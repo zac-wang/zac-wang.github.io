@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超大日志处理工具（Web Worker优化版）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+        }
+
+        :root {
+            --indent-step: 20px;
+            --content-offset: 16px;
+            --default-title-font-size: 14px;
+            --input-panel-height: 300px; /* 输入面板固定高度 */
+            --input-panel-min-height: 200px; /* 输入面板最小高度 */
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f5f5f5;
+            overflow: hidden;
+            contain: layout paint; /* 全局性能优化：限制重绘范围 */
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            contain: layout paint; /* 容器性能优化 */
+        }
+
+        /* 左侧组合面板：垂直拆分，彻底避免重叠 */
+        .left-combo-panel {
+            display: flex;
+            flex-direction: column; /* 垂直排列 */
+            width: 420px;
+            height: 100%;
+            flex-shrink: 0;
+            will-change: width;
+            transform: translateZ(0); /* 硬件加速 */
+            overflow: hidden; /* 隐藏溢出 */
+            contain: layout paint; /* 性能优化：只重绘自身 */
+        }
+
+        /* 日志输入面板：固定高度 + 最小高度兜底 */
+        .input-panel {
+            height: var(--input-panel-height); /* 固定高度 */
+            min-height: var(--input-panel-min-height); /* 最小高度 */
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #ddd; /* 分隔线，视觉区分 */
+            overflow: hidden; /* 防止内部溢出 */
+            contain: layout paint; /* 性能优化 */
+        }
+
+        /* 上传区域样式 - 统一按钮尺寸和对齐 */
+        .upload-area {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            align-items: center; /* 垂直居中对齐 */
+            justify-content: flex-start; /* 水平左对齐 */
+        }
+
+        #uploadBtn, .clear-btn {
+            /* 统一按钮样式，保证尺寸一致 */
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            flex-shrink: 0;
+            height: 28px; /* 固定高度，保证水平对齐 */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #uploadBtn {
+            background-color: #9b59b6;
+            color: white;
+        }
+        #uploadBtn:hover {
+            background-color: #8e44ad;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        /* 进度条样式 */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background-color: #eee;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            display: none;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.2s ease;
+        }
+
+        .progress-text {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            display: none;
+        }
+
+        /* 功能面板：占剩余空间，不再覆盖输入框 */
+        .function-panel {
+            flex: 1; /* 占输入面板下方剩余空间 */
+            width: 100%; /* 自适应父容器宽度 */
+            padding: 10px;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow: hidden; /* 防止内部溢出 */
+            contain: layout paint; /* 性能优化 */
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        /* 去除空行选项样式 */
+        .remove-empty-line-option {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .remove-empty-line-option input[type="checkbox"] {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        #processBtn, #toggleWrapBtn {
+            padding: 10px 18px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            width: 100%; /* 按钮自适应宽度 */
+            flex-shrink: 0; /* 防止按钮被压缩 */
+        }
+
+        #processBtn {
+            background-color: #3498db;
+        }
+        #processBtn:hover {
+            background-color: #2980b3;
+        }
+        #processBtn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        #toggleWrapBtn {
+            background-color: #27ae60;
+        }
+        #toggleWrapBtn:hover {
+            background-color: #219653;
+        }
+
+        .filter-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-shrink: 0; /* 标题不压缩 */
+        }
+        .filter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto; /* 列表纵向滚动 */
+            overflow-x: hidden;
+            flex: 1; /* 占功能面板剩余空间 */
+        }
+        .filter-item {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #444;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .filter-item input[type="checkbox"] {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            flex-shrink: 0; /* 复选框不压缩 */
+        }
+
+        .resizer {
+            width: 6px;
+            background-color: #2c3e50;
+            cursor: col-resize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 10;
+            user-select: none;
+            transition: none;
+        }
+        .resizer::after {
+            content: "||";
+            color: white;
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .output-panel {
+            flex: 1;
+            height: 100%;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+            position: relative;
+            z-index: 1;
+            contain: layout paint; /* 性能优化 */
+        }
+
+        /* 日志输入框：占满输入面板剩余空间 */
+        #logInput {
+            flex: 1;
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+            background-color: white;
+            font-family: 'Consolas', 'Monaco', monospace;
+            will-change: width;
+            /* 防止输入框被压缩 */
+            min-height: 100px;
+        }
+
+        .panel-title {
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0; /* 标题不压缩 */
+        }
+
+        .clear-btn {
+            background-color: #e74c3d;
+            color: white;
+            /* 移除margin-top，避免位置偏移 */
+            margin: 0;
+        }
+
+        #logOutput {
+            flex: 1;
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: white;
+            font-family: 'Consolas', 'Monaco', monospace;
+            overflow-y: auto;
+        }
+
+        .log-content {
+            white-space: pre-wrap;
+            margin-bottom: 2px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .log-content.nowrap {
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        /* 按级别定义标题样式 */
+        .log-title {
+            font-weight: bold;
+            margin: 5px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            user-select: none;
+            font-size: var(--default-title-font-size); /* 默认样式兜底 */
+        }
+        /* 级别1-6的样式定义 */
+        .log-title.log-level-1 { font-size: 18px; color: #e74c3d; }
+        .log-title.log-level-2 { font-size: 16px; color: #3498db; }
+        .log-title.log-level-3 { font-size: 15px; color: #27ae60; }
+        .log-title.log-level-4 { font-size: 13px; color: #f39c12; }
+        .log-title.log-level-5 { font-size: 12px; color: #9b59b6; }
+        .log-title.log-level-6 { font-size: 11px; color: #7f8c8d; }
+
+        .log-content-title {
+            font-weight: bold;
+            margin: 3px 0;
+            color: #555;
+            font-size: 12px;
+            user-select: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .title-toggle {
+            display: inline-block;
+            width: 16px;
+            text-align: center;
+            margin-right: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 12px;
+        }
+        .special-log-desc {
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        .log-raw-content {
+            font-size: 10px;
+            color: #666;
+            font-weight: normal;
+            white-space: pre-wrap;
+        }
+        .log-content.nowrap .log-raw-content {
+            white-space: pre;
+        }
+        .collapsed {
+            display: none;
+        }
+        .title-time {
+            color: #666;
+            font-weight: normal;
+            margin-left: 8px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="left-combo-panel" id="leftComboPanel">
+        <!-- 日志输入面板：固定高度，不被覆盖 -->
+        <div class="input-panel">
+            <div class="panel-title">日志输入</div>
+            
+            <!-- 上传区域 - 按钮水平对齐 -->
+            <div class="upload-area">
+                <button id="uploadBtn">上传日志文件</button>
+                <input type="file" id="fileInput" accept=".log,.txt">
+                <button class="clear-btn" id="clearInput">清空输入</button>
+            </div>
+            
+            <!-- 进度条 -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-text" id="progressText">解析进度：0%</div>
+            
+            <textarea id="logInput" placeholder="请粘贴ohos格式的日志内容...或上传日志文件"></textarea>
+        </div>
+
+        <!-- 功能面板：占下方剩余空间 -->
+        <div class="function-panel">
+            <div class="btn-group">
+                <!-- 去除空行复选框 -->
+                <div class="remove-empty-line-option">
+                    <input type="checkbox" id="removeEmptyLine" checked>
+                    <label for="removeEmptyLine">去除空行</label>
+                </div>
+                <button id="processBtn" disabled>处理日志</button>
+                <button id="toggleWrapBtn">切换为自动换行</button>
+            </div>
+
+            <div class="filter-title">日志过滤规则</div>
+            <div class="filter-list" id="filterList"></div>
+        </div>
+    </div>
+
+    <div class="resizer" id="resizer"></div>
+
+    <div class="output-panel">
+        <div class="panel-title">分析结果</div>
+        <div id="logOutput"></div>
+        <button class="clear-btn" id="clearOutput">清空结果</button>
+    </div>
+</div>
+
+<!-- Web Worker 脚本（内联创建，避免跨域） -->
+<script id="workerScript" type="text/worker">
+    // 缓存正则表达式
+    const EMPTY_LINE_REG = /(\r?\n)\s*$/gm;
+    const OHOS_SPLIT_REG = /\[ohos\]/g;
+
+    // 分块解析日志
+    // 接收主线程传递的分块数据，处理后返回结果
+    self.onmessage = function(e) {
+        const { chunk, chunkIndex, totalChunks, removeEmptyLine } = e.data;
+        try {
+            // 清理空行（如果需要）
+            let processedChunk = chunk;
+            if (removeEmptyLine) {
+                processedChunk = processedChunk.replace(EMPTY_LINE_REG, '');
+            }
+
+            // 拆分ohos日志（仅拆分，不处理，减少Worker计算量）
+            const logLines = processedChunk.split(OHOS_SPLIT_REG)
+                .filter(line => line.trim());
+
+            // 发送处理后的块数据和进度到主线程
+            self.postMessage({
+                type: 'chunkDone',
+                chunkIndex,
+                totalChunks,
+                logLines: logLines.map(line => `[ohos]${line}`), // 补全前缀
+                error: null
+            });
+        } catch (error) {
+            // 异常捕获，通知主线程解析失败
+            self.postMessage({
+                type: 'error',
+                error: error.message,
+                chunkIndex
+            });
+        }
+    };
+</script>
+
+<script>
+    const resizer = document.getElementById('resizer');
+    const leftComboPanel = document.getElementById('leftComboPanel');
+    const logInput = document.getElementById('logInput');
+    const logOutput = document.getElementById('logOutput');
+    const processBtn = document.getElementById('processBtn');
+    const clearInput = document.getElementById('clearInput');
+    const clearOutput = document.getElementById('clearOutput');
+    const toggleWrapBtn = document.getElementById('toggleWrapBtn');
+    const filterList = document.getElementById('filterList');
+    const removeEmptyLineCheckbox = document.getElementById('removeEmptyLine');
+    
+    // 新增上传相关DOM
+    const uploadBtn = document.getElementById('uploadBtn');
+    const fileInput = document.getElementById('fileInput');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+
+    let isNowrap = true;
+    let leftPanelWidth = 420;
+    let isResizing = false;
+    let containerRect = null;
+    const MAX_LEVEL = 6;
+    const INDENT_STEP = 20;
+    const CONTENT_OFFSET = 16;
+    const DEFAULT_TITLE_FONT_SIZE = '14px';
+
+    // ====================== 可配置参数 - 分块大小 ======================
+    // 分块大小配置（可根据实际场景调整）
+    // 调整建议：
+    // - 低配设备/移动端：16KB ~ 64KB (16*1024 ~ 64*1024)
+    // - 高配电脑/大文件：64KB ~ 512KB (64*1024 ~ 512*1024)
+    // - 不建议超过512KB，避免内存占用过高；不建议低于4KB，避免IO次数过多
+    const CHUNK_SIZE = 256 * 1024; // 256KB 分块大小（当前配置）
+    // ==================================================================
+
+    let logDataCache = ''; // 缓存解析后的日志数据（避免重复解析）
+    let worker = null; // Web Worker实例（用于后台解析文件，避免阻塞主线程）
+    let currentFile = null; // 当前上传的文件
+
+    // 缓存正则表达式（避免重复创建，提升性能）
+    const EMPTY_LINE_REG = /(\r?\n)\s*$/gm; // 全局匹配行尾空行
+    const LINE_START_EMPTY_REG = /^\s*[\r\n]/gm; // 匹配行首空行
+
+    // ====================== 过滤规则 ======================
+    const filterRules = [
+        { reg: new RegExp('(?:IRC_message==>onLoginResponse)', 's'), title: '隐藏onLoginResponse' },
+    ];
+    const filterChecked = {};
+    filterRules.forEach(r => filterChecked[r.title] = false);
+
+    // ====================== 初始化过滤面板 ======================
+    function initFilterUI() {
+        filterList.innerHTML = '';
+        filterRules.forEach(rule => {
+            const item = document.createElement('div');
+            item.className = 'filter-item';
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.checked = filterChecked[rule.title];
+            cb.onchange = e => {
+                filterChecked[rule.title] = e.target.checked;
+                refreshLogVisibility();
+            };
+            const label = document.createElement('label');
+            label.textContent = rule.title;
+            item.appendChild(cb);
+            item.appendChild(label);
+            filterList.appendChild(item);
+        });
+    }
+
+    // ====================== 动态显示/隐藏 ======================
+    function refreshLogVisibility() {
+        const allLogItems = document.querySelectorAll('.log-content');
+        allLogItems.forEach(el => {
+            const text = el.textContent || '';
+            let needHide = false;
+            for (const rule of filterRules) {
+                if (filterChecked[rule.title] && rule.reg.test(text)) {
+                    needHide = true;
+                    break;
+                }
+            }
+            el.style.display = needHide ? 'none' : '';
+        });
+    }
+
+    // ====================== 切换换行 ======================
+    toggleWrapBtn.onclick = () => {
+        isNowrap = !isNowrap;
+        document.querySelectorAll('.log-content').forEach(el => {
+            el.classList.toggle('nowrap', isNowrap);
+        });
+        toggleWrapBtn.textContent = isNowrap ? '切换为自动换行' : '切换为单行展示';
+    };
+
+    // ====================== 正则规则 ======================
+    const appLaunchReg = new RegExp('(?:=========== Launch Info ===========)', 's');
+    const enterClassReg = new RegExp('XESRouter traget (?=.*"(livevideo\\/xrsmodule|livevideo)\\?[^"]*")(?=.*"type":"push").*', 's');
+    const leaveClassReg = new RegExp('XESRouter traget (?=.*"(livevideo\\/xrsmodule|livevideo)\\?[^"]*")(?=.*"type":"pop").*', 's');
+    const tutorClassReg = new RegExp('IRC_message==>onRoomDataUpdateNotice.*"mode":"in-training"[^}]*', 's');
+    const mainClassReg = new RegExp('IRC_message==>onRoomDataUpdateNotice.*"mode":"in-class"[^}]*', 's');
+    const tutorWatchStuReg = new RegExp('IRC_message==>onRoomDataUpdateNotice.*tutor_watch_stu[^}]*', 's');
+    const level5Reg = new RegExp('new-rule-level5', 's');
+    const level6Reg = new RegExp('new-rule-level6', 's');
+    const timeExtractReg = new RegExp('\\[ohos\\]\\s+(\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2}:\\d{1,3})');
+    const videoStreamReg = new RegExp('rtc-log-TeamRtcRoom enableVideoNetStream\\(\\)\\s+tag:(?:[\\w\\-_]+)\\s+stuID:(?:\\d+)\\s+enable:(?:true|false)', 's');
+    const audioStreamReg = new RegExp('rtc-log-TeamRtcRoom enableAudioNetStream\\(\\)\\s+tag:(?:[\\w\\-_]+)\\s+stuID:(?:\\d+)\\s+enable:(?:true|false)', 's');
+
+    const levelRegs = [
+        { reg: appLaunchReg, level: 1, title: 'App启动' },
+        { reg: enterClassReg, level: 2, title: '进课' },
+        { reg: leaveClassReg, level: 2, title: '下课' },
+        { reg: tutorClassReg, level: 3, title: '辅导' },
+        { reg: mainClassReg, level: 3, title: '主讲' },
+        { reg: tutorWatchStuReg, level: 4, title: '辅导看学生' },
+        { reg: level5Reg, level: 5, title: '五级标题示例' },
+        { reg: level6Reg, level: 6, title: '六级标题示例' }
+    ];
+
+    function calculateIndent(level, type) {
+        switch(type) {
+            case 'title': return `${(level - 1) * INDENT_STEP}px`;
+            case 'content-title': return `${level * INDENT_STEP}px`;
+            case 'content': return `${level * INDENT_STEP + CONTENT_OFFSET}px`;
+            default: return '0px';
+        }
+    }
+
+    // ====================== 节流/防抖函数 ======================
+    // 节流：限制函数执行频率，避免高频触发（如拖动调整面板宽度）
+    function throttle(fn, delay = 8) {
+        let lastTime = 0;
+        return function(...args) {
+            const now = Date.now();
+            if (now - lastTime >= delay) {
+                fn.apply(this, args);
+                lastTime = now;
+            }
+        };
+    }
+
+    // 防抖：延迟执行函数，避免频繁触发（如输入框内容变化）
+    function debounce(fn, delay) {
+        let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); }
+    }
+
+    // ====================== 分割线拖动逻辑 ======================
+    function initResizer() {
+        const startResize = (e) => {
+            e.preventDefault();
+            isResizing = true;
+            containerRect = document.querySelector('.container').getBoundingClientRect();
+            document.body.style.cursor = 'col-resize';
+            
+            const handleMove = throttle((e) => {
+                if (!isResizing || !containerRect) return;
+                
+                const newWidth = e.clientX - containerRect.left;
+                // 限制面板宽度范围：最小150px，最大容器宽度的70%
+                if (newWidth >= 150 && newWidth <= containerRect.width * 0.7) {
+                    leftPanelWidth = newWidth;
+                    leftComboPanel.style.width = `${newWidth}px`;
+                }
+            });
+            
+            document.addEventListener('mousemove', handleMove);
+            document.addEventListener('mouseup', () => {
+                isResizing = false;
+                document.body.style.cursor = '';
+                document.removeEventListener('mousemove', handleMove);
+            }, { once: true });
+        };
+
+        resizer.addEventListener('mousedown', startResize);
+        
+        const handleWindowResize = debounce(() => {
+            if (!isResizing) {
+                leftComboPanel.style.width = `${Math.max(150, leftPanelWidth)}px`;
+            }
+        }, 100);
+        window.addEventListener('resize', handleWindowResize);
+    }
+
+    // ====================== 日志解析工具函数 ======================
+    // 提取ohos日志中的时间信息
+    function extractOhosTime(log) {
+        const m = log.match(timeExtractReg);
+        if (!m) return '未知时间';
+        const t = m[1];
+        const i = t.lastIndexOf(':');
+        if (i < 0) return t;
+        return t.substring(0, i) + ':' + t.substring(i + 1).padEnd(3, '0');
+    }
+
+    // 分析单个日志行，提取视频/音频流相关信息
+    function analyzeSingleLog(s) {
+        let m = s.match(videoStreamReg);
+        if (m) {
+            const p = s.split(/\s+/);
+            const tag = p.find(x => x.startsWith('tag:')).replace('tag:', '');
+            const stu = p.find(x => x.startsWith('stuID:')).replace('stuID:', '');
+            const en = p.find(x => x.startsWith('enable:')).replace('enable:', '');
+            return { text: `${tag}${en=='true'?'开启':'关闭'}学员${stu}视频`, color:'#2ecc71', raw:s };
+        }
+        m = s.match(audioStreamReg);
+        if (m) {
+            const p = s.split(/\s+/);
+            const tag = p.find(x => x.startsWith('tag:')).replace('tag:', '');
+            const stu = p.find(x => x.startsWith('stuID:')).replace('stuID:', '');
+            const en = p.find(x => x.startsWith('enable:')).replace('enable:', '');
+            return { text: `${tag}${en=='true'?'开启':'关闭'}学员${stu}音频`, color:'#7fbf7f', raw:s };
+        }
+        return null;
+    }
+
+    // ====================== 超大文件上传/解析核心逻辑 ======================
+    // 创建Web Worker（内联脚本，避免跨域）
+    // 作用：将文件解析逻辑放到后台线程，避免阻塞主线程导致页面卡顿
+    function createWorker() {
+        // 清理旧Worker，避免内存泄漏
+        if (worker) {
+            worker.terminate();
+            worker = null;
+        }
+
+        const workerScript = document.getElementById('workerScript').textContent;
+        const blob = new Blob([workerScript], { type: 'application/javascript' });
+        worker = new Worker(URL.createObjectURL(blob));
+
+        // 监听Worker消息（接收解析结果/异常）
+        worker.onmessage = function(e) {
+            const { type, chunkIndex, totalChunks, logLines, error } = e.data;
+            
+            if (type === 'error') {
+                alert(`解析第${chunkIndex+1}块失败：${error}`);
+                resetUploadState();
+                return;
+            }
+
+            if (type === 'chunkDone') {
+                // 增量缓存日志数据（避免一次性加载大文件占用过多内存）
+                logDataCache += logLines.join('\n');
+                
+                // 计算并更新进度（进度条+文字提示）
+                const progress = Math.floor(((chunkIndex + 1) / totalChunks) * 100);
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `解析进度：${progress}%`;
+
+                // 所有块解析完成
+                if (chunkIndex + 1 === totalChunks) {
+                    // 将缓存的日志填入输入框（仅显示前10000字符，避免超大文本框卡顿）
+                    logInput.value = logDataCache.substring(0, 10000) + '\n\n[...日志内容过长，已省略部分内容]';
+                    logInput.dataset.fullData = logDataCache; // 完整数据缓存到dataset，处理时使用
+                    
+                    // 启用处理按钮
+                    processBtn.disabled = false;
+                    
+                    // 清理资源（保留缓存数据）
+                    resetUploadState(true);
+                    alert('文件解析完成，可点击"处理日志"按钮分析');
+                }
+            }
+        };
+    }
+
+    // 分块读取文件核心逻辑
+    // 原理：将大文件按CHUNK_SIZE分块，逐块读取并交给Worker解析，降低内存峰值
+    function readFileInChunks(file) {
+        if (!file) return;
+        
+        // 初始化解析状态
+        logDataCache = '';
+        progressContainer.style.display = 'block';
+        progressText.style.display = 'block';
+        progressBar.style.width = '0%';
+        processBtn.disabled = true;
+
+        const fileSize = file.size;
+        const totalChunks = Math.ceil(fileSize / CHUNK_SIZE); // 计算总块数
+        let currentChunk = 0; // 当前读取的块索引
+
+        const reader = new FileReader();
+        const removeEmptyLine = removeEmptyLineCheckbox.checked;
+
+        // 读取下一块的递归函数
+        function readNextChunk() {
+            // 计算当前块的起始/结束位置
+            const start = currentChunk * CHUNK_SIZE;
+            const end = Math.min(start + CHUNK_SIZE, fileSize); // 最后一块可能不足CHUNK_SIZE
+            const chunk = file.slice(start, end); // 切割文件块
+
+            // 异步读取文件块（避免阻塞主线程）
+            reader.readAsText(chunk, 'utf-8');
+        }
+
+        // 块读取完成回调
+        reader.onload = function(e) {
+            // 将读取到的块数据发送到Worker处理
+            worker.postMessage({
+                chunk: e.target.result,
+                chunkIndex: currentChunk,
+                totalChunks,
+                removeEmptyLine
+            });
+
+            currentChunk++;
+            // 还有未读取的块，继续读取（setTimeout节流，避免IO压力）
+            if (currentChunk < totalChunks) {
+                setTimeout(readNextChunk, 0);
+            }
+        };
+
+        // 读取失败回调
+        reader.onerror = function() {
+            alert('文件读取失败，请检查文件是否损坏');
+            resetUploadState();
+        };
+
+        // 初始化Worker并开始读取第一块
+        createWorker();
+        readNextChunk();
+    }
+
+    // 重置上传/解析状态
+    // isSuccess：是否解析成功（成功则保留缓存数据，失败则清空）
+    function resetUploadState(isSuccess = false) {
+        // 隐藏进度条
+        progressContainer.style.display = 'none';
+        progressText.style.display = 'none';
+        currentFile = null;
+        
+        // 清理Worker（解析完成后释放后台线程）
+        if (worker) {
+            worker.terminate();
+            worker = null;
+        }
+
+        // 解析失败时清空缓存，解析成功则根据输入框内容决定按钮状态
+        if (!isSuccess) {
+            logDataCache = '';
+            processBtn.disabled = !logInput.value.trim();
+        }
+    }
+
+    // 检查输入框内容，更新处理按钮状态
+    // 作用：手动粘贴日志时自动启用处理按钮
+    function checkInputContent() {
+        const hasContent = logInput.value.trim() || logInput.dataset.fullData;
+        processBtn.disabled = !hasContent;
+    }
+
+    // 上传按钮点击事件：触发文件选择框
+    uploadBtn.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    // 文件选择事件：开始分块读取文件
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // 限制文件类型（仅支持.log/.txt纯文本日志）
+        if (!['text/plain', '.log', '.txt'].some(type => file.name.toLowerCase().endsWith(type))) {
+            alert('仅支持.log/.txt格式的纯文本日志文件');
+            fileInput.value = '';
+            return;
+        }
+
+        currentFile = file;
+        readFileInChunks(file);
+    });
+
+    // 清空输入按钮事件：清空输入框和缓存
+    clearInput.addEventListener('click', () => {
+        logInput.value = '';
+        logInput.removeAttribute('data-fullData');
+        logDataCache = '';
+        processBtn.disabled = true;
+        logInput.focus();
+    });
+
+    // 监听输入框内容变化（输入/粘贴），实时更新按钮状态
+    logInput.addEventListener('input', debounce(checkInputContent, 100));
+    logInput.addEventListener('paste', debounce(checkInputContent, 100));
+
+    // ====================== 处理日志（无行数限制） ======================
+    processBtn.onclick = () => {
+        // 优先使用dataset中的完整数据（上传文件场景），其次使用输入框内容（手动粘贴场景）
+        let txt = logInput.dataset.fullData || logInput.value.trim();
+        if (!txt) { 
+            logOutput.innerHTML = '请输入或上传日志'; 
+            return; 
+        }
+        logOutput.innerHTML = '';
+
+        // 全局清理空行（如果用户勾选了该选项）
+        const needRemoveEmptyLine = removeEmptyLineCheckbox.checked;
+        if (needRemoveEmptyLine) {
+            txt = txt.replace(EMPTY_LINE_REG, '');
+        }
+
+        // 拆分日志（按[ohos]分割，过滤空内容，补全前缀）
+        const entries = txt.split('[ohos] ')
+            .filter(p => p.trim())
+            .map(p => `[ohos] ${p}`);
+
+        // 构建日志树结构（按级别分类）
+        const tree = [];
+        const ptrs = new Array(MAX_LEVEL).fill(null); // 级别指针，用于构建层级关系
+
+        // 批量处理所有日志行（无行数限制）
+        entries.forEach(line => {
+            let hit = null;
+            // 匹配级别规则
+            for (const r of levelRegs) {
+                if (r.reg.test(line)) { 
+                    hit = r; 
+                    break; 
+                }
+            }
+            const time = extractOhosTime(line);
+            if (hit) {
+                // 匹配到级别规则，创建级别节点
+                const lvl = hit.level;
+                const node = {
+                    rule: hit, level: lvl, title: hit.title,
+                    fullTitle: `${hit.title} [${time}]`, time,
+                    logs: [line], children: []
+                };
+                // 查找父节点（当前级别-1的第一个有效节点）
+                let parent = null;
+                for (let i = lvl - 2; i >= 0; i--) {
+                    if (ptrs[i]) { 
+                        parent = ptrs[i]; 
+                        break; 
+                    }
+                }
+                // 添加到父节点或根节点
+                if (parent) parent.children.push(node);
+                else tree.push(node);
+                // 更新级别指针（当前级别及以下置空，避免层级错乱）
+                ptrs.fill(null, lvl - 1);
+                ptrs[lvl - 1] = node;
+            } else {
+                // 未匹配到级别规则，添加到最近的级别节点
+                let tg = null;
+                for (let i = MAX_LEVEL - 1; i >= 0; i--) {
+                    if (ptrs[i]) { 
+                        tg = ptrs[i]; 
+                        break; 
+                    }
+                }
+                if (tg) tg.logs.push(line);
+                else tree.push({ 
+                    level:1, title:'未分类', fullTitle:`未分类 [${time}]`, 
+                    time, logs:[line], children: []
+                });
+            }
+        });
+
+        // 递归渲染日志树（使用文档碎片批量渲染，减少DOM重绘）
+        (function render(parent, nodes) {
+            const frag = document.createDocumentFragment();
+            nodes.forEach(node => {
+                const title = document.createElement('div');
+                title.className = `log-title log-level-${node.level}`;
+                title.style.marginLeft = calculateIndent(node.level, 'title');
+                const tog = document.createElement('span');
+                tog.className = 'title-toggle';
+                tog.textContent = '+';
+                title.appendChild(tog);
+                title.appendChild(document.createTextNode(node.fullTitle));
+                const wrap = document.createElement('div');
+                wrap.className = 'log-content-group collapsed';
+
+                // 标题点击事件：展开/折叠日志内容
+                title.onclick = e => {
+                    e.stopPropagation();
+                    if (title._open) {
+                        // 折叠：隐藏内容，清空DOM减少内存占用
+                        wrap.classList.add('collapsed');
+                        wrap.innerHTML = '';
+                        tog.textContent = '+';
+                    } else {
+                        // 展开：渲染日志内容和子节点
+                        wrap.classList.remove('collapsed');
+                        tog.textContent = '-';
+                        const f = document.createDocumentFragment();
+                        // 渲染当前节点的日志内容
+                        if (node.logs.length) {
+                            const ct = document.createElement('div');
+                            ct.className = 'log-content-title';
+                            ct.style.marginLeft = calculateIndent(node.level, 'content-title');
+                            const ctog = document.createElement('span');
+                            ctog.className = 'title-toggle';
+                            ctog.textContent = '+';
+                            ct.appendChild(ctog);
+                            ct.appendChild(document.createTextNode('日志正文'));
+                            const lw = document.createElement('div');
+                            lw.className = 'logs-content-group collapsed';
+                            const lf = document.createDocumentFragment();
+                            node.logs.forEach(content => {
+                                const sp = analyzeSingleLog(content);
+                                const le = document.createElement('div');
+                                le.className = `log-content${isNowrap?' nowrap':''}`;
+                                le.style.marginLeft = calculateIndent(node.level, 'content');
+                                if (sp) {
+                                    // 特殊日志（视频/音频流）：高亮显示描述
+                                    const d = document.createElement('span');
+                                    d.className = 'special-log-desc';
+                                    d.style.color = sp.color;
+                                    d.textContent = sp.text;
+                                    const r = document.createElement('span');
+                                    r.className = 'log-raw-content';
+                                    r.textContent = sp.raw;
+                                    le.appendChild(d);
+                                    le.appendChild(r);
+                                } else {
+                                    // 普通日志：直接显示内容
+                                    le.textContent = content;
+                                }
+                                lf.appendChild(le);
+                            });
+                            lw.appendChild(lf);
+                            // 日志正文标题点击事件：展开/折叠正文
+                            ct.onclick = e => {
+                                e.stopPropagation();
+                                lw.classList.toggle('collapsed');
+                                ctog.textContent = lw.classList.contains('collapsed') ? '+' : '-';
+                            };
+                            f.appendChild(ct);
+                            f.appendChild(lw);
+                        }
+                        // 递归渲染子节点
+                        if (node.children.length) {
+                            const cf = document.createDocumentFragment();
+                            render(cf, node.children);
+                            f.appendChild(cf);
+                        }
+                        wrap.appendChild(f);
+                        // 更新过滤规则的显示状态
+                        refreshLogVisibility();
+                    }
+                    title._open = !title._open;
+                };
+                frag.appendChild(title);
+                frag.appendChild(wrap);
+            });
+            parent.appendChild(frag);
+        })(logOutput, tree);
+    };
+
+    // 清空结果按钮事件
+    clearOutput.onclick = () => { 
+        logOutput.innerHTML = ''; 
+    };
+
+    // 页面初始化
+    window.onload = () => {
+        leftComboPanel.style.width = `${leftPanelWidth}px`;
+        initResizer();
+        initFilterUI();
+        checkInputContent(); // 初始化时检查输入框状态，更新按钮
+    };
+
+    // 页面卸载时清理资源（避免内存泄漏）
+    window.addEventListener('beforeunload', () => {
+        if (worker) {
+            worker.terminate();
+        }
+    });
+</script>
+</body>
+</html>
