@@ -1,0 +1,122 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>bc Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>bc</h1>
+<p>An arbitrary precision calculator language.</p>
+<pre>Syntax
+      bc <i>options</i> <i>file</i>... 
+
+Options:
+   -h, --help
+       Print the usage and exit.
+
+ <i>file</i>  A file containing the calculations/functions to perform.
+       This can be piped from standard input  
+
+   -i, --interactive
+       Force interactive mode.
+ 
+   -l, --mathlib
+       Define the standard math library.
+ 
+   -w, --warn
+       Give warnings for extensions to POSIX bc.
+
+   -s, --standard
+       Process exactly the POSIX bc language.
+
+   -q, --quiet
+       Do not print the normal GNU bc welcome.
+
+   -v, --version
+       Print the version number and copyright and quit.</pre>
+<p><span class="code">bc</span> is a language that supports arbitrary precision numbers with interactive execution of statements.</p>
+<p>Arbitrary-precision arithmetic, also called bignum arithmetic, indicates that calculations are performed on numbers whose digits of precision are limited only by the available memory of the host system. In an arbitrary precision library, there's no fixed limit on the number of base types used to represent the numbers, just whatever memory can hold. This contrasts with the faster fixed-precision arithmetic found in most arithmetic logic unit (ALU) hardware, which typically use only 32 or 64 bits of precision.</p>
+<p> <span class="code">bc</span> starts by processing code from all the files listed on the command line in the order listed. After all files have been processed, <span class="code">bc</span> reads from the standard input. </p>
+<p>All code is executed as it is read. If a file contains a command to halt the processor, <span class="code">bc</span> will never read from the standard input.</p>
+<p>A  use of <span class="code">bc</span> is within a shell script, using a &quot;<a href="syntax-here.html">here</a>&quot; document to pass the program details to <span class="code">bc</span>.</p>
+<p><a id="e"></a><b>Example</b>s</p>
+<p class="code">$ echo '1+2' | bc <br>
+$ 3</p>
+<p><b>Shell script</b></p>
+<pre>#!/bin/bash
+# bcsample - An example of calculations with bc
+if [ $# != 1 ]
+  then
+  echo "A number argument is required"
+  exit
+fi
+
+<b>bc</b> &lt;&lt;END-OF-INPUT
+  scale=6
+  /* first we define the function */
+  define myfunc(x){
+  return(sqrt(x) + 10);
+  }
+
+  /* then use the function to do the calculation*/
+ x=$1
+ "Processing";x;" result is ";myfunc(x)
+ quit
+END-OF-INPUT
+
+echo &quot;(to 6 decimal places)&quot;</pre>
+<p>Run the  script above with:<br>
+<span class="code">$ chmod a+x bcsample<br>
+$ ./bcsample 125 </span></p>
+<h2>Standard functions supported by bc</h2>
+<blockquote>
+<p><span class="code">length ( expression )</span><br>
+The value of the length function is the number of significant digits in the expression.<br>
+<br>
+<span class="code">read ( )</span><br>
+Read a number from the standard input, regardless of where the function occurs. Beware, this can cause problems with the mixing of data and program in the standard input. The best use for this function is in a previously written program that needs input from the user, but never allows program code to be input from the user. </p>
+<p><span class="code">scale ( expression )</span><br>
+The  number of digits after the decimal point in the expression. </p>
+<p><span class="code">sqrt ( expression )</span><br>
+The  square root of the expression.</p>
+<p> Most standard math expressions are of course supported: <span class="code"> + - / * % ^ </span></p>
+<p><span class="code">++ var</span><br>
+increment the variable by one and set the new value as the result of the expression. </p>
+<p><span class="code">var ++</span><br>
+The result of the expression is the value of the variable and  the variable is then incremented by one. </p>
+<p><span class="code">-- var</span><br>
+decrement the variable by one and set the new value as the result of the expression. <br>
+<br>
+<span class="code">var --</span><br>
+The result of the expression is the value of the variable and  the variable is then decremented by one. <br>
+<br>
+<span class="code">( expr )</span><br>
+Parenthesis alter the standard precedence to force the evaluation of an expression. </p>
+<p><span class="code">var = expr</span><br>
+The variable var is assigned the value of the expression. </p>
+<p>Relational expressions and Boolean operations are also legal, look at the full bc man page for more </p>
+</blockquote>
+<h2>Comments</h2>
+<blockquote>
+<p> /* In-line comments */<br>
+# single line comment. The end of line character is not part of the comment and is processed normally. </p>
+</blockquote>
+<p><i class="quote">&ldquo;I sold my most valuable possession, but I knew that because I worked at Hewlett Packard, I could buy the next model calculator the very next month for a lower price than I sold the older one for!&rdquo; ~ Steve Wozniak</i></p>
+<h3>Related macOS commands</h3>
+<p><span class="space"><a href="https://web.archive.org/web/20190609084206/http://www.unixprogram.com/bc.pdf">Full bc manual</a> by Lorinda Cherry and Robert Morris at Bell Labs, 1997 (pdf)<br>
+<a href="dc.html">dc</a> - Desk Calculator.</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --><p></p></body>
+</html>

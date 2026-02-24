@@ -1,0 +1,74 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>afplay Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>afplay</h1> 
+<p>Audio File Play. </p>
+<pre>Syntax
+      afplay [<i>option</i>...] <i>audio_file</i>
+
+Options: (may appear before or after arguments)
+   -v <i>VOLUME</i>
+   --volume <i>VOLUME</i>
+        Set the volume for playback of the file
+        Apple does not define a value range for this, but it appears to accept
+        0=silent, 1=normal (default) and then up to 255=Very loud.
+        The scale is logarithmic and in addition to (not a replacement for) other volume control(s).
+   -h
+   --help
+        Print help.
+
+   --leaks
+        Run leaks analysis.
+
+   -t <i>TIME</i>
+   --time <i>TIME</i>
+        Play for <i>TIME</i> seconds
+        &gt;0 and &lt; duration of <i>audio_file</i>.
+
+   -r <i>RATE</i>
+   --rate <i>RATE</i>
+        Play at playback <i>RATE</i>.
+        practical limits are about 0.4 (slower) to 3.0 (faster).
+
+   -q <i>QUALITY</i>
+   --rQuality <i>QUALITY</i>
+        Set the quality used for rate-scaled playback (default is 0 - low quality, 1 - high quality).
+
+   -d
+   --debug
+        Debug print output.</pre>
+<p>Play can be cancelled with <span class="code">Ctrl-C</span></p>
+<h3><a id="e"></a>Examples</h3>
+<p>Play music.wav for 5 seconds:<br>
+   
+<span class="code">$ afplay music.wav -t 5</span></p>
+<p>Play jolene.mp3:<br>
+<span class="code">$ </span><span class="code">afplay jolene.mp3</span></p>
+<p>Play jolene.mp3 at half speed:<span class="code"><br>
+$ afplay jolene.mp3 -r 0.5<br>
+</span>
+<br>
+<i class="quote">&ldquo;You've achieved success in your field when you don't know whether what you're doing is work or play” ~ Warren Beatty</i></p>
+<h3>Related macOS commands</h3>
+<p class="space">Local man page: <a href="x-man-page://afplay">afplay </a>- Command line help page on your local machine.<br>
+<a href="afconvert.html">afconvert</a> - Audio File Convert.<br>
+<a href="afinfo.html">afinfo</a> - Audio File Info.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

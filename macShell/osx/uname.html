@@ -1,0 +1,63 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>uname Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>uname</h1> 
+<p>Print the <a href="https://www.puredarwin.org/">Darwin OS</a> Kernel version / release / machine name.</p>
+<pre>Syntax
+      uname [-amnpsrv]
+
+Options
+     -a      Behave as though all of the options -mnrsv were specified.
+
+     -m      Print the machine hardware name.
+
+     -n      Print the nodename (the nodename may be a name that the system is
+             known by to a communications network).
+
+     -p      Print the generic processor type.
+
+     -s      <u>Print the operating system name.</u>
+             This is the default if no other options are specified.
+
+     -r      Print the operating system release.
+
+     -v      Print the operating system version.</pre>
+<p>The version data includes either <span class="code">i386</span> or <span class="code">X86_64</span> indicating a 32 or 64 bit kernel.</p>
+<p>During system boot you can hold down '6' and '4' to load the 64 bit kernel or hold down '3' and '2' to use the 32 bit kernel.<br>
+Your machine will default into the kernel that is best supported.</p>
+<h3><a id="e"></a>Examples</h3>
+<p class="code">$ uname -m<br>
+i386</p>
+<p class="code">$ uname -v<br>
+Darwin Kernel Version 16.7.0: Thu Dec 20 21:53:35 PST 2018; root:xnu-3789.73.31~1/RELEASE_X86_64</p>
+<p>Check if we are running a 64 bit kernel:</p>
+<pre> OS=$(uname -m) 
+ case $OS in
+    (amd64|x86_64)   bits=64 ;;    
+    (i386|i586|i686) bits=32 ;;
+    (*) bits=unknown         ;;
+ esac  
+ echo &quot;You have a ${bits}-bit machine.&quot;</pre>
+<p class="quote"><i>&ldquo;I have discovered the art of deceiving diplomats. I tell them  the truth and they never believe me&rdquo; ~ Camillo Di Cavour </i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="hostname.html">hostname</a> -  Print or set system name.<br>
+<a href="serverinfo.html">serverinfo</a> - Server information.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

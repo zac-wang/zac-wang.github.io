@@ -1,0 +1,69 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>locate Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>locate</h1> 
+<p>Find files. </p>
+<pre>Syntax
+      locate <i>pattern</i></pre>
+<p> locate searches a database for all pathnames which match the specified pattern. The database is recomputed periodically, (about once a week) and contains the path-names of all files which are publicly accessible. </P>
+<p>Shell globbing and quoting characters (`*', `?', ``\'', `[' and `]') can be used in pattern, although they will have to be escaped from the shell. </P>
+<p>Preceding any character with a backslash (`\') eliminates any special meaning which it can have. The matching differs in that no characters must be matched explicitly, including slashes (`/'). </P>
+<p>As a special case, a pattern containing no globbing characters (`foo') is matched as though it were `*foo*'.. </P>
+<p>To force a build/update of the database:<br>
+<br>
+<span class="code"> $ cd /<br>
+$ sudo /usr/libexec/locate.updatedb</span></P>
+<p>The update can alternatively be called via a plist which  executes /usr/libexec/locate.updatedb<br>
+$ <span class="code">sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist</span></P>
+<p><a id="e"></a><b>Examples</b><br>
+<br>
+ Search the database for files with names containing "foo",<br>
+or in folders with names containing "foo"<br>
+<br>   
+<span class="code">$ locate foo</span><br>
+<br>
+Search the database for files (but not in folders) with names ending in ".jpg"<br>
+<br>
+<span class="code">$ locate '*.jpg'</span></p>
+<h2> File locations</h2>
+<blockquote>
+<p> Database<br>
+<span class="code">/var/db/locate.database</span><br>
+<br>
+Script to update database<br>
+<span class="code">/usr/libexec/locate.updatedb</span></p>
+</blockquote>
+<h2>Faster Searches</h2>
+<blockquote>
+<p>On modern hardware it is often faster to create and search an uncompressed index file of all filenames than to use the compressed locate database, source: Julia Evans [<a href="https://jvns.ca/blog/2015/03/05/how-the-locate-command-works-and-lets-rewrite-it-in-one-minute/">x</a>]</p>
+<p class="code">sudo find / &gt; database.txt<br>
+grep Alanis database.txt</p>
+</blockquote>
+<p class="quote"> <i>[I do not] carry such information in my mind since it is readily available in books. ...The value of a college education is not the learning of many facts but the training of the mind to think ~ Albert Einstein</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="find.html">find</a> - Search for files that meet a desired criteria.<br>
+<a href="grep.html">grep</a> - Search file(s) for lines that match a given pattern.<br>
+<a href="ln.html">ln</a> - Make links between files (hard links, symbolic links).<br>
+<a href="ls.html">ls</a> - List information about file(s).<br>
+<a href="mdfind.html">mdfind</a> - Spotlight search.<br>
+<a href="whereis.html">whereis</a> - Locate a command.<br>
+<a href="which.html">which</a> - Locate a program file in the user's path.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

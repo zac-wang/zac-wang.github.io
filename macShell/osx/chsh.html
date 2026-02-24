@@ -1,0 +1,77 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>chsh Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>chsh</h1> 
+<p>Add or change user database information, change default shell<span class="code"></span>.</p>
+<pre>Syntax
+       chsh [-l <i>location</i>] [-u <i>authname</i>] [-s <i>newshell</i>] [<i>user</i>]
+</pre>
+<pre>Options:</pre>
+<pre> -l <i>location</i>
+        If not specified, chpass will perform a search for the user record on all available Open Directory
+        nodes. When specified, chpass will edit the user record on the directory node at the given location.</pre>
+<pre> -u <i>authname</i>
+        The user name to use when authenticating to the directory node containing the user.</pre>
+<pre> -s <i>newshell</i>
+        Attempt to change the user's shell to <i>newshell</i>.
+        n.b. if the command is run with <a href="sudo.html">sudo</a> it will change the shell for the root user not the current user.</pre>
+<p><span class="body">The chfn, and chpass utilities behave identically to chsh.  (There is only one program.)</span></p>
+<p>The chpass utility allows editing of the user database information associated with <i>user</i> or, by default, the current user.<br>
+The chpass utility cannot change the user's password on Open Directory systems.  Use the <a href="passwd.html">passwd</a> utility instead.</p>
+<p> The information is formatted and supplied to an editor for changes.<br>
+Only the information that the user is allowed to change is displayed.</p>
+<p>The standard shells that chsh will allow users to change to (or from),  without root permission, are those listed in the file /etc/shells.<br>
+  Use <span class="code">cat /etc/shells</span> to list them, typically:</p>
+<blockquote>
+  <p>/bin/bash<br>
+    /bin/csh<br>
+    /bin/dash<br>
+    /bin/ksh<br>
+    /bin/sh<br>
+    /bin/tcsh<br>
+  /bin/zsh</p>
+<p>If installed via <a href="https://brew.sh/">brew</a> then bash will  be located in <span class="code">/usr/local/bin/bash</span></p>
+</blockquote>
+<p>To view the current <b>default</b> shell, use: <span class="code"><a href="dscl.html">dscl</a> . -read ~/ UserShell</span><br>
+To view the current  shell, use: <span class="code">echo <a href="syntax-env_vars.html">$SHELL</a></span><br>
+On the command line <span class="code">echo $0 </span>will also display the  current shell, in a script this will return the name of the file or the program.</p>
+<p>These may be different, if you have manually launched a new/different shell, or in Terminal ➞ Preferences ➞ General, there's a setting for <em>Shells open with</em> if that is set to to anything other than 'Default login shell' then it will replace the setting made with <span class="code">chsh</span>.</p>
+<p>On macOS a consequence of this change is that the following message is printed every time bash is invoked: </p>
+<blockquote>
+  <p><em>The default interactive shell is now zsh. To update your account to use zsh, please run `chsh -s /bin/zsh`. For more details, please visit <a href="https://support.apple.com/kb/HT208050">https://support.apple.com/kb/HT208050</a></em><a href="https://support.apple.com/kb/HT208050"></a></p>
+</blockquote>
+<p>This can be suppressed by adding: <span class="code"><br>
+export BASH_SILENCE_DEPRECATION_WARNING=1</span><br> 
+to ~/.<a href="syntax-profile.html">bash_profile.</a></p>
+<p>After changing shell, you should review your <a href="syntax-profile.html">shell startup files</a> and transfer any important settings, e.g. a modified PATH to the relevant files.</p>
+<p><b>Examples:</b></p>
+<p>Set the current user to start all new terminal sessions using the Apple supplied Bash version 3.2:</p>
+<p class="code">chsh -s /bin/bash</p>
+<p>Set the current user to start all new terminal sessions using a brew installed Bash version 5.0:</p>
+<p class="code">chsh -s /opt/homebrew/bin/bash</p>
+<p>Set the current user to start all new terminal sessions using zsh (the default).</p>
+<p class="code">chsh -s /bin/zsh</p>
+<p class="quote"><i>&ldquo;Insisting on perfect safety is for people who don't have the balls to live in the real world&rdquo; ~ Mary Shafer NASA  Flight Research Center</i></p>
+<h3>Related macOS commands</h3>
+<p><a href="passwd.html">passwd</a><a href="md5.html"></a> - Modify a user password.<br>
+<a href="https://support.apple.com/en-gb/HT208050">HT208050</a> - How to change your default shell in macOS (GUI or command line).<br>
+<a href="syntax-profile.html">macOS startup files </a>- .zprofile and .bash_profile</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

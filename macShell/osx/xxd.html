@@ -1,0 +1,242 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>xxd Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>xxd</h1> 
+<p>Make a hexdump or do the reverse. <br>
+xxd creates a hex dump of a given file or standard input. It can also convert a hex dump back to its original binary form. Like  <a href="uuencode.html">uuencode</a> and <a href="uuencode.html">uudecode</a> it allows the transmission of binary data in an 'email-safe' <a href="../ascii.html">ASCII</a> representation, but has the advantage of decoding to standard output. Moreover, it can be used to perform binary file patching.</p>
+<pre>Syntax
+
+      xxd [<i>options</i>] [<i>infile</i> [<i>outfile</i>]]
+
+      xxd -r[evert] [<i>options</i>] [<i>infile</i> [<i>outfile</i>]]
+
+      xxd -h[elp]
+
+Options</pre>
+<p> If no <i>infile</i> is given, standard input is read.  If <i>infile</i> is  specified
+as  a  '-'  character,  then input is taken from standard input.<br>
+If no <i>outfile</i> is given (or a '-' character is in its place), results are sent
+to standard output.<br>
+<br>
+Note  that  a  "lazy" parser is used which does not check for more than
+the first option letter, unless the option is followed by a  parameter.<br>
+Spaces  between  a single option letter and its parameter are optional.<br>
+Parameters to <i>options</i> can be specified in decimal, hexadecimal or octal
+notation.  Thus -c8, -c 8, -c 010 and -cols 8 are all equivalent.<br>
+</p>
+<pre>
+   -a | -autoskip
+      Toggle  autoskip: A single '*' replaces nul-lines.  Default off.
+
+   -b | -bits
+      Switch to bits (binary digits) dump, rather than hexdump. This option  writes
+      octets as eight digits "1"s and "0"s instead of a  normal hexadecimal  dump.
+      Each line is preceded by a line  number in  hexadecimal and followed by an ascii
+      (or ebcdic) representation.
+      The command line switches -r, -p, -i do not work with this mode.
+
+   -c <i>cols</i> | -cols <i>cols</i>
+      format  <i>cols</i> octets per line. Default 16 (-i: 12, -ps: 30, -b: 6). Max 256.
+
+   -E | -EBCDIC
+      Change the character encoding in the righthand column from ASCII to EBCDIC.
+      This does not change the hexadecimal representation.
+      The option is meaningless in combinations with -r, -p or -i.
+
+   -g <i>bytes</i> | -groupsize <i>bytes</i>
+      Separate the output of every <i>bytes</i> bytes (two  hex  characters or eight bit-digits each)
+      by a whitespace.  Specify -g 0 to suppress grouping.
+      <i>Bytes</i> defaults to 2 in normal mode and  1  in bits  mode.
+      Grouping  does  not apply to postscript or include style.
+
+   -h | -help
+      Print a summary of available commands and exit.  No hex  dumping is performed.
+
+   -i | -include
+      Output in C include file style. A complete static array definition is written
+      (named after the input file), unless xxd reads from stdin.
+
+   -l len | -len <i>len</i>
+      Stop after writing <i>len</i> octets.
+
+   -p | -ps | -postscript | -plain
+      Output  in  postscript  continuous  hexdump style. Also known as plain hexdump style.
+
+   -r | -revert
+      Reverse operation: convert (or patch) hexdump into  binary. If not  writing
+      to stdout, xxd writes into its output file without truncating it.
+      Use the combination -r -p to read plain hexadecimal dumps without line number
+      information and without a particular column layout.
+      Additional Whitespace and line-breaks are allowed anywhere.
+
+   -seek <i>offset</i>
+      When used after -r: revert with <i>offset</i> added to file positions found in hexdump.
+
+   -s [+][-]<i>seek</i>
+      Start at <i>seek</i> bytes abs. (or rel.) infile offset.  + indicates that the
+      seek  is  relative to the current stdin file position (meaningless when not reading
+      from stdin).
+      - indicates that the seek should be that many characters from the end of the input
+      (or if combined with +: before the current stdin file position).
+      Without -s option, xxd starts at the current file position.
+
+   -u
+      Use upper case hex letters. Default is lower case.
+
+   -v | -version
+      Show version string.</pre>
+<h2> Caveats</h2>
+<blockquote>
+<p> xxd -r has some builtin magic while evaluating line number information.<br>
+If the output file is seekable, then the linenumbers at  the  start  of
+each  hexdump  line may be out of order, lines may be missing, or overlapping. In these cases xxd will lseek(2) to the next position. If  the
+output  file  is  not  seekable,  only  gaps are allowed, which will be
+filled by null-bytes.<br>
+<br>
+xxd -r never generates parse errors. Garbage is silently skipped.<br>
+<br>
+When editing hexdumps, please note that xxd -r skips everything on  the
+input line after reading enough columns of hexadecimal data (see option
+-c). This also means, that changes to the printable ascii  (or  ebcdic)
+columns  are  always  ignored.  Reverting a plain (or postscript) style<br>
+hexdump with xxd -r -p does not depend on the correct  number  of  columns.  Here  anything  that  looks  like a pair of hex-digits is interpreted.<br>
+<br>
+Note the difference between<br>
+<span class="code">% xxd -i file</span><br>
+and<br>
+<span class="code">% xxd -i &lt; file</span><br>
+<br>
+xxd -s +seek may be different from xxd -s seek, as lseek(2) is used  to "rewind" input.  A '+' makes a difference if the input source is stdin,<br>
+and if stdin's file position is not at the start of  the  file  by  the
+time  xxd  is  started and given its input. <br>
+The following examples may
+help to clarify...<br>
+<br>
+Rewind stdin before reading; needed because the 'cat' has already  read
+to the end of stdin.<br>
+<span class="code">% sh -c "cat &gt; plain_copy; xxd -s 0 &gt; hex_copy" &lt; file</span><br>
+<br>
+Hexdump  from  file  position  0x480 (=1024+128) onwards.  The '+' sign<br>
+means "relative to the current position", thus the `128' adds to the 1k
+where dd left off.<br>
+<span class="code">%  sh -c "dd of=plain_snippet bs=1k count=1; xxd -s +128 &gt; hex_snippet"<br>
+&lt; file</span><br>
+<br>
+Hexdump from file position 0x100 ( = 1024-768) on.<br>
+<span class="code">% sh -c "dd of=plain_snippet bs=1k count=1; xxd -s +-768 &gt; hex_snippet"<br>
+&lt; file</span><br>
+<br>
+However,  this is a rare situation and the use of `+' is rarely needed.<br>
+The author prefers to monitor the  effect  of  xxd  with  strace(1)  or
+truss(1), whenever -s is used.</p>
+</blockquote>
+<h2><a id="e"></a>Examples</h2>
+<blockquote>
+<p> Print everything but the first three lines (hex 0x30 bytes) of file.<br>
+<span class="code">% xxd -s 0x30 file</span><br>
+<br>
+Print 3 lines (hex 0x30 bytes) from the end of file.<br>
+<span class="code">% xxd -s -0x30 file</span><br>
+<br>
+Print 120 bytes as continuous hexdump with 20 octets per line.<br>
+<span class="code">% xxd -l 120 -ps -c 20 xxd.1<br>
+2e54482058584420312022417567757374203139<br>
+39362220224d616e75616c207061676520666f72<br>
+20787864220a2e5c220a2e5c222032317374204d<br>
+617920313939360a2e5c22204d616e2070616765<br>
+20617574686f723a0a2e5c2220202020546f6e79<br>
+204e7567656e74203c746f6e79407363746e7567</span><br>
+<br>
+Hexdump the first 120 bytes of this man page with 12 octets per line.<br>
+<span class="code">% xxd -l 120 -c 12 xxd.1<br>
+0000000: 2e54 4820 5858 4420 3120 2241  .TH XXD 1 "A<br>
+000000c: 7567 7573 7420 3139 3936 2220  ugust 1996"<br>
+0000018: 224d 616e 7561 6c20 7061 6765  "Manual page<br>
+0000024: 2066 6f72 2078 7864 220a 2e5c   for xxd"..\<br>
+0000030: 220a 2e5c 2220 3231 7374 204d  "..\" 21st M<br>
+000003c: 6179 2031 3939 360a 2e5c 2220  ay 1996..\"<br>
+0000048: 4d61 6e20 7061 6765 2061 7574  Man page aut<br>
+0000054: 686f 723a 0a2e 5c22 2020 2020  hor:..\"<br>
+0000060: 546f 6e79 204e 7567 656e 7420  Tony Nugent<br>
+000006c: 3c74 6f6e 7940 7363 746e 7567  &lt;tony@sctnug</span><br>
+<br>
+Display just the date from the file xxd.1<br>
+<span class="code">% xxd -s 0x36 -l 13 -c 13 xxd.1<br>
+0000036: 3231 7374 204d 6179 2031 3939 36  21st May 1996</span><br>
+<br>
+Copy input_file to output_file and prepend 100 bytes of value 0x00.<br>
+% xxd input_file | xxd -r -s 100 &gt; output_file<br>
+<br>
+Patch the date in the file xxd.1<br>
+<span class="code">% echo "0000037: 3574 68" | xxd -r - xxd.1<br>
+% xxd -s 0x36 -l 13 -c 13 xxd.1<br>
+0000036: 3235 7468 204d 6179 2031 3939 36  25th May 1996</span><br>
+<br>
+Create  a  65537 byte file with all bytes 0x00, except for the last one which is 'A' (hex 0x41).<br>
+<span class="code">% echo "010000: 41" | xxd -r &gt; file</span><br>
+<br>
+Hexdump this file with autoskip.<br>
+<span class="code">% xxd -a -c 12 file<br>
+0000000: 0000 0000 0000 0000 0000 0000  ............<br>
+*<br>
+000fffc: 0000 0000 40                   ....A</span><br>
+<br>
+Create a 1 byte file containing a single  'A'  character.   The  number
+after '-r -s' adds to the linenumbers found in the file; in effect, the<br>
+leading bytes are suppressed.<br>
+<span class="code">% echo "010000: 41" | xxd -r -s -0x10000 &gt; file</span><br>
+<br>
+Use xxd as a filter within an editor such as vim(1) to hexdump a region
+marked between 'a' and 'z'.<br>
+<span class="code">:'a,'z!xxd</span><br>
+<br>
+Use xxd as a filter within an editor such as vim(1) to recover a binary
+hexdump marked between 'a' and 'z'.<br>
+<span class="code">:'a,'z!xxd -r</span><br>
+<br>
+Use xxd as a filter within an editor such as vim(1) to recover one line
+of a hexdump.  Move the cursor over the line and type:<br>
+<span class="code">!!xxd -r</span><br>
+<br>
+Read single characters from a serial line<br>
+<span class="code">% xxd -c1 < /dev/term/b &<br>
+% stty < /dev/term/b -echo -opost -isig -icanon min 1<br>
+% echo -n foo > /dev/term/b</span><br>
+</p>
+</blockquote>
+<h2>Return Values</h2>
+<blockquote>
+<p>The following error values are returned:        <br>
+<span class="code">0 </span>no errors encountered. <br>
+<span class="code">-1 </span>operation not supported ( xxd -r -i still impossible).<br>
+<span class="code">1 </span>error while parsing options. <br>
+<span class="code">2 </span>problems with input file. <br>
+<span class="code">3 </span>problems with output file. <br>
+<span class="code">4,5 </span>desired seek position is unreachable.</p>
+</blockquote>
+<p> This manual page documents xxd version 1.7 Author:        Juergen Weigert (c) 1990-1997</p>
+<p class="quote"><i>&ldquo;Discovery consists of seeing what everybody has seen and thinking what nobody has thought&rdquo; ~ Albert Szent-Gyorgyi </i></p>
+<h3>Related macOS commands</h3>
+<p class="space"> <a href="echo.html">echo</a> - Display text on screen<br>
+<a href="env.html">env</a> - Set environment and run a utility.<br>
+<a href="find.html">find</a> - Search for files that meet a desired criteria.<br>
+execvp(3)</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

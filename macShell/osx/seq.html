@@ -1,0 +1,86 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>seq Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>seq</h1> 
+<p>Print a sequence of numbers to standard output</p>
+<pre>Syntax
+      seq [-w] [-f <i>format</i>] [-s <i>string</i>] [-t <i>string</i>] [<i>first</i> [<i>incr</i>]] <i>last</i>
+
+Options
+
+ -f <i>format</i>
+     Use a printf(3) style format to print each number.
+     Only the E, e, f, G, g, and % conversion characters are valid, along with any optional
+     flags and an optional numeric minimum field width or precision.
+     The format can contain character escape sequences in backslash notation as defined
+     in ANSI X3.159-1989 (``ANSI C89'').  The default is %g.
+
+ -s<i> string</i>
+     Use <i>string</i> to separate numbers.
+     The string can contain character escape sequences in backslash notation as defined in ANSI X3.159-1989
+     (ANSI C89).  The default is \n. (a newline).
+
+ -t <i>string</i>
+     Use <i>string</i> to terminate sequence of numbers.
+     The string can contain character escape sequences in backslash notation as defined in ANSI X3.159-1989
+     (ANSI C89).  This option is useful when the default separator does not contain a \n.
+
+ -w
+     Equalize the widths of all numbers by padding with zeros as necessary.
+     This option has no effect with the -f option.
+     If any sequence numbers will be printed in exponential notation, the default
+     conversion is changed to %e.</pre>
+<p>The seq utility prints a sequence of numbers, one per line (default), from <i>first</i> (default 1), to near <i>last</i> as possible, in increments of <i>incr</i> (default&nbsp;1).  When <i>first</i> is larger than <i>last</i> the default <i>incr</i> is -1. </p>
+<p>All numbers are interpreted as floating point. Normally integer values are printed as decimal integers.</p>
+<p>The -w option does not handle the transition from pure floating point to exponent representation very well.  The seq command is      not bug for bug compatible with the Plan 9 from Bell Labs or GNU versions of seq.<br>
+</p>
+<h3><a id="e"></a>Examples</h3>
+<pre>$ seq 1 3
+1
+2
+3            </pre>
+<pre>$ seq 3 1
+3
+2
+1 </pre>
+<pre>$ seq -w 0 .05 .1
+0.00
+0.05
+0.10
+
+$ seq 100
+1
+2
+...</pre>
+<p>You can also produce a sequence with the <a href="for.html">for</a> command </p>
+<p><span class="code">for ((myseq=0; myseq&lt;50; myseq++))<br>
+do<br>
+echo The sequence is ${myseq}<br>
+done <br>
+fi</span><br>
+<br>
+<i class="quote">&ldquo;The idea of a Being who interferes with the sequence of events in the world is absolutely impossible&rdquo; ~ Albert Einstein</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="expr.html">expr</a> - Evaluate expressions.<br>
+<a href="for.html">for</a> - Expand <i>words</i>, and execute <i>commands</i><br>
+<a href="nl.html">nl</a> - Number lines and write files.<br>
+<a href="printf.html">printf</a> - Format and print data</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

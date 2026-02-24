@@ -1,0 +1,323 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>codesign Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>codesign</h1> 
+<p> Create and manipulate code signatures.</p>
+<pre>Syntax
+      <b>Sign:</b><br>      codesign -s <i>identity</i> [-i <i>identifier</i>] [-r <i>requirements</i>] [-fv] [<i>path</i> ...]
+
+      <b>Verify:</b>
+      codesign -v [-R <i>requirement</i>] [-v] [<i>path</i>|<i>pid</i> ...]
+
+      <b>Display:</b>
+      codesign -d [-v] [<i>path</i>|<i>pid</i> ...]
+
+      <b>Hosting chain:
+</b>      codesign -h [-v] [<i>pid</i> ...]
+
+Options
+     --all-architectures
+             When verifying a code signature on code that has a universal ("fat") Mach-O binary, separately verify each 
+             architecture contained. This is the default unless overridden with the -a (--architecture) option.
+
+     -a, --architecture <i>architecture</i>
+             When verifying or displaying signatures, explicitly select the Mach-O architecture given. The architecture can be
+             specified either by name (e.g. i386) or by number; if by number, a sub-architecture may be appended separated by a comma.
+             This option applies only to Mach-O binary code and is ignored for other types.  If the path uses the Mach-O format and
+             contains no code of the given architecture, the command will fail.  The default for verification is --all-architec-
+             tures, to verify all architectures present.  The default for display is to report on the native architecture of the
+             host system.  When signing, codesign will always sign all architectures contained in a universal Mach-O file.
+
+     --bundle-version <i>version-string</i>
+             When handling versioned bundles such as frameworks, explicitly specify the version to operate on. This must be one of
+             the names in the "Versions" directory of the bundle.  If not specified, codesign uses the bundle's default version.
+             Note that most frameworks delivered with the system have only one version, and thus this option is irrelevant for them.
+             There is currently no facility for operating on all versions of a bundle at once.
+
+     -d, --display
+             Display information about the code at the path(s) given. Increasing levels of verbosity produce more output.
+             The format is designed to be moderately easy to parse by simple scripts while still making sense to human eyes.  
+             In addition, the -r, --file-list, --extract-certificates, and --entitlements options can be used to retrieve
+             additional information.
+
+     -D, --detached <i>filename</i>
+             When signing, designates that a detached signature should be written to the specified file. The code being signed is
+             not modified and need not be writable.  When verifying, designates a file containing a detached signature to be used
+             for verification. Any embedded signature in the code is ignored.
+
+     --deep  When signing a bundle, specifies that nested code content such as helpers, frameworks, and plug-ins, should be
+             recursively signed in turn. Beware that all signing options you specify will apply, in turn, to such nested content.
+             When verifying a bundle, specifies that any nested code content will be recursively verified as to its full content.
+             By default, verification of nested content is limited to a shallow investigation that may not detect changes to
+             the nested code.
+             When displaying a signature, specifies that a list of directly nested code should be written to the display output.
+             This lists only code directly nested within the subject; anything nested indirectly will require recursive
+             application of the codesign command.
+
+     --detached-database
+             When signing, specifies that a detached signature should be generated as with the --detached option, but that the
+             resulting signature should be written into a system database, from where it is made automatically available whenever
+             apparently unsigned code is validated on the system.
+             Writing to this system database requires elevated process privileges that are not available to ordinary users.
+
+     -f, --force
+             When signing, causes codesign to replace any existing signature on the path(s) given. Without this option, existing
+             signatures will not be replaced, and the signing operation fails.
+
+     -h, --hosting
+             Constructs and prints the hosting chain of a running program. The pid arguments must denote running code (pids etc.)
+             With verbose options, this also displays the individual dynamic validity status of each element of the hosting chain.
+
+     -i, --identifier <i>identifier</i>
+             During signing, explicitly specify the unique identifier string that is embedded in code signatures. If this option is
+             omitted, the identifier is derived from either the Info.plist (if present), or the filename of the executable being
+             signed, possibly modified by the --prefix option.  It is a very bad idea to sign different programs with the same
+             identifier.
+
+     -o, --options <i>flag</i>,...
+             During signing, specifies a set of option flags to be embedded in the code signature. The value takes the form of a
+             comma-separated list of names (with no spaces). Alternatively, a numeric value can be used to directly specify the
+             option mask (CodeDirectory flag word). See OPTION FLAGS below.
+
+     -P, --pagesize <i>pagesize</i>
+             Indicates the granularity of code signing. Pagesize must be a power of two.  Chunks of pagesize bytes are separately
+             signed and can thus be independently verified as needed.  As a special case, a pagesize of zero indicates that the
+             entire code should be signed and verified as a single, possibly gigantic page. This option only applies to the main
+             executable and has no effect on the sealing of associated data, including resources.
+
+     -r, --requirements <i>requirements</i>
+             During signing, indicates that internal requirements should be embedded in the code path(s) as specified. 
+             See "specifying requirements" below.  Defaults will be applied to requirement types that are not explicitly
+             specified; if you want to defeat such a default, specify "never" for that type.
+             During display, indicates where to write the code's internal requirements. Use -r- to write them to standard output.
+
+     -R, --test-requirement <i>requirement</i>
+             During verification, indicates that the path(s) given should be verified against the code requirement specified.
+             If this option is omitted, the code is verified only for internal integrity and against its own designated requirement.
+
+     -s, --sign <i>identity</i>
+             Sign the code at the path(s) given using this identity. See SIGNING IDENTITIES below.
+
+     -v, --verbose
+             Sets (with a numeric value) or increments the verbosity level of output. Without the verbose option, no output is
+             produced upon success, in the classic UNIX style.  If no other options request a different action, the first -v
+             encountered will be interpreted as --verify instead (and does not increase verbosity).
+
+     -v, --verify
+             Requests verification of code signatures.  If other actions (sign, display, etc.) are also requested,
+             -v is interpreted to mean --verbose.
+
+     --continue
+             Instructs codesign to continue processing path arguments even if processing one fails.  If this option is given, exit
+             due to operational errors is deferred until all path arguments have been considered. The exit code will then indicate
+             the most severe failure (or, with equal severity, the first such failure encountered).
+
+     --dryrun
+             During signing, performs almost all signing operations, but does not actually write the result anywhere. Cryptographic
+             signatures are still generated, actually using the given signing identity and triggering any access control checks
+             normally, though the resulting signature is then discarded.
+
+     --entitlements <i>path</i>
+             When signing, take the file at the given path and embed its contents in the signature as entitlement data. If the data
+             at path does not already begin with a suitable binary ("blob") header, one is attached automatically.
+             When displaying a signature, extract any entitlement data from the signature and write it to the path given. Use "-" to
+             write to standard output.  By default, the binary "blob" header is returned intact; prefix the path with a colon ":" to
+             automatically strip it off.  If the signature has no entitlement data, nothing is written (this is not an error).
+
+     --extract-certificates <i>prefix</i>
+             When displaying a signature, extract the certificates in the embedded certificate chain and write them to individual
+             files. The prefix argument is appended with numbers 0, 1, ... to form the filenames, which can be relative or absolute.
+             Certificate 0 is the leaf (signing) certificate, and as many files are written as there are certificates in the
+             signature. The files are in ASN.1 (DER) form.  If prefix is omitted, the default prefix is "codesign" in the current
+             directory.
+
+     --file-list <i>path</i>
+             When signing or displaying a signature, codesign writes to the given path a list of files that may have been modified
+             as part of the signing process. This is useful for installer or patcher programs that need to know what was changed or
+             what files are needed to make up the "signature" of a program. The file given is appended-to, with one line per
+             absolute path written. An argument of "-" (single dash) denotes standard output.  Note that the list may be somewhat
+             pessimistic - all files not listed are guaranteed to be unchanged by the signing process, but some of the listed files may
+             not actually have changed.  Also note that changes may have been made to extended attributes of these files.
+
+     --ignore-resources
+             During static validation, do not validate the contents of the code's resources.  In effect, this will pass validation
+             on code whose resources have been corrupted (or inappropriately signed). On large programs, it will also substantially
+             speed up static validation, since all the resources will not be read into memory.  Obviously, the outcome of such a
+             validation should be considered on its merits.
+
+     --keychain <i>filename</i>
+             During signing, only search for the signing identity in the keychain file specified. This can be used to break any
+             matching ties if you have multiple similarly-named identities in several keychains on the user's search list.  Note
+             that the standard keychain search path is still consulted while constructing the certificate chain being embedded in
+             the signature.
+             Note that filename will not be searched to resolve the signing identity's certificate chain unless it is also on the
+             user's keychain search list.
+
+     --prefix <i>string</i>
+             If no explicit unique identifier is specified (using the -i option), and if the implicitly generated identifier does
+             not contain any dot (.) characters, then the given string is prefixed to the identifier before use. If the implicit
+             identifier contains a dot, it is used as-is. Typically, this is used to deal with command tools without Info.plists,
+             whose default identifier is simply the command's filename; the conventional prefix used is com.domain. (note that the
+             final dot needs to be explicit).
+
+     --preserve-metadata=<i>list</i>
+             When re-signing code that is already signed, reuse some information from the old signature.  If new data is specified
+             explicitly, it is preferred.  You still need to specify the -f (--force) option to enable overwriting signatures at
+             all.  If this option is absent, any old signature has no effect on the signing process.
+             This option takes a comma-separated list of names, which you may reasonably abbreviate:
+
+             identifier    Preserve the signing identifier (--identifier) instead of generating a default identifier.
+
+             entitlements  Preserve the entitlement data (--entitlements).
+
+             requirements  Preserve the internal requirements (--requirements option), including any explicit Designated
+                           Requirement. Note that all internal requirements are preserved or regenerated as a whole; you
+                           cannot pick and choose individual elements with this option.
+             For historical reasons, this option can be given without a value, which preserves all of these values as presently
+             known. This use is deprecated and will eventually be removed; always specify an explicit list of preserved items.
+
+     --strict <i>options</i>
+             When validating code, apply additional restrictions beyond the defaults.
+
+             symlinks  Check that symbolic links inside the code bundle point to sealed files inside its bundle.  This means that
+                       broken symbolic links are rejected, as are links to places outside the bundle and to places that are not,
+                       for whatever reason, sealed by the signature.
+
+             sideband  Check that no resource forks, Finder attributes, or similar sideband data is present in the signed code.
+                       This is now automatically enforced by signing operations.
+             Options can be specified as a comma-separated list. Use plain --strict or --strict=all to be as strict as possible.
+             Note that --strict=all may include more checking types over time.
+             Not all strictness check make sense in all circumstances, which is why these behaviors are not the defualt.
+
+     --timestamp [=<i>URL</i>]
+             During signing, requests that a timestamp authority server be contacted to authenticate the time of signing. The server
+             contacted is given by the URL value.  If this option is given without a value, a default server provided by Apple is
+             used.  Note that this server may not support signatures made with identities not furnished by Apple.  If the timestamp
+             authority service cannot be contacted over the Internet, or it malfunctions or refuses service, the signing operation
+             will fail.
+             If this option is not given at all, a system-specific default behavior is invoked.  This may result in some but not all
+             code signatures being timestamped.
+             The special value none explicitly disables the use of timestamp services.</pre>
+<p>The codesign command is used to create, check, and display code signatures, as well as inquire into the dynamic status of signed code in the system. </p>
+<p>The 'common name' of a code signing certificate can be read from the Apple Keychain Access Manager. </p>
+<p>codesign requires exactly one operation <i>option</i> to determine what action is to be performed, as well as any number of other options to modify its behavior. It can act on any number of objects per invocation, but performs the same operation on all of them. <br>
+codesign accepts single-character (classic) options, as well as GNU-style long options of the form --name and --name=value.</p>
+<p> Common options have both forms; less frequent and specialized options have only long form.  Note that the form <span class="code">--name <i>value</i></span> (without equal sign) will not work as expected on options with optional values.</p>
+<h2>Operation</h2>
+<blockquote>
+<p> In the first synopsis form, codesign attempts to sign the code objects at the path(s) given, using the identity provided.
+Internal requirements and entitlements are embedded if requested. Internal requirements not specified may be assigned suitable default values. Defaulting applies separately to each type of internal requirement.  If an identifier is explicitly given, it is sealed into all path(s).  Otherwise, each path derives its identifier independently from its Info.plist or pathname.  Code nested within bundle directories must already be signed or the signing operation will fail, unless the --deep option is given, in which case any unsigned nested code will be recursively signed before proceeding, using the same signing options and parameters.<br>
+If the --force option is given, any existing top-level signature is replaced, subject to any --preserve-metadata options
+also present. <br>
+Combining the --force and --deep options results in forcible replacement of all signatures within the target bundle.</p>
+<p>In the second synopsis form, codesign verifies the code signatures on all the path(s) given. The verification confirms that the code at those path(s) is signed, that the signature is valid, and that all sealed components are unaltered. If a requirement is given, each path is also checked against this requirement (but see DIAGNOSTICS below).  If verbose verification is requested, the program is also checked against its own designated requirement, which should never fail for a properly signed program.</p>
+<p>If a path begins with a decimal digit, it is interpreted as the process id of a running process in the system, and dynamic validation is performed on that process instead.  This checks the code's dynamic status and just enough static data to close the nominal security envelope. Add at least one level of verbosity to also perform a full static check.</p>
+<p>In the third synopsis form, codesign displays the contents of the signatures on the path(s) given. More information is displayed as the verbosity level increases.  This form may not completely verify the signatures on the path(s); though it may perform some verification steps in the process of obtaining information about the path(s).  If the -r path option is given, internal requirements will be extracted from the path(s) and written to path; specify a dash "-" to write to standard output. If the code does not contain an explicit designated requirement, the implied one will be retrieved and written out as a source comment.  If the --entitlements path option is given, embedded entitlement data will be extracted likewise and written to the file specified.</p>
+<p>In the fourth synopsis form, codesign constructs the hosting path for each pid given and writes it, one host per line, to standard output. The hosting path is the chain of code signing hosts starting with the most specific code known to be running, and ending with the root of trust (the kernel). If the --verbose option is given, the dynamic validity status of each host is also displayed, separated from the path by a tab character.  Note that hosting chains can at times be constructed for invalid or even unsigned code, and the output of this form of the codesign command should not be taken as a statement of formal code validity. Only codesign --verify can do that; and in fact, formal verification constructs the hosting chain as part of its operation (but does not display it).</p>
+</blockquote>
+<h2>Signing Identities</h2>
+<blockquote>
+<p>To be used for code signing, a digital identity must be stored in a keychain that is on the calling user's keychain search list.  All keychain sources are supported if properly configured. In particular, it is possible to sign code with an identity stored on a supported smart card.  If your signing identity is stored in a different form, you need to make it available in keychain form to sign code with it. If the --keychain argument is used, identity is only looked-for in the specific keychain given. This is meant to help disambiguate references to identities.  Even in that case, the full keychain search list is still consulted for additional certificates needed to complete the signature.
+
+The identity is first considered as the full name of a keychain identity preference.  If such a preference exists, it directly names the identity used.  Otherwise, the identity is located by searching all keychains for a certificate whose subject common name (only) contains the identity string given. If there are multiple matches, the operation fails and no signing is performed; however, an exact match is preferred over a partial match.  These comparisons are case sensitive.  Multiple instances of the exactly same certificate in multiple keychains are tolerated as harmless.<br>
+<br>
+If identity consists of exactly forty hexadecimal digits, it is instead interpreted as the SHA-1 hash of the certificate part of the desired identity.  In this case, the identity's subject name is not considered.<br>
+<br>
+Both identity preferences and certificate hashes can be used to identify a particular signing identity regardless of name. Identity preferences are global settings for each user and provide a layer of indirection. Certificate hashes are very explicit and local. These choices, combined with what is placed into Xcode project and target build variables and/or script settings, allows for very flexible designation of signing identities.
+<br>
+  If identity is the single letter "-" (dash), ad-hoc signing is performed.  Ad-hoc signing does not use an identity at all, and identifies exactly one instance of code. Significant restrictions apply to the use of ad-hoc signed code; consult documentation before using this.<br>
+<br>
+codesign will attempt to embed the entire certificate chain documenting the signing identity in the code signature it generates, including any intermediate certificates and the anchor certificate. It looks for those in the keychain search list of the user performing the signing operation. If it cannot generate the entire certificate chain, signing may still succeed, but verification may fail if the verifying code does not have an independent source for the missing certificates (from its keychains).
+</p>
+<p>The error &quot;CSSMERR_TP_NOT_TRUSTED&quot; may indicate that one of the Intermediate certificates was not found on your machine.</p>
+</blockquote>
+<h2> Specifying Requirements<br>
+</h2>
+<blockquote>
+<p> The requirement(s) arguments (-r and -R) can be given in various forms. A plain text argument is taken to be a path to a file<br>
+containing the requirement(s).  codesign will accept both binary files containing properly compiled requirements code, and<br>
+source files that are automatically compiled before use.  An argument of "-" requests that the requirement(s) are read from<br>
+standard input.  Finally, an argument that begins with an equal sign "=" is taken as a literal requirements source text, and is<br>
+compiled accordingly for use.<br>
+</p>
+</blockquote>
+<h2> Option Flags<br>
+</h2>
+<blockquote>
+<p> When signing, a set of option flags can be specified to change the behavior of the system when using the signed code. The fol-<br>
+lowing flags are recognized by codesign; other flags may exist at the API level. Note that you can specify any valid flags by<br>
+giving a (single) numeric value instead of a list of option names.</p>
+</blockquote>
+<pre>     kill     Forces the signed code's kill flag to be set when the code begins execution.  Code with the kill flag set will die
+              when it becomes dynamically invalid. It is therefore safe to assume that code marked this way, once validated, will
+              have continue to have a valid identity while alive.
+
+     hard     Forces the signed code's hard flag to be set when the code begins execution.  The hard flag is a hint to the system
+              that the code prefers to be denied access to resources if gaining such access would invalidate its identity.
+
+     host     Marks the code as capable of hosting guest code. You must set this option if you want the code to act as a code sign-
+              ing host, controlling subsidiary ("guest") code. This flag is set automatically if you specify an internal guest
+              requirement.
+
+     expires  Forces any validation of the code to consider expiration of the certificates involved. Code signatures generated with
+              this flag will fail to verify once any of the certificates in the chain has expired, regardless of the intentions of
+              the verifier. Note that this flag does not affect any other checks that may cause signature validation to fail,
+              including checks for certificate revocation.
+
+     library  Forces the signed code's library validation flag to be set when the code begins execution.  The code will only be able
+              to link against system libraries and frameworks, or libraries, frameworks, and plug-in bundles with the same team
+              identifier embedded in the code directory.  Team identifiers are automatically recorded in signatures when signing
+              with suitable Apple-issued signing certificates.  Note that the flag is not supported for i386 binaries, and only
+              applies to the main executable.  The flag has no effect when set on frameworks and libraries.</pre>
+<blockquote>
+<p> Note that code can set the hard and kill flags on itself at any time. The signing options only affect their initial state. Once      set by any means, these flags cannot be cleared for the lifetime of the code. Therefore, specifying such flags as signing      options guarantees that they will be set whenever the signed code runs.</p>
+<p> If the code being signed has an Info.plist that contains a key named CSFlags, the value of that key is taken as the default      value for the options. The value of CSFlags can be a string in the same form as the --options option, or an integer number      specifying the absolute numeric value. Note however that while you can abbreviate flag names on the command lines, you must      spell them out in the Info.plist.<br>
+</p>
+</blockquote>
+<h3><a id="e"></a>Examples</h3>
+<p> To sign application Terminal.app with a signing identity named "authority":<br>
+<span class="code">codesign -s authority Terminal.app</span><br>
+<br>
+To sign the command-line tool "helper" with the same identity, overwriting any existing signature, using the signing identifier<br>
+"com.mycorp.helper", and embedding a custom designated requirement<br>
+<span class="code">codesign -f -s authority --prefix=com.mycorp. -r="designated => anchor /tmp/foo" helper</span><br>
+<br>
+Sign the application ss64.app with the 'ACME Co.' certificate:</p>
+<p class="code">codesign -s &quot;ACME Co.&quot; /path/to/ss64.app </p>
+<p>To verify the signature on Terminal.app and produce some verbose output:<br>
+<span class="code">codesign --verify --verbose Terminal.app</span><br>
+<br>
+To verify the dynamic validity of process 664:<br>
+<span class="code">codesign --verify 664</span><br>
+<br>
+To display all information about Terminal.app's code signature:<br>
+<span class="code">codesign --display --verbose=4 Terminal.app</span><br>
+<br>
+To extract the internal requirements from Terminal.app to standard output:<br>
+<span class="code">codesign --display -r- Terminal.app</span></p>
+<p class="quote"><i>&ldquo;Humility, that low, sweet root, 
+From which all heavenly virtues shoot&rdquo; - Thomas Moore (The Loves of the Angels)</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/Procedures/Procedures.html">About the Code Signing Identity</a> - Apple.<br>
+<a href="https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/DistributingApplicationsOutside/DistributingApplicationsOutside.html">Create a developer ID</a> to sign Mac apps and installer packages; only Apple Developer code signing certs are compatible with GateKeeper.<br>
+keytool   - Key and certificate management tool.<br>
+<a href="security.html">security</a> - Administer Keychains, keys, certificates and the Security framework</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

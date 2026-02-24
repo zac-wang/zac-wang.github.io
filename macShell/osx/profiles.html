@@ -1,0 +1,142 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>profiles Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>profiles</h1> 
+<p>Profiles Tool. Install, remove or list configuration profiles,  install provisioning profiles.  <br>
+Some commands  only
+work with elevated privileges, or for the current user.</p>
+<pre>Syntax
+      profiles [[-I | -R | -i] [-F <i>file_path_to_profile</i> | -]] [[-L] [-U <i>username</i>]]
+         [[-r] [-p <i>profile_id</i>] [-u <i>uuid</i>] [-o <i>output_file_path</i>]<br>            [-Y <i>shortname</i>]] [-PHDdCchfvxVzYeN]
+
+Key
+   -C  List all device configuration profile information for the computer.
+
+   -c  List all provisioning profile information.
+
+   -D  Delete existing device configuration profiles (requires root privileges)
+   -d  Delete existing provisioning profiles (requires root privileges)
+            
+   -e  Print the Device Enrollment configuration, if any, for the computer.
+       Can be combined with the -o option to write output to a plist.
+
+   -I  Install a configuration profile for a particular user from a profile file.
+
+   -i  Install a provisioning profile from a profile file.
+
+   -L  List configuration profile information for a particular user, or the current user if no Username was specified.
+
+   -f  Automatically confirm any questions, or when used with -s, will retry startup profiles at each startup
+       until successfully installed.
+
+   -F <i>filenamepath</i> Specify the file path to the profile file.
+       Use '-' as the file path to input the configuration profile (not provisioning profile) XML plist via stdin.
+
+   -h  Display help.
+
+   -H  Returns whether configuration profiles are installed.
+
+   -N  Re-enable the user notifications for DEP enrollment.
+
+   -o <i>path</i> The output file path for profile information (-L, -P, -C, -c) as a plist file.
+       The <i>path</i> argument must be specified to use this option, Use 'stdout' to send this informaton to the console.
+       File output will be written as an XML plist file, or you can use 'stdout-xml' to write XML to the console.
+       The toplevel key will contain the user name, or _computerLevel for device or provisioning profile information.
+
+   -P  List configuration profile information for everyone.
+       Profiles must have unique toplevel PayloadUUIDs in order for them to be distinguished as different profiles, so
+       different users with the same toplevel PayloadUUIDs will be treated as the same payload for display purposes.
+
+   -p <i>profile</i>  A profile identifier used to locate the configuration or provisioning profile.(only used for removal)
+
+   -r  Remove a provisioning profile given a identifier and uuid.
+
+   -R  Remove a configuration profile for a particular user from a profile file.
+
+   -s <i>filenamepath</i>  Set filenamepath as a startup profile. (Requires root privileges)
+
+   -S  Sync up and remove any configuration profiles that aren't assigned to any current local user.
+       Requires root privileges.
+
+   -u  A uuid identifier used to locate the provisioning profile.  The uuid must be in its canonical 36 character form.
+
+   -U  Specify the short username (destination).
+       If installing or removing a profile as root (or sudo), the designated user must be logged in.
+
+   -v  Enable verbose mode.
+       A 'pass' or 'fail' indicator may also be displayed based on the command return status to stdout.
+
+   -V  Verify a provisioning profile from a profile file.
+
+   -W  Attempt to renew the certificates in an installed profile.
+
+   -x  Display tool version number.
+       The version is in the format x.yy, where x will change if new or incompatible commands are added.
+       The version initially starts at 2.00
+
+   -Y  Specify the shortname of a local user that will be enrolled with MDM if the configuration profile
+       being installed contains an MDM payload. Will only be used if the profile is being installed as root.
+
+   -z  The profile removal password.
+       If not specified and the profile requires a removal password, you will be prompted.</pre>
+<p>Certain configuration profiles may be marked as a device profile (system) using the PayloadScope key.  However, the profiles tool will ignore the PayloadScope key and install the profile based on how the profile is installed; either a user profile if installed from a user, or a device profile if installed from root (or sudo).   </p>
+<p>If you are installing a profile as root, you may use the -U parameter to install or remove the profile for that active user.</p>
+<p> Specific payload dictionary information is not available since it may contain sensitive information.  Non-sensitive information can be viewed using the System Report.</p>
+<p> Because this command line tool was not designed to ask for missing information, some profiles may fail to install properly.  The only recourse is to insert the missing information before installing the configuration profile.  The System Preferences application's Profiles pane is designed to handle the querying of missing information.</p>
+<p> Configuration profiles installed to the wrong user domain (user vs system) may not behave in the way you expect since the information may not be useful to that particular domain.  For example, adding a Mail payload to the system domain will not do anything since Mail payloads must have a user account.   Additionally, since profiles are stored by the user shortname and only stored on the local client, care should be taken to not install a profile that could be used by a same named local user.</p>
+<p> The profiles tool should only be used from the /usr/bin folder since certain operations are privileged and may fail if moved.</p>
+<h3><a id="e"></a>Examples</h3>
+<p> Install the profile file 'testfile.mobileconfig' into current user.<br>
+<span class="code">$ profiles -I -F /testfile.configprofile</span></p>
+<p> Remove the profile file '/profiles/testfile2.mobileconfig' into the current user.<br>
+<span class="code">$ profiles -R -F /profiles/testfile2.configprofile </span></p>
+<p>Install the application provisioning profile 'foo.mobileconfig' into current user:<br>
+<span class="code">$ profiles -i -F /myprofiles/foo.mobileconfig</span></p>
+<p>Remove a provisioning profile:<br>
+<span class="code">$ profiles -r -p com.example.123 -u 00000000-0000-0000-0000-000000000000'</span></p>
+<p> Return whether or not configuration profiles are installed on the system:<br> 
+<span class="code">$ 
+profiles -H</span></p>
+<p> Display information on all installed configuration profiles on the system:<br>
+<span class="code">$ profiles -P</span></p>
+<p> Display information for installed profiles for the current user:<br>
+<span class="code">$ profiles -L </span></p>
+<p> Display information for installed profiles for the current user and sends the output as a dictionary to /outputfile.plist<br>
+<span class="code">$ profiles -L -o /outputfile </span></p>
+<p> Display extended information for installed configuration profiles for the current user:<br>
+<span class="code">$ profiles -Lv </span></p>
+<p> Remove any installed profiles with the identifier com.example.profile1 in the current user and using a removal password of<br>
+'pass':<br>
+<span class="code">$ profiles -R -p com.example.profile1 -z pass</span></p>
+<p> Set up the profile as a startup profile to be triggered at the next system startup time.   If the profile can't be installed,<br>
+it will try again at next startup time:<br>
+<span class="code">$ profiles -s -F /startupprofile.mobileconfig -f </span></p>
+<p> Install the configuration profile read in from stdin.   The stdin data must be a fully formed XML plist containing the<br>
+configuration profile information:<br>
+<span class="code">$ profiles -I -F - &lt; /configprofile.mobileconfig </span></p>
+<p class="quote"><i>&ldquo; I would look at my profile and be like, 'Look at this girl! She has, like, the most perfect life!' and I would feel so guilty for not feeling blessed all the time&rdquo; ~ Alexis Ren</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="createhomedir.html">createhomedir</a> - Create and populate home directories on the local computer.<br>
+<a href="dscl.html">dscl</a> - Directory Service command line utility.<br>
+<a href="diskutil.html">diskutil</a> - Disk utilities.<br>
+<a href="sysadminctl.html">sysadminctl</a> - Administer system user accounts.<br>
+<a href="https://support.apple.com/en-gb/guide/deployment/dep24dbdcf9e/web">Apple Support </a>- Use secure token, bootstrap token and volume ownership in deployments.<!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></p></body>
+</html>

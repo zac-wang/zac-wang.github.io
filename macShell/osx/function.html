@@ -1,0 +1,103 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>function Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>function</h1> 
+<p>Shell functions are a way to group commands for later execution using a single 
+  name for the group. They are executed just like a regular command. When the 
+  name of a shell function is used as a simple command name, the list of commands 
+associated with that function name will be executed.</p>
+<p>Functions are declared using this syntax:
+</p><pre>[ <code>function</code> ] <var>name</var> () { <var>command-list</var>; }</pre>
+<p>This defines a shell function named <var>name</var>. The reserved word <code>function</code> is optional and is only required for posix compatibility. If the <code>function</code> reserved word is supplied, the parentheses 
+  are optional.</p>
+<p>If a function called <i>name</i> already exists it will be overwritten. If you already have an <a href="alias.html">alias</a> called <i>name</i>, this alias should be removed with unalias before creating the function.</p>
+<p>The <var>body</var> of the function is the <var>command-list</var> between { and }. This list is executed whenever <var>name</var> is specified 
+  as the name of a command. </p>
+<p>The exit status of a function is the exit status of 
+  the last command executed in the body.</p>
+<p>To view a bash function's definition use the <a href="type.html">type</a> command: <span class="code">type myfunctionname</span></p>
+<p>Shell functions are executed 
+  in the current shell context; no new process is created to interpret them. </p>
+<p>Note that for historical reasons, the curly braces that surround the body of 
+  the function must be separated from the body by <code>blanks</code> or newlines. 
+  This is because the braces are reserved words and are only recognized as such 
+  when they are separated by whitespace. Also, the <var>command-list</var> must 
+  be terminated with a semicolon or a newline. </p>
+<p>When a function is executed, the arguments to the function become the positional 
+  parameters during its execution.<br>
+The special parameter <span class="code">`#'</span> that expands to the number of positional 
+  parameters is updated to reflect the change. <br>
+Positional parameter <code>0</code> is unchanged. <br>
+The <code>FUNCNAME</code> variable is set to the name of the function while 
+the function is executing. </p>
+<p>If the builtin command <code>return</code> is executed in a function, the function 
+  completes and execution resumes with the next command after the function call. 
+  When a function completes, the values of the positional parameters and the special 
+  parameter <span class="code">`#'</span> are restored to the values they had prior to the 
+  function's execution. If a numeric argument is given to <code>return</code>, 
+  that is the function's return status; otherwise the functions's return status 
+  is the exit status of the last command executed before the <code>return</code>. </p>
+<p>Variables local to the function can be declared with the <code>local</code> builtin. These variables are visible only to the function and the commands it 
+  invokes. </p>
+<p>Functions can be recursive. No limit is placed on the number of recursive calls.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>As an alternative to a simple alias:</p>
+<blockquote>
+<p><span class="code">lsl() { ls -l $1; }<br>
+<br>
+mcd() { mkdir $1 &amp;&amp; cd $1; }</span></p>
+</blockquote>
+<p>A function to run $HOME/bin/myexecutable</p>
+<blockquote>
+<p class="code">myex() {<br>
+$HOME/bin/myexecutable &quot;$@&quot;<br>
+}<br>
+export -f myex</p>
+</blockquote>
+<p>A shell script to demonstrate passing arguments:</p>
+<blockquote>
+<pre>function.sh arg1
+
+#!/bin/bash
+# function.sh
+#  Call this script with a command-line argument,
+#+ something like $0 arg1.
+
+func ()
+{
+echo "$1"   # Echo the first arg passed to the function.
+}
+
+echo "==============================================="
+echo
+echo "Now call the above function passing the scripts first command-line argument."
+func $1
+
+exit 0</pre>
+</blockquote>
+<p class="quote"><i>&ldquo;Cats are intended to teach us that not everything in nature has a function&rdquo; ~ Garrison Keillor</i></p>
+<h3>Related macOS commands</h3>
+<span class="space"><a href="expr.html">expr</a> - Evaluate expressions.<br>
+<a href="eval.html">eval</a> - Evaluate several commands/arguments.<br>
+<a href="for.html">for</a> - Expand <var>words</var>, and execute <var>commands.</var><br>
+<a href="awk.html">awk</a> - Find and Replace text within file(s).<br>
+<a href="set.html">set</a> - Manipulate shell variables and functions.</span><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

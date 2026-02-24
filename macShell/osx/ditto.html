@@ -1,0 +1,154 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>ditto Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>ditto</h1> 
+<p>Copy  directory hierarchies, create and extract archives. Ditto can preserve ownership / permissions,  resource forks and file / folder metadata. Ditto will automatically create the destination folder if 
+it doesn’t yet exist, if the destination does exist and contains files, then ditto will merge them.</p>
+<pre>Syntax
+     ditto [<i>options</i>] <i>Source_file  Destination_file</i>
+
+     ditto [<i>options</i>] <i>Source  Destination_folder</i>
+
+     ditto -x [<i>options</i>] <i>Source_Archive  Destination_folder</i>
+
+     ditto -c [<i>options</i>] <i>Source  Destination_archive
+
+</i>     ditto -h | --help
+
+     Where <i>Source </i>= a file, folder or archive.
+
+Options
+     -h            Print full usage.
+
+     -X            When copying one or more source directories, do not descend into directories that
+                   have a different device ID.
+
+     -c            Create an archive at the destination path.  The default format is CPIO, unless
+                   -k is given.  CPIO archives should be stored in files with names ending in .cpio.
+                   Compressed CPIO archives should be stored in files with names ending in .cpgz.
+
+     -z            Create compressed CPIO archives, using gzip(1) compression.
+
+     -j            Create compressed CPIO archives, using bzip2(1) compression.
+
+     -v            Print a line of output to stderr for each source directory copied.
+
+     -V            Print a line of output to stderr for every file, symbolic link, and device copied.
+
+     -x            Extract the archives given as source arguments. The format is assumed to be CPIO,
+                   unless -k is given.  Compressed CPIO is automatically handled.
+
+     -k            Create or extract from a PKZip archive instead of the default CPIO.
+                   PKZip archives should be stored in filenames ending in .zip.
+
+     --keepParent  When creating an archive, embed the parent directory name src in dst_archive.
+
+     --arch arch   Thin Universal binaries to the specified architecture.
+                   If multiple --arch options are specified then the resulting destination file
+                   will contain each of the specified architectures (if they are present in the
+                   source file).  arch should be specified as "i386", "x86_64", etc.
+
+     --bom bom     Copy only files, links, devices, and directories that are present in the
+                   specified BOM.
+
+     --rsrc        Preserve resource forks and HFS meta-data.  ditto will store this data in
+                   Carbon-compatible ._ AppleDouble files on filesystems that do not natively 
+                   support resource forks.  As of Mac OS X 10.4, --rsrc is default behavior.
+
+     --norsrc      Do not preserve resource forks and HFS meta-data.
+                   If both --norsrc and --rsrc are passed, whichever is passed last will take
+                   precedence.  Both options override DITTONORSRC.
+                   Unless explicitly specified, --norsrc also implies --noextattr and --noacl
+                   to match the behavior of Mac OS X 10.4.
+
+     --extattr     Preserve extended attributes (requires --rsrc).
+                   As of Mac OS X 10.5, --extattr is the default.
+
+     --noextattr   Do not preserve extended attributes (requires --norsrc).
+
+     --qtn         Preserve quarantine information.  As of Mac OS X 10.5, --qtn is the default.
+
+     --noqtn       Do not preserve quarantine information.
+
+     --acl         Preserve Access Control Lists (ACLs).  As of Mac OS X 10.5, --acl is the default.
+
+     --noacl       Do not preserve ACLs.
+
+     --nocache     Do not perform copies using the Mac OS X Unified Buffer Cache.
+                   Files read and written will not be cached, although if the file is
+                   already present in the cache, the cached information will be used.
+
+     --hfsCompression
+                   When copying files or extracting content from an archive, if the destination is
+                   an HFS+ volume that supports compression, all the content will be compressed if
+                   appropriate. This is only supported on Mac OS X 10.6 or later, and is only
+                   intended to be used in installation and backup scenarios that involve system files.
+                   Since files using HFS+ compression are not readable on versions of Mac OS X earlier
+                   than 10.6, this flag should not be used when dealing with non-system files or other
+                   user-generated content that will be used on a version of Mac OS X earlier than 10.6.
+
+     --nohfsCompression
+                   Do not compress files with HFS+ compression when copying or extracting content
+                   from an archive unless the content is already compressed with HFS+ compression.
+                   This flag is only supported on Mac OS X 10.6 or later.  --nohfsCompression is the default.
+
+     --preserveHFSCompression
+                   When copying files to an HFS+ volume that supports compression, ditto will preserve
+                   the compression of any source files that were using HFS+ compression.
+                   This flag is only supported on Mac OS X 10.6 or later.  --preserveHFSCompression is the default.
+
+     --nopreserveHFSCompression
+                   Do not preserve HFS+ compression when copying files that are already compressed
+                   with HFS+ compression. This is only supported on Mac OS X 10.6 or later.
+
+     --sequesterRsrc
+                   When creating a PKZip archive, preserve resource forks and HFS meta-data in the
+                   subdirectory __MACOSX.  PKZip extraction will automatically find these resources.
+
+     --zlibCompressionLevel num
+                   Sets the compression level to use when creating a PKZip archive. The compression
+                   level can be set from 0 to 9, where 0 represents no compression, and 9 represents
+                   optimal (slowest) compression.
+                   By default, ditto will use the default compression level as defined by zlib.
+
+     --password    When extracting a password-encrypted ZIP archive, you must specify --password to
+                   allow ditto to prompt for a password to use to extract the contents of the file.
+                   If this option is not provided, and a password-encrypted file is encountered,
+                   ditto will emit an error message.</pre>
+<p>Unlike <a href="cp.html">cp -R</a>, if the destination folder already exists, the existing contents will be <i>merged</i> with the contents of the folder being copied. </P>
+<h3><a id="e"></a>Examples</h3>
+<p> Copy a folder quotes are needed because of the space in the folder name. Note that this will merge the files into the destination:<br>
+<span class="code">ditto &quot;~/Desktop/work files&quot; "/Volumes/work backup"</span><br>
+<br>
+To also preserve the Mac resource forks, type and creator codes use (only required prior to 10.4):<br>
+<span class="code">ditto -rsrc &quot;~/Desktop/work files&quot; "/Volumes/work backup"</span></p>
+<p>Don’t  copy metadata and resource forks:<br>
+<span class="code">ditto -V --norsrc &quot;~/Desktop/work files&quot; "/Volumes/work backup"</span><br>
+</p>
+<p class="quote"><i>&ldquo;The Borgesian meta-library contains a copy of every book ever written, but my dream-artifact is already, and always, every book ever written, on demand&rdquo; - William Gibson </i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="cp.html">cp</a> - Copy files.<br>
+<a href="dd.html">dd</a> - Data Duplicator - convert and copy a file.<br>
+<a href="install.html">install</a> - Copy files and set attributes.<br>
+<a href="mv.html">mv</a> - Move Files.<br>
+<a href="tar.html">tar</a> - store or extract files to an archive (allows symbolic 
+links to be copied as links.)</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

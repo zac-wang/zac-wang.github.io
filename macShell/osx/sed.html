@@ -1,0 +1,328 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>sed Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>sed</h1> 
+<p>SED is a stream editor. A stream editor is used to perform basic 
+  text transformations on an input stream (a file or input from a pipeline). <br>
+  While in some ways similar to an editor which permits scripted edits, SED works 
+  by making only one pass over the input(s), and is consequently more efficient. 
+  But it is SED's ability to filter text in a pipeline which particularly distinguishes 
+it from other types of editors.</p>
+<p>A single command may be specified as the first argument to sed.  Multiple commands may be specified by using the -e or -f options.  All<br>
+commands are applied to the input in the order they are specified regardless of their origin.</p>
+<pre>Syntax
+      sed [-Ealnru] <i>command</i> [-I <i>extension</i>] [-i <i>extension</i>] [<i>file</i> ...]<br>
+      sed [-Ealnru] [-e <i>command</i>] [-f <i>command_file</i>] [-I <i>extension</i>] [-i <i>extension</i>] [<i>file</i> ...]
+
+Options</pre>
+<p>A single command may be specified as the first argument to sed. Multiple commands may be specified by using the -e or -f options. All commands are applied to the input in the order they are specified regardless of their origin.</p>
+<pre>   -E   Interpret regular expressions as extended (modern) regular expressions rather than basic regular
+        expressions (BRE's).  The re_format(7) manual page fully describes both formats.
+
+   -a   The files listed as parameters for the “w” functions are created (or truncated) before any processing
+        begins, by default.  The -a option causes sed to delay opening each file until a command containing
+        the related “w” function is applied to a line of input.
+
+   -e <i>command</i>
+        Append the editing commands specified by the command argument to the list of commands.
+
+   -f <i>command_file</i>
+        Append the editing commands found in the file command_file to the list of commands.
+        The editing commands should each be listed  on a separate line.
+        The commands are read from the standard input if command_file is “-”.
+
+   -I <i>extension</i>
+        Edit files in-place, saving backups with the specified extension.
+        If a zero-length extension is given, no backup will be  saved.
+        It is not recommended to give a zero-length extension when in-place editing files, as you risk
+        corruption or partial  content in situations where disk space is exhausted, etc.
+
+        Note that in-place editing with -I still takes place in a single continuous line address space covering
+        all files, although each file preserves its individuality instead of forming one output stream.
+        The line counter is never reset between files, address ranges can span file boundaries, and the “$” address
+        matches only the last line of the last file.  (See Sed Addresses.)
+        That can lead to unexpected results in many cases of in-place editing, where using -i is desired.
+
+   -i <i>extension</i>
+        Edit files in-place similarly to -I, but treat each file independently from other files.
+        In particular, line numbers in each file start at 1, the “$” address matches the last line of the current file,
+        and address ranges are limited to the current file. (See Sed Addresses.)
+        The net result is as though each file were edited by a separate sed instance.
+
+   -l   Make output line buffered.
+
+   -n   By default, each line of input is echoed to the standard output after all of the commands have been applied to it.
+        The -n  option suppresses this behavior.
+
+   -r   Same as -E for compatibility with GNU sed.
+
+   -u   Make output unbuffered.</pre>
+<p> The form of a <b>sed</b> command is as follows:</p>
+<blockquote>
+<p class="code"> [<i>address</i>[,<i>address</i>]]function[<i>arguments</i>]</p>
+</blockquote>
+<p> Whitespace may be inserted before the first <i>address</i> and the function portions of the command.<br>
+<br>
+Normally, <b>sed</b> cyclically copies a line of input, not including its terminating newline character, into a <i>pattern</i> <i>space</i>, (unless there is something left after a 'D' function), applies all of the commands with addresses that select that pattern space, copies the pattern space to the standard output, appending a newline, and deletes the pattern space.<br>
+<br>
+Some of the functions use a <b>hold space</b> to save all or part of the pattern space for subsequent retrieval.</p>
+<h2>Sed Addresses</h2>
+<blockquote>
+<p>An <i>address</i> is not required, but if specified must have one of the following formats:</p>
+<ul>
+<li> A number (that counts input lines cumulatively across input files)</li>
+<li>A dollar ('$') 
+character that addresses the last line of input,  (or the last line of the current file if a -i option was<br>
+specified).</li>
+<li> A context address (which consists of a regular expression preceded and followed by a delimiter).</li>
+</ul>
+<p> A command line with <b>no</b> addresses selects every pattern space.</p>
+<p> A command line with <b>one</b> address selects all of the pattern spaces that match the address.<br>
+<br>
+A command line with <b>two</b> addresses selects the inclusive range from the first pattern space that matches the first address through the next pattern space that matches the second.  (If the second address is a number less than or equal to the line number first selected, only that line is selected.)  Starting at the first line following the selected range, <b>sed</b> starts looking again for the first address.<br>
+<br>
+Editing commands can be applied to non-selected pattern spaces by use of the exclamation character ('!') function.</p>
+</blockquote>
+<h2>Sed Regular Expressions</h2>
+<blockquote>
+<p>     The <b>sed</b> regular expressions are basic regular expressions (BRE's, see re_format(7) for more information), but extended (modern) regular expressions can be used instead if the -E flag is given.  In addition, sed has the following two additions to regular expressions:<br>
+<br>
+1.   In a context address, any character other than a backslash (“\”) or newline character may be used to delimit the regular expression.  The opening delimiter needs to be preceded by a backslash unless it is a slash.  For example, the context address \xabcx is equivalent to /abc/.  Also, putting a backslash character before the delimiting character within the regular expression causes the character to be treated literally.  For example, in the context address \xabc\xdefx, the RE delimiter is an “x” and the second “x” stands for itself, so that the regular expression is “abcxdef”.</p>
+<p> 2.   The escape sequence \n matches a newline character embedded in the pattern space.  You cannot, however, use a literal newline<br>
+character in an address or in the substitute command.<br>
+<br>
+One special feature of <b>sed</b> regular expressions is that they can default to the last regular expression used.  If a regular expression is empty, i.e. just the delimiter characters are specified, the last regular expression encountered is used instead.  The last regular expression is defined as the last regular expression used as part of an address or substitute command, and at run-time, not compile-time.  For example, the command '/abc/s//XXX/' will substitute 'XXX' for the pattern 'abc'.</p>
+</blockquote>
+<h2>Sed Functions</h2>
+<blockquote>
+<p>     In the following list of commands, the maximum number of permissible addresses for each command is indicated by<span class="code"> [0addr], [1addr], or [2addr]</span>,<br>
+representing zero, one, or two addresses.</p>
+<p> The argument <i>text</i> consists of one or more lines.  To embed a newline in
+the text, precede it with a backslash.  Other backslashes in text are deleted and the following character taken literally.</p>
+<p> The 'r' and 'w' functions take an optional file parameter, which
+should be separated from the function letter by white space.  Each file given as an argument to <b>sed</b> is created (or its contents truncated) before
+any input processing begins.</p>
+<p> The 'b', 'r', 's', 't', 'w', 'y', '!', and ':' functions all accept additional arguments.  The following synopses indicate which arguments have to be separated from the function letters by white space characters.<br>
+<br>
+Two of the functions take a function-list. <br>
+</p>
+<p>This is a list of <b>sed</b> functions separated by newlines, as follows:<br>
+</p>
+</blockquote>
+<pre>
+           { function
+             function
+             ...
+             function
+           }</pre>
+<blockquote>
+<p> The '{' can be preceded by white space and can be followed by white space.  The function can be preceded by white space.  The terminating
+'}' must be preceded by a newline or optional white space.<br>
+</p>
+</blockquote>
+<pre>
+     [2addr] function-list
+             Execute function-list only when the pattern space is selected.
+
+     [1addr]<b>a</b>\
+     <i>text</i>
+             Write <i>text</i> to standard output immediately before each attempt to read a line of input,
+             whether by executing the 'N' function or by beginning a new cycle.
+
+     [2addr]<b>b</b>[<i>label</i>]
+             Branch to the ':' function with the specified <i>label</i>.  If the
+             label is not specified, branch to the end of the script.
+
+     [2addr]<b>c</b>\
+     <i>text</i>
+             Delete the pattern space.
+             With 0 or 1 address or at the end of a 2-address range, <i>text</i> is written to standard output.
+
+     [2addr]<b>d</b>
+             Delete the pattern space and start the next cycle.
+
+     [2addr]<b>D</b>
+             Delete the initial segment of the pattern space through the first
+             newline character and start the next cycle.
+
+     [2addr]<b>g</b>
+             Replace the contents of the pattern space with the contents of the hold space.
+
+     [2addr]<b>G</b>
+             Append a newline character followed by the contents of the hold space to the pattern space.
+
+     [2addr]<b>h</b>
+             Replace the contents of the hold space with the contents of the pattern space.
+
+     [2addr]<b>H</b>
+             Append a newline character followed by the contents of the pattern space
+             to the hold space.
+
+     [1addr]<b>i</b>\
+     <i>text</i>
+             Write <i>text</i> to the standard output.
+
+     [2addr]<b>l</b>
+             (The letter ell.)  Write the pattern space to the standard output
+             in a visually unambiguous form.  This form is as follows:
+
+                   backslash          \\
+                   alert              \a
+                   form-feed          \f
+                   newline            \n
+                   carriage-return    \r
+                   tab                \t
+                   vertical tab       \v
+
+             Nonprintable characters are written as three-digit octal numbers (with a preceding backslash)
+             for each byte in the character (most  significant byte first).  Long lines are folded, with
+             the point of folding indicated by displaying a backslash followed by a new-line.
+             The end of each line is marked with a '$'.
+
+     [2addr]<b>n</b>
+             Write the pattern space to the standard output if the default output has not been
+             suppressed, and replace the pattern space with the next line of input.
+
+     [2addr]<b>N</b>
+             Append the next line of input to the pattern space, using an embedded newline
+             character to separate the appended material from the original contents.
+             Note that the current line number changes.
+
+     [2addr]<b>p</b>
+             Write the pattern space to standard output.
+
+     [2addr]<b>P</b>
+             Write the pattern space, up to the first newline character to the
+             standard output.
+
+     [1addr]<b>q</b>
+             Branch to the end of the script and quit without starting a new cycle.
+           
+
+     [1addr]<b>r</b> <i>file</i>
+             Copy the contents of <i>file</i> to the standard output immediately before the next
+             attempt to read a line of input.  If <i>file</i> cannot be read for any reason,
+             it is silently ignored and no error condition is set.
+
+     [2addr]<b>s</b>/regular expression/replacement/flags
+             Substitute the replacement string for the first instance of the regular expression in the pattern space.
+             Any character other than backslash or newline can be used instead of a slash to delimit the RE and the replacement.
+             Within the RE and the replacement, the RE delimiter itself can be used as a literal character if
+             it is preceded by a backslash.
+
+             An ampersand (“&”) appearing in the replacement is replaced by the string matching the RE.
+             The special meaning of “&” in this context can be suppressed by preceding it by a backslash.
+             The string “\#”, where “#” is a digit, is replaced by the text matched by the corresponding
+             backreference expression (see re_format(7)).
+
+             A line can be split by substituting a newline character into it.
+             To specify a newline character in the replacement string, precede it with a backslash.
+
+             The value of <i>flags</i> in the substitute function is zero or more of the following:
+
+                N     Make the substitution only for the N'th occurrence of the regular expression in the pattern space.
+
+                g     Make the substitution for all non-overlapping matches of the regular expression, not just the first one.
+
+                p     Write the pattern space to standard output if a replacement was made.
+                      If the replacement string is identical to that which it replaces, it is still considered to have
+                      been a replacement.
+
+                w <i>file</i>  Append the pattern space to file if a replacement was made.
+                      If the replacement string is identical to that which it replaces, it is still considered to have
+                      been a replacement.
+
+              i or I  Match the regular expression in a case-insensitive way.
+
+     [2addr]<b>t</b> [<i>label</i>]
+
+             Branch to the “:” function bearing the <i>label</i> if any substitutions have been made since the most recent
+             reading of an input line  or execution of a “t” function.
+             If no <i>label</i> is specified, branch to the end of the script.
+
+     [2addr]<b>w</b> <i>file</i>
+             Append the pattern space to the <i>file</i>.
+
+     [2addr]<b>x</b>
+             Swap the contents of the pattern and hold spaces.
+
+     [2addr]<b>y</b>/string1/string2/
+             Replace all occurrences of characters in <i>string1</i> in the pattern space with the corresponding characters
+             from <i>string2</i>. Any character other than a backslash or newline can be used instead of a slash to delimit
+             the strings.  Within <i>string1</i> and <i>string2</i>, a backslash followed by any character other than a newline is that
+             literal character, and a backslash followed by an 'n' is replaced by a newline character.
+
+     [2addr]<b>!</b>function
+     [2addr]<b>!</b>function-list
+             Apply the function or function-list only to the lines that are <i>not</i> selected by the address(es).
+
+     [0addr]<b>:</b>label
+             This function does nothing; it bears a label to which the 'b' and 't' commands may branch.
+
+     [1addr]=
+             Write the line number to the standard output followed by a new-line character.
+
+     [0addr]
+             Empty lines are ignored.
+
+     [0addr]#
+             The '#' and the remainder of the line are ignored (treated as a comment), with the single exception that
+             if the first two characters in the file are '#n', the default output is suppressed.
+             This is the same as specifying the <b>-n</b> option on the command line.
+
+Exits 0 on success and &gt;0 if an error occurs.</pre>
+<h3><a id="e"></a>Examples</h3>
+ <p> Replace ‘bar’ with ‘baz’ when piped from another command:<br>
+<br>
+<span class="code">echo "An alternate word, like bar, is sometimes used in examples." | sed 's/bar/baz/'</span><br>
+<br>
+Using backlashes can sometimes be hard to read and follow:<br>
+<br>
+<span class="code">echo "/home/example" | sed  's/\/home\/example/\/usr\/local\/example/'</span><br>
+<br>
+Using a different separator can be handy when working with paths:<br>
+<br>
+<span class="code">echo "/home/example" | sed 's#/home/example#/usr/local/example#'</span><br>
+<br>
+Replace all occurances of ‘foo’ with ‘bar’ in the file test.txt, without creating a backup of the file:<br>
+<br>
+<span class="code">sed -i '' -e 's/foo/bar/g' test.txt</span><br>
+</p>
+<p>Rename a bunch of iPhone screenshot files from IMG_0001.PNG, IMG_0002.PNG...<br>
+ to ScreenShot01.png, ScreenShot01.png...</p>
+<pre><a href="for.html">for</a> name in IMG*PNG
+do
+  # Work out the new name
+  newname=&quot;$(echo $name | <b>sed</b> &quot;s/IMG_00/ScreenShot/;s/PNG/png/&quot;)&quot;
+
+  # Move/rename the files
+  echo &quot;renaming $name as $newname&quot;
+  <a href="mv.html">mv</a> $name $newname
+done</pre>
+<p class="quote"><i>&ldquo;life is 10% what happens to me and 90% how I react to it&rdquo; ~ Charles Swindoll </i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="awk.html">awk</a> - Find and Replace text within file(s).<br>
+<a href="grep.html">grep</a> - Search file(s) for lines that match a given pattern.<br>
+<a href="https://web.archive.org/web/20200206072314/http://sed.sourceforge.net/sed1line.txt">Useful SED one liners</a><br>
+regex(3).<br>
+re_format(7)<br>
+<a href="tail.html">tail</a> - Output the last part of files.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

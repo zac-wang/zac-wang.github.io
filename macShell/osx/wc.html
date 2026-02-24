@@ -1,0 +1,71 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>wc Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>wc</h1> 
+<p>Word count, line, character, and byte count.</p>
+<pre>Syntax
+       wc [-clmw] [<i>file</i> ...]
+
+Options
+     -c    The number of bytes in each input file is written to the standard output.
+
+     -l    The number of lines in each input file is written to the standard output.
+
+     -m    The number of characters in each input file is written to the
+           standard output.  If the current locale does not support multi-
+           byte characters, this is equivalent to the -c option.
+
+     -w    The number of words in each input file is written to the standard output.</pre>
+<p> When an option is specified, wc only reports the information requested by
+that option.  The default action is equivalent to specifying the -c, -l and -w options.<br>
+<br>
+If no files are specified, the standard input is used and no file name is
+displayed.</p>
+<p>The command <a href="grep.html">grep -c</a> will also count the number of matching lines, <span class="code">grep -c</span> is faster than piping <span class="code">grep</span> to <span class="code">wc -l</span></p>
+<p>The wc utility displays the number of lines, words, and bytes contained 
+in each input file (or standard input, by default) to the standard output. </p>
+<p>A 
+  line is defined as a string of characters delimited by a
+<new-
+     line>
+character, and a word is defined as a string of characters delimited 
+  by white space characters. White space characters are the set of characters 
+  for which the iswspace(3) function returns true.</p>
+<p> If more than one input file 
+  is specified, a line of cumulative counts for all the files is displayed on 
+  a separate line after the output for the last file. </p>
+<p> The LANG, LC_ALL and LC_CTYPE environment variables affect the 
+  execution of wc as described in environ(7).</p>
+<p>Exits 0 on success, and >0 if an error occurs.</p>
+<h3><a id="e"></a>Examples</h3>
+<p> Count the number of characters, words and lines in each of the files<br>
+report1 and report2 as well as the totals for both:</p>
+<pre>$ wc -mlw report1 report2
+</pre>
+<p>Count the number of words by pasting from the clipboard: </p>
+<p><span class="code">$ wc -l<br>
+(paste the list into the window and then type CTRL-D)</span></p>
+<p class="quote"><i>&ldquo;One look is worth a thousand words&rdquo; ~ Fred R. Barnard</i></p>
+<h3>Related macOS commands</h3>
+<p><a href="cal.html">  <span class="space">cal</span></a><span class="space"> - Display a calendar.<br>
+<a href="units.html"> units</a> - Convert units from one scale to another.<br>
+Equivalent Windows command: <i>command</i> | <a href="../nt/find.html">find</a> /c /v &quot;&quot;</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>dot_clean man page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>dot_clean</h1> 
+<p>Remove dot-underscore files. Merges<span class="code"> ._* </span>files with corresponding native files.</p>
+<pre>Syntax
+      dot_clean [-fmnsv] [--keep=[mostrecent|dotbar|native]] [<i>dir</i> ...]
+
+Key
+   -f    Flat merge.  Do not recursively merge all directories in the
+         given dir.  This is off by default.
+
+   -h    Help. Prints verbose usage message.
+
+   -m    Always delete dot underbar files.
+
+   -n    Delete dot underbar file if there is no matching native file.
+
+   -s    Follow symbolic links.  This will follow symbolic dot underbar
+         files when they are found.
+
+   -v    Print verbose output.
+
+   --keep=mostrecent
+         The default option.  If an attribute is associated with a data
+         fork, use that.  Otherwise, use information stored in the Apple-
+         Double file.
+
+   --keep=dotbar
+         Always use information stored in the AppleDouble file, replacing
+         any extended attributes associated with the native file.
+
+   --keep=native
+         Always use the information associated with the data fork, ignoring
+         any AppleDouble files.</pre>
+<p>For each <i><span class="code">dir</span></i>, dot_clean recursively merges all ._* files with their corresponding native files according to the rules specified with the given arguments.  By default, if there is an attribute on the native file that is also present in the ._ file, the most recent attribute will be used. If no operands are given, a usage message is output. If more than one directory is given, directories are merged in the order in which they are specified.</p>
+<p>The dot_clean utility exits 0 on success, and &gt;0 if an error occurs.</p>
+<h3><a id="e"></a>Examples</h3>
+<p> Perform a dot_clean merge on the mounted volume 'test',      always using the dot underbar information.            </p>
+<p class="code">dot_clean --keep=dotbar /Volumes/test</p>
+<p><span class="quote"><i>“Don’t waste your crazy” ~ <a href="https://www.elle.com/culture/celebrities/a14232/a-new-albumand-lifefor-fiona-apple-656787/">Fiona Apple</a></i></span></p>
+<h3>Related macOS commands</h3>
+<p><a href="bless.html">bless</a> - Set volume bootability and startup disk options.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>cpio Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>cpio</h1> 
+<p>Copy files to and from archives. This implementation can extract from tar, pax, cpio, zip, jar, ar, and ISO 9660 cdrom images and can create tar, pax, cpio, ar, and shar archives.</p>
+<pre>Syntax
+      cpio -i [<i>options</i>] [<i>pattern</i> ...] [&lt; <i>archive</i>]
+      cpio -o [<i>options</i>] &lt; <i>name-list</i> [&gt; <i>archive</i>]
+      cpio -p [<i>options</i>] <i>dest-dir</i> &lt; <i>name-list</i>
+
+   The first option to cpio is a mode indicator from the following list:
+
+      -i    <b>Copy-in</b> mode.  Read an archive from standard input (unless overriden) and extract the contents to disk
+            or (if the -t option is specified) list the contents to standard output.
+            If one or more file patterns are specified, only files matching one of the patterns will be extracted.
+
+      -o    <b>Copy-out</b> mode.  Read a list of filenames, one per line, from standard input and produce a new archive on standard output
+            (unless overriden) containing the specified items.
+
+      -p    <b>Pass-thru</b> mode.  Read a list of filenames from standard input and copy the files to the specified directory.
+            This combines the copy-out and copy-in steps without actually using an archive.
+
+Options:
+
+   Unless specifically stated otherwise, options are applicable in all operating modes.
+
+   -0    Read filenames separated by NUL characters instead of newlines.
+         This is necessary if any of the filenames being read might contain newlines.
+         find is one way to produce a list of null-terminated filenames.
+
+   -A    (o mode only) Append to the specified archive.  (Not yet implemented.)
+
+   -a    (o and p modes) Reset access times on files after they are read.
+
+   -B    (o mode only) Block output to records of 5120 bytes.
+
+   -C <i>size</i>  (o mode only) Block output to records of size bytes.
+
+   -c    (o mode only) Use the old POSIX portable character format.  Equivalent to --format odc.
+
+   -d    (i and p modes) Create directories as necessary.
+
+   -E <i>file</i>   (i mode only) Read list of file name patterns from file to list and extract.
+
+   -F <i>file</i>   Read archive from or write archive to file.
+
+   -f <i>pattern</i>
+           (i mode only) Ignore files that match pattern.
+
+   --format format
+           (o mode only) Produce the output archive in the specified format.  Supported formats include:
+
+           cpio     Synonym for odc.
+           newc     The SVR4 portable cpio format.
+           odc      The old POSIX.1 portable octet-oriented cpio format.
+           pax      The POSIX.1 pax format, an extension of the ustar format.
+           ustar    The POSIX.1 tar format.
+
+           The default format is odc.
+           See libarchive_formats(5) for more complete information about the formats currently supported
+           by the underlying libarchive(3) library.
+
+   -H format
+           Synonym for --format.
+
+   -h, --help
+           Print usage information.
+
+   -I file
+         Read archive from file.
+
+   -i    Input mode.  See above for description.
+
+   --insecure
+         (i and p mode only) Disable security checks during extraction or copying.
+         This allows extraction via symbolic links and path names containing .. in the name.
+
+   -J    (o mode only) Compress the file with xz-compatible compression before writing it.
+         In input mode, this option is ignored; xz compression is recognized automatically on input.
+
+   -j    Synonym for -y.
+
+   -L    (o and p modes) All symbolic links will be followed.
+         Normally, symbolic links are archived and copied as symbolic links.
+         With this option, the target of the link will be archived or copied instead.
+
+   -l    (p mode only) Create links from the target directory to the original files, instead of copying.
+
+   -lzma (o mode only) Compress the file with lzma-compatible compression before writing it.
+         In input mode, this option is ignored; lzma compression is recognized automatically on input.
+
+   -m    (i and p modes) Set file modification time on created files to match those in the source.
+
+   -n    (i mode, only with -t) Display numeric uid and gid.
+         By default, cpio displays the user and group names when they are provided in the
+         archive, or looks up the user and group names in the system password database.
+
+   -no-preserve-owner
+         (i mode only) Do not attempt to restore file ownership.  This is the default when run by non-root users.
+
+   -O <i>file</i>   Write archive to file.
+
+   -o    Output mode.  See above for description.
+
+   -p    Pass-through mode.  See above for description.
+
+   -preserve-owner
+         (i mode only) Restore file ownership.  This is the default when run by the root user.
+
+   --quiet   Suppress unnecessary messages.
+
+   -R [<i>user</i>][:][<i>group</i>]
+           Set the owner and/or group on files in the output.
+           If group is specified with no user (for example, -R :wheel) then the group will be
+           set but not the user.  If the user is specified with a trailing colon and no group (for example, -R root:)
+           then the group will be set to the user's default group.
+           If the user is specified with no trailing colon, then the user will be set but not the group.
+           In -i and -p modes, this option can only be used by the super-user.
+           (For compatibility, a period can be used in place of the colon.)
+
+   -r     (All modes.)  Rename files interactively.  For each file, a prompt is written to /dev/tty containing
+           the name of the file and a line is read from /dev/tty.
+           If the line read is blank, the file is skipped.  If the line contains a single period, the file
+           is processed normally.  Otherwise, the line is taken to be the new name of the file.
+
+   -t      (i mode only) List the contents of the archive to stdout; do not restore the contents to disk.
+
+   -u      (i and p modes) Unconditionally overwrite existing files.  Ordinarily, an older file will not overwrite a newer file on disk.
+
+   -v      Print the name of each file to stderr as it is processed.  With -t, provide a detailed listing of each file.
+
+   --version
+           Print the program version information and exit.
+
+   -y      (o mode only) Compress the archive with bzip2-compatible compression before writing it.
+           In input mode, this option is ignored; bzip2 compression is recognized automatically on input.
+
+   -Z      (o mode only) Compress the archive with compress-compatible compression before writing it.
+           In input mode, this option is ignored; compression is recognized automatically on input.
+
+   -z      (o mode only) Compress the archive with gzip-compatible compression before writing it.
+           In input mode, this option is ignored; gzip compression is recognized automatically on input.
+
+ENVIRONMENT
+   The following environment variables affect the execution of cpio:
+
+   LANG       The locale to use.  See environ(7) for more information.
+
+   TZ         The timezone to use when displaying dates.  See environ(7) for more information.
+
+EXIT STATUS
+   The cpio utility exits 0 on success, and >0 if an error occurs.</pre>
+<p>The <span class="code">cpio</span> command is traditionally used to copy file hierarchies in conjunction with the <a href="find.html">find</a> command. When creating an archive in copy-out mode ; you should give <span class="code">find</span> the -depth option to minimize problems with permissions on directories that are unreadable.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Archive the content of a single directory, <span class="code">-ov</span> = Copy-out + view all files:</p>
+<pre>   ls | cpio -ov &gt; directory.cpio</pre>
+<p>Copy all files from  src to dest, the find command can provide the file list to cpio,<br>
+<span class="code">&nbsp;-pmud</span> = Set file modification time + Unconditionally overwrite + Create directories as necessary:<br>
+</p>
+<pre>   find src | cpio -pmud dest
+</pre>
+<p> Archive an entire directory tree:</p>
+<pre>   find . -print -depth | cpio -ov &gt; tree.cpio</pre>
+<p>Take the contents of the archive tree.cpio and extract it to the current directory<br>
+&nbsp;<span class="code">-idv</span> = Copy-In + Create directories + verbose</p>
+<pre>   cpio -idv &lt; tree.cpio</pre>
+<p> Copy files from src to dest that are more than 2 days old and which contain the word 'foobar':<br>
+</p>
+<pre>   find src -mtime +2 | xargs grep -l foobar | cpio -pdmu dest
+</pre>
+<p>By carefully selecting options to the <a href="find.html">find</a> command and combining it with other standard utilities, it is possible to exercise very fine control over which files are copied.  This next example copies files from src to dest that are more than 2 days old and whose names match a particular pattern:<br>
+</p>
+<pre>   find src -mtime +2 | grep foo[bar] | cpio -pdmu dest</pre>
+<p class="quote">&ldquo;R2D2! You know better than to trust a strange computer!&rdquo; ~ C3PO (The Empire Strikes Back)</p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="cp.html">cp</a> - Copy one or more files to another location.<br>
+<a href="dd.html">dd</a> - Data Duplicator - convert and copy a file (use for RAW storage).<br>
+<a href="ditto.html">ditto</a> - copy files and folders (Can preserve Apple resource forks, type &amp; creator).<br>
+<a href="install.html">install</a> - Copy files and set attributes.<br>
+<a href="mv.html">mv</a> - Move or rename files or directories.<br>
+<a href="rcp.html">rcp</a> - Remote copy.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

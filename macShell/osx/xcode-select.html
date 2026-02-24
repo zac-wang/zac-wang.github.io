@@ -1,0 +1,93 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>xcode-select Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>xcode-select</h1> 
+<p>Manage the active developer directory for Xcode and BSD tools.</p>
+<pre>Syntax
+      xcode-select [-h|--help] [-s|--switch <i>path</i>] [-p|--print-path] [-v|--version]
+
+Key
+   -h, --help
+           Print the usage message.
+
+   -s <i>path</i>, --switch <i>path</i>
+           Sets the active developer directory to the given path, for example /Applications/Xcode-beta.app.
+           This command must be run with superuser permissions (see <a href="sudo.html">sudo</a>), and will affect all users on the system.
+           To set the path without superuser permissions or only for the current shell session, use the DEVELOPER_DIR 
+           environment variable instead (see ENVIRONMENT).
+
+   -p, --print-path
+           Prints the path to the currently selected developer directory.
+           This is useful for inspection, but scripts and other tools should use xcrun(1) to locate tool
+           inside the active developer directory.
+
+   -r, --reset
+           Unset any user-specified developer directory, so that the developer directory will be found via
+           the default search mechanism. This command must be run with superuser permissions (see <a href="sudo.html">sudo</a>), and
+           will affect all users on the system.
+   -v, --version
+           Print xcode-select version information.
+
+   --install
+           Open a user interface dialog to request automatic installation of the command line developer tools.</pre>
+<p>xcode-select controls the location of the developer directory used by xcrun(1), xcodebuild(1), cc(1), and other Xcode and BSD
+
+development tools. This also controls the locations that are searched for by man(1) for developer tool manpages.</p>
+<p>This allows you to easily switch between different versions of the Xcode tools and can be used to update the path to the Xcode if it 
+is moved after installation.</p>
+<p>When multiple Xcode applications are installed on a system (e.g. /Applications/Xcode.app, containing the latest Xcode, and 
+/Applications/Xcode-beta.app containing a beta) use xcode-select --switch path/to/Xcode.app to specify the Xcode that you wish to use 
+for command line developer tools.</p>
+<p> After setting a developer directory, all of the xcode-select provided developer tool shims (see FILES) will automatically invoke the 
+version of the tool inside the selected developer directory. Your own scripts, makefiles, and other tools can also use xcrun(1) to 
+easily lookup tools inside the active developer directory, making it easy to switch them between different versions of the Xcode 
+tools and allowing them to function properly on systems where the Xcode application has been installed to a non-default location.</p>
+<h2>ENVIRONMENT</h2>
+<blockquote>
+<p> <span class="code">DEVELOPER_DIR</span><br>
+Overrides the active developer directory. When <span class="code">DEVELOPER_DIR </span>is set, its value will be used instead of the system-wide active 
+developer directory.</p>
+<p> Note that for historical reason, the developer directory is considered to be the Developer content directory inside the Xcode 
+application (for example /Applications/Xcode.app/Contents/Developer). You can set the environment variable to either the actual 
+Developer contents directory, or the Xcode application directory -- the xcode-select provided shims will automatically convert the 
+environment variable into the full Developer content path.</p>
+</blockquote>
+<h3>Examples</h3>
+<p> Install the command line developer tools, will prompt to download and install:</p>
+<p><span class="code">xcode-select --install</span></p>
+<p>Select /Applications/Xcode.app/Contents/Developer as the active developer directory:</p>
+<p class="code">xcode-select --switch /Applications/Xcode.app/Contents/Developer</p>
+<p> As above, select /Applications/Xcode.app/Contents/Developer as the active developer directory. The Developer content directory is 
+automatically inferred by xcode-select:</p>
+<p class="code">xcode-select --switch /Applications/Xcode.app</p>
+<p>Run xcodebuild out of the active developer directory:</p>
+<p class="code">/usr/bin/xcodebuild </p>
+<p> Use xcrun to locate xcodebuild inside the active developer directory:</p>
+<p class="code">/usr/bin/xcrun --find xcodebuild</p>
+<p> Execute xcodebuild using an alternate developer directory:</p>
+<p class="code">env DEVELOPER_DIR=&quot;/Applications/Xcode-beta.app&quot; /usr/bin/xcodebuild</p>
+<p class="quote">&ldquo;Rien n'est pareil&rdquo;</p>
+<h3>Related macOS commands</h3>
+<p><span class="space"><a href="pkgutil.html">pkgutil</a> - Query and manipulate installed packages<br>
+<a href="sw_vers.html">sw_vers</a> - Print macOS operating system version.<br>
+ xcrun(1)<br>
+xcodebuild(1)</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

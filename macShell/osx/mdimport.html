@@ -1,0 +1,101 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>mdimport Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>mdimport</h1> 
+<p>Import file hierarchies into the Spotlight metadata datastore.</p>
+<pre>Syntax
+      mdimport [-itpAXLr] [-d <i>level</i>] [-o -<i>outputfile</i>] [ <i>file</i> | <i>directory</i> ... ]
+
+Key
+   -i         Request Spotlight to import file or recursively import directory.  The files will be imported using the normal mechanisms
+              and attributes will be stored in the Spotlight index. This is the implied switch if none are specified.
+
+   -t         Request Spotlight to test import file, sending the result back to mdimport for possible further processing. The attributes
+              will not be stored in the Spotlight index. This is useful to test Spotlight import plug-ins.
+
+   -d <i>level</i>    Print debugging information. This requires -t.
+
+   -d1        Print summary of test import
+
+   -d2        Print summary of import and all attributes, except kMDItemTextContent
+
+   -d3        Print summary of import and all attributes
+
+   -o <i>outfile</i>   Store attribute into <i>outfile</i>. This requires -t.
+
+   -p         Print out performance information gathered during the run.  This requires -t.
+
+   -A         Print out the list of all of the attributes and their localizations in the current language and exit.
+
+   -X         Print the schema file and exit.
+
+   -L         Print the list of installed importers and exit.
+
+   -r         Ask the server to reimport files for UTIs claimed by the listed plugin.
+              For example, the following would cause all of the chat files on the system to be reimported:
+                    mdimport -r /System/Library/Spotlight/Chat.mdimporter</pre>
+<p>mdimport is used to test Spotlight plug-ins, list the installed plug-ins and schema, and re-index files handled by a plug-in when a new<br>
+plug-in is installed.</p>
+<p>Commonly used attributes:</p>
+<blockquote>
+<p>kMDItemAlternateNames - Alternative display names of the file.<br>
+kMDItemApplicationCategories - Application Categories a member of categories.<br>
+kMDItemAudiences - Who the document is intended for.<br>
+kMDItemAuthors - Authors of this item.<br>
+kMDItemCity - Town/City.<br>
+kMDItemComment - Comment.<br>
+kMDItemCopyright - Copyright.<br>
+kMDItemCountry - Region or location where the item was created according to the provider.<br>
+kMDItemCreator - Application used to create the document.<br>
+kMDItemDateAdded - Date when this item was last moved.<br>
+kMDItemDescription - Description.<br>
+kMDItemDisplayName - Localised name of the file.<br>
+kMDItemEditors - Editors of this item.<br>
+kMDItemFSHasCustomIcon - Whether the file has a custom icon.<br>
+kMDItemFSInvisible - Whether the file is visible.<br>
+kMDItemFSIsExtensionHidden - Whether the file extension is hidden.<br>
+kMDItemFSIsReadable - is readable?<br>
+kMDItemFSIsStationery - Whether the file is stationery.<br>
+kMDItemFSIsWriteable - is writable?<br>
+kMDItemFSLabel - Finder label assigned to the file.<br>
+kMDItemFSName - Filename.<br>
+kMDItemFinderComment - Spotlight comment.<br>
+kMDItemIsQuarantined - is quarantined?<br>
+kMDItemLastUsedDate - Date when this item was last opened.<br>
+kMDItemNamedLocation - Name of the location or point of interest.<br>
+kMDItemPath - Complete pathname of this file.<br>
+kMDItemPhysicalSize - Physical size of the item in bytes.<br>
+kMDItemTitle - Title of this item.<br>
+kMDItemVersion - Version number of this item.<br>
+kMDItemWhereFroms  - Where the item came from.</p>
+</blockquote>
+<h3><a id="e"></a>Examples</h3>
+<p>List all attributes:</p>
+<p class="code"> $ mdimport -A</p>
+<p>Request Spotlight to test animport file:</p>
+<p class="code"> $ mdimport -t testfile</p>
+<p class="quote"><i>&ldquo;The real voyage of discovery consists not in seeking new landscapes but in having new eyes&rdquo; ~ Marcel Proust</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="https://developer.apple.com/library/mac/#documentation/Carbon/Reference/MetadataAttributesRef/Reference/CommonAttrs.html#//apple_ref/doc/uid/TP40001694-SW1">Spotlight Metadata Attributes</a> - List of all the kDM* attributes (or just use mdls -A to list the attributes of a file).<br>
+<a href="mdfind.html">mdfind</a> - Spotlight search.<br>
+<a href="mdutil.html">mdutil</a> - Manage Spotlight metadata store.<br>
+<a href="find.html">find</a> - Search for files that meet a desired criteria.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

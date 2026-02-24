@@ -1,0 +1,136 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>textutil Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>textutil</h1> 
+<p>Manipulate text files in various formats.</p>
+<pre>Syntax
+       textutil -info [<i>options</i>] <i>file</i> ...
+
+       textutil -convert <i>fmt</i> [<i>options</i>] <i>file</i> ...
+
+       textutil -cat <i>fmt</i> [<i>options</i>] <i>file</i> ...
+
+       textutil -<u>help</u> [<i>options</i>] <i>file</i> ...
+
+Key
+     -info         Display information about the specified files.
+
+     -convert <i>fmt</i>  Convert the files to format <i>fmt</i> and write each one 
+                   back to the file system.
+
+     -cat <i>fmt</i>      Read the specified files, concatenate them, and write the
+                   result out as a single file in the indicated format.
+
+     -help         Show usage information and exit.
+
+     <i>fmt</i>           One of:  txt, html, rtf, rtfd, doc, wordml, or webarchive
+
+Options
+
+     -encoding <i>IANA_name</i> | <i>NSStringEncoding</i>
+                     The encoding to be used for plain text or HTML output
+                     (by default, the output encoding will be UTF-8).
+
+     -extension <i>ext</i>  Specify an extension to be used for output files (by
+                     default, the extension will be determined from the format).
+
+     -format <i>fmt</i>     Force all input files to be interpreted using the indicated 
+                     format (by default, a file's format will be determined from
+                     its contents).
+
+     -font <i>font</i>      The font to be used when converting to rich text.
+
+     -fontsize <i>size</i>  Font size (in points) to be used for converting plain to rich text.
+
+     -inputencoding <i>IANA_name</i> | <i>NSStringEncoding</i>
+                     Force all plain text input files to be interpreted using
+                     the specified encoding (by default, a file's encoding
+                     will be determined from its BOM).
+
+     -output <i>path</i>    The file name to be used for the first output file.
+
+     -stdout         Send the first output file to stdout.
+
+     --              Specify that all further arguments are file names.
+
+Additional options for HTML and WebArchive files:
+
+     -noload          Do not load subsidiary resources.
+     -nostore         Do not write out subsidiary resources.
+     -baseurl <i>url</i>     Specify a base URL to be used for relative URLs.
+     -timeout <i>t</i>       The time in seconds to wait for resources to load.
+     -textsizemultiplier <i>x</i>   A numeric factor by which to multiply font sizes.
+     -excludedelements (<i>tag1, tag2</i>, ...)
+                      Specify which HTML elements should not be used in generated 
+                      HTML (the list should be a single argument, and so will
+                      usually need to be quoted in a shell context).
+     -prefixspaces <i>n</i>  The number of spaces by which to indent nested
+                      elements in generated HTML (default is 2).
+
+Additional options for the output file metadata:
+
+     -strip        Do not copy metadata from input files to output files.
+     -title <i>val</i>    The title metadata attribute for output files.
+     -author <i>val</i>   The author metadata attribute for output files.
+     -subject <i>val</i>  The subject metadata attribute for output files.
+     -keywords (<i>val1, val2</i>, ...)
+                   The keywords metadata attribute for output files
+                   (the list should be a single argument, and so will usually
+                   need to be quoted in a shell context).
+
+     -comment <i>val</i>  The comment metadata attribute for output files.
+     -editor <i>val</i>   The editor metadata attribute for output files.
+     -company <i>val</i>  The company metadata attribute for output files.
+     -creationtime <i>yyyy-mm-ddThh:mm:ssZ</i>
+                   The creation time metadata attribute for output files.
+     -modificationtime <i>yyyy-mm-ddThh:mm:ssZ</i>
+                   The modification time metadata attribute for output
+                   files.</pre>
+<p>Textutil first appeared in  OS X 10.4</p>
+<h3><a id="e"></a>Examples</h3>
+<p> Display information about foo.rtf.<br>
+<span class="code">$ textutil -info foo.rtf</span><br>
+<br>
+Convert foo.rtf into foo.html.<br>
+<span class="code">$ textutil -convert html foo.rtf</span><br>
+<br>
+Convert foo.txt into foo.rtf, using Times 10 for the font.<br>
+<span class="code">$ textutil -convert rtf -font Times -fontsize 10 foo.txt</span><br>
+<br>
+Load all RTF files in the current directory, concatenate their contents,
+and write the result out as index.html with the HTML title set to
+Several Files".<br>
+<br>         
+<span class="code">$ textutil -cat html -title "Several Files" -output index.html *.rtf</span><br>
+<br>   
+Create a .txt file for each .doc file in the directory.<br>       
+<span class="code">$ textutil -convert txt *.doc</span></p>
+<p>Notes:<br>
+The textutil command exits 0 on success, and 1 on failure. <br>
+Some options may require a connection to the window server.</p>
+<p class="quote"><i>&ldquo;A lot of people are afraid to say what they want, that's why a lot of people don't get what they want&rdquo; ~ Madonna</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="getfileinfo.html">GetFileInfo</a> - Get attributes of HFS+ files.<br>
+<a href="pr.html">pr</a> - Convert text files for printing.<br>
+<a href="say.html">say</a> - Convert text to audible speech.<br>
+<a href="setfile.html">setfile</a> - Set attributes of HFS+ files.<br>
+<a href="sips.html">sips</a> - Scriptable image processing system.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

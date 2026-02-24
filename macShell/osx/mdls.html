@@ -1,0 +1,50 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>mdls Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>mdls</h1> 
+<p>List the metadata attributes for a specified file.</p>
+<pre>Syntax
+      mdls [-name <i>attributeName</i>] [-raw [-nullMarker <i>markerString</i>]] <i>file</i> ...
+
+Key
+   -name        Print only the matching metadata attribute value.  Can be used multiple times.
+
+   -raw         Print raw attribute data in the order that was requested.
+                Fields will be separated with a ASCII NUL character, suitable for piping to xargs(1) -0.
+
+   -nullMarker  Set a marker string to be used when a requested attribute is null.
+                Only used in -raw mode.  Default is &quot;(null)&quot;.
+</pre>
+<p>The mdls command prints the values of all the metadata attributes associated with the files provided as an argument.</p>
+<p>To get a list of the available attributes for use in constructing queries, see mdimport(1), particularly the -X switch. Not all files are indexed by spotlight and not all file attributes are present on all files, image files, iCal files and music files all support different attributes. </p>
+<h3><a id="e"></a>Examples</h3>
+<p>Return the application used to create a document:</p>
+<p class="code"> $ mdls -n kMDItemCreator /Users/fred/Pictures/Untitled.pxm</p>
+<p> List all cameras and scanners used to make pictures on my Mac [<a href="https://stackoverflow.com/questions/45899411/compound-mdfind-search">via StackOverflow</a>]:</p>
+<p class="code"> $ mdfind -0 kind:image |  xargs -0 <b>mdls</b> -n kMDItemAcquisitionModel | sort -u</p>
+<p class="quote"><i>&ldquo;The real voyage of discovery consists not in seeking new landscapes but in having new eyes&rdquo; ~ Marcel Proust</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="https://developer.apple.com/library/mac/#documentation/Carbon/Reference/MetadataAttributesRef/Reference/CommonAttrs.html#//apple_ref/doc/uid/TP40001694-SW1">Spotlight Metadata Attributes</a> - List of all the kDM* attributes (or just use mdls to list the attributes of a file).<br>
+<a href="mdfind.html">mdfind</a> - Spotlight search.<br>
+<a href="mdutil.html">mdutil</a> - Manage Spotlight metadata store.<br>
+<a href="mdimport.html">mdimport</a> - Import file hierarchies into the Spotlight datastore.<br>
+<a href="find.html">find</a> - Search for files that meet a desired criteria.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

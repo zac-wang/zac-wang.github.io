@@ -1,0 +1,80 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>uuencode, uudecode Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>uuencode, uudecode</h1> 
+<p>Encode/decode a binary file</p>
+<pre>Syntax
+      uuencode [-m] [-o <i>output_file</i>] [<i>file</i>] <i>name</i>
+
+      uudecode [-cips] [<i>file</i> ...]
+
+      uudecode [-i] -o <i>output_file</i> [<i>file</i>]
+
+Options uuencode:<i>
+</i>
+     -m     Use the Base64 method of encoding, rather than the traditional
+            <b>uuencode</b> algorithm.
+
+     -o <i>output</i>_<i>file</i>
+            Output to <i>output</i>_<i>file</i> instead of standard output.
+
+Options uudecode:
+
+     -c     Decode more than one uuencode'd file from <i>file</i> if possible.
+
+     -i     Do not overwrite files.
+
+     -o <i>output</i>_<i>file</i>
+            Output to <i>output</i>_<i>file</i> instead of any pathname contained in the
+            input data.
+
+     -p     Decode <i>file</i> and write output to standard output.
+
+     -s     Do not strip output pathname to base filename.  By default
+            <b>uudecode</b> deletes any prefix ending with the last slash '/' for
+            security purpose.</pre>
+<p>The uuencode and uudecode utilities are used to transmit binary files over transmission mediums that do not support other than simple ASCII data. </p>
+<p>The uuencode utility reads <span class="code">file</span> (or by default the standard input) and writes an encoded version to the standard output, or <span class="code">output_file</span> if one has been specified. The encoding uses only printing ASCII characters and includes the mode of the file and the operand <span class="code">name</span> for use by uudecode. </p>
+<p>The uudecode utility transforms uuencoded files (or by default, the standard input) into the original form. The resulting file is named either <span class="code">name</span> or (depending on options passed to uudecode) <span class="code">output_file</span> and will have the mode of the original file except that setuid and execute bits are not retained. The uudecode utility ignores any leading and trailing lines. </p>
+<h3><a id="e"></a>Examples</h3>
+<p> The following example packages up a source tree, compresses it, uuencodes
+it and mails it to a user on another system.  When uudecode is run on the
+target system, the file ``src_tree.tar.Z'' will be created which may then
+be uncompressed and extracted into the original tree.</p>
+<pre>
+    tar cf - src_tree | compress |
+    uuencode src_tree.tar.Z | mail sys1!sys2!user</pre>
+<p> The following example unpack all uuencode'd files from your mailbox into
+your current working directory:<br>
+</p>
+<pre>
+    uudecode -c < $MAIL
+</pre>
+<p> The following example extract a compress'ed tar archive from your mailbox:<br>
+</p>
+<pre>
+    uudecode -o /dev/stdout < $MAIL | zcat | tar xfv -    </pre>
+<p class="quote"><i>&ldquo;One of the main causes of the fall of the Roman Empire was that, lacking zero, they had no way to indicate successful termination of their C programs&rdquo; ~ Robert Firth</i></p>
+<h3>Related macOS commands</h3>
+<p> <span class="space"><a href="basename.html">basename</a> - return filename or directory portion of pathname.<br>
+compress(1), mail(1)<br>
+uucp - Unix to Unix copy.</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

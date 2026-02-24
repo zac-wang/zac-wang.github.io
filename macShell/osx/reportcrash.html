@@ -1,0 +1,47 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>ReportCrash Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>ReportCrash </h1> 
+<p>Enable or Disable crash reporting via <span class="code">launchtl</span>.</p>
+<pre>Syntax
+
+      To disable crash reporting:
+
+      launchctl unload -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist
+      sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.ReportCrash.Root.plist
+
+      To re-enable crash reporting:
+
+      launchctl load -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist
+      sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.ReportCrash.Root.plist</pre>
+<p>ReportCrash analyzes crashing processes and saves a crash report to disk.  A crash report contains information that can help a developer diagnose the cause of a crash.
+ReportCrash also records the identity of the crashing process and the location of the saved crash report in the system.log and the ASL log database.</p>
+<p>ReportCrash is invoked automatically by <span class="code">launchd</span> when a crash is detected.  For applications and other processes running in the per-user launchd context, ReportCrash runs as a
+LaunchAgent and saves crash reports in the user's<span class="code"> ~/Library/Logs/DiagnosticReports/</span> directory.  </p>
+<p>For daemons, other processes running in the system launchd context and other
+privileged processes, ReportCrash runs as a LaunchDaemon and saves crash reports in the system's <span class="code">/Library/Logs/DiagnosticReports</span> directory where they are only readable by admin users.  If there are too many crash reports saved for a particular process, older reports will automatically be removed in order to conserve disk space.</p>
+<p>For application crashes (but not background process crashes) ReportCrash will display a      dialog notifying the user that the application unexpectedly quit and offering to reopen      the application or send the report to Apple.  For developers, the behavior of this dialog      can be adjusted using <span class="code">/Developer/Applications/Utilities/CrashReporterPrefs.app</span> which is      installed as part of the developer tools. </p>
+<p>Crash reports which are sent to Apple are submitted anonymously by the SubmitDiagInfo      process.  The reports are used by Apple to improve its products.  </p>
+<p class="quote"><i>“I hate modern car radios. In my car, I don't even have a push-button radio. It's just got a dial and two knobs. Just AM. One knob makes it louder, and one knob changes the station. When you're driving, that's all I want.”  ~ Chris Isaak</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="https://feedbackassistant.apple.com/">Feedback Assistant for developers</a> - Report bugs.<br>
+<a href="https://developer.apple.com/library/content/technotes/tn2004/tn2123.html">TN2123</a> - interpreting the contents of crash reports.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

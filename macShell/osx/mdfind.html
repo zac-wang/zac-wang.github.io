@@ -1,0 +1,200 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>mdfind Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>mdfind</h1> 
+<p>Spotlight search.</p>
+<pre>Syntax
+      mdfind [-live] [-count] [-onlyin <i>directory</i>] <i>query</i>
+
+Key
+    <i>query</i>       A string or query expression.
+
+    -0          Print an ASCII NUL character after each result path.
+                This is useful when used in conjunction with xargs -0.
+
+    -live       Causes the mdfind command to provide live-updates to the 
+                number of files matching the query.  When an update causes the
+                query results to change the number of matches is updated.
+                The find can be cancelled by typing ctrl-C.
+
+    -count      Output the total number of matches, instead of the path 
+                to the matching items.
+
+    -onlyin <i>dir</i>
+                Limit the scope of the search to the directory specified.
+
+    -literal    Force the provided query string to be taken as a literal
+                query string, without interpretation.
+
+    -interpret  Force the provided query string to be interpreted as if the
+                user had typed the string into the Spotlight menu.
+                For example, the string "search" would produce the following 
+                query string:
+                       (* = search* cdw || kMDItemTextContent = search* cdw)</pre>
+<h2>Spotlight Keywords.</h2>
+<blockquote>
+<p>These can be included in the <i>query</i> expression to limit the type of documents returned: </p>
+<table border="0">
+<tr>
+<td>Applications</td>
+<td><span class="code">kind:application, kind:applications, kind:app</span></td>
+</tr>
+<tr>
+<td>Audio/Music</td>
+<td><span class="code">kind:audio, kind:music</span></td>
+</tr>
+<tr>
+<td>Bookmarks</td>
+<td><span class="code">kind:bookmark, kind:bookmarks</span></td>
+</tr>
+<tr>
+<td>Contacts</td>
+<td><span class="code">kind:contact, kind:contacts</span></td>
+</tr>
+<tr>
+<td>Email</td>
+<td><span class="code">kind:email, kind:emails, kind:mail message, kind:mail messages</span></td>
+</tr>
+<tr>
+<td>Folders</td>
+<td><span class="code">kind:folder, kind:folders</span></td>
+</tr>
+<tr>
+<td>Fonts</td>
+<td><span class="code">kind:font, kind:fonts</span></td>
+</tr>
+<tr>
+<td>iCal Events</td>
+<td><span class="code">kind:event, kind:events</span></td>
+</tr>
+<tr>
+<td>iCal To Dos</td>
+<td><span class="code">kind:todo, kind:todos, kind:to do, kind:to dos</span></td>
+</tr>
+<tr>
+<td>Images</td>
+<td><span class="code">kind:image, kind:images</span></td>
+</tr>
+<tr>
+<td>Movies</td>
+<td><span class="code">kind:movie, kind:movies</span></td>
+</tr>
+<tr>
+<td>PDF</td>
+<td><span class="code">kind:pdf, kind:pdfs</span></td>
+</tr>
+<tr>
+<td>Preferences</td>
+<td><span class="code">kind:system preferences, kind:preferences</span></td>
+</tr>
+<tr>
+<td>Presentations</td>
+<td><span class="code">kind:presentations, kind:presentation</span></td>
+</tr>
+</table>
+</blockquote>
+<h2>Date Keywords.</h2>
+<blockquote>
+<p>These can be included in the <i>query</i> expression to limit the age of documents returned: </p>
+<p class="code">date:today &nbsp;&nbsp;&nbsp;$time.today()<br>
+date:yesterday .yesterday()<br>
+date:this week &nbsp;.this_week()<br>
+date:this month .this_month()<br>
+
+date:this year &nbsp;.this_year()<br>
+<br>
+date:tomorrow &nbsp;.tomorrow()<br>
+date:next month &nbsp;.next_month()<br>
+date:next week &nbsp;.next_week()<br>
+date:next year &nbsp;.next_year()</p>
+</blockquote>
+<h2>Comparison Operators</h2>
+<blockquote>
+<p>By default  mdfind will AND together elements of the query string. <br>
+<span class="code">| </span> (OR) To return items that match either word, use the pipe character: <span class="code"> stringA|stringB <br>
+-</span>  (NOT) To exclude documents that match a string <span class="code">-string<br>
+</span><span class="code">= </span>“equal”<br>
+<span class="code">== </span>“equal”<br> 
+<span class="code">!= </span>“not equal”<br>
+<span class="code">&lt; and &gt;</span>  “less” or “more than”<br>
+<span class="code">&lt;= and &gt;=</span>  “less than or equal” or “more than or equal”<br>
+<span class="code">InRange(<i>attributeName</i>,<i>minValue</i>,<i>maxValue</i>)</span> Numeric values within the range of <i>minValue</i> to <i>maxValue </i>in the specified attribute.<br>
+<br>
+Whitespace is significant when building a query, use parentheses <span class="code">()</span> to create groups.<br>
+Characters such as “ and ‘ in the value string should be escaped using the \ character</p>
+</blockquote>
+<h2>Value Comparison modifiers </h2>
+<blockquote>
+<table>
+<tr>
+<th>Modifier</th>
+<th>Description</th>
+</tr>
+<tr>
+<td class="code">c</td>
+<td>The comparison is case insensitive. </td>
+</tr>
+<tr>
+<td class="code">d</td>
+<td>The comparison is insensitive to diacritical marks.</td>
+</tr>
+</table>
+<p>kMDItemAuthors ==[c] &quot;Steve&quot;</p>
+</blockquote>
+<p>To get a list of the available attributes for use in constructing queries, see mdimport(1), particularly the -X switch. Not all files are indexed by spotlight and not all file attributes are present on all files, image files, iCal files and music files all support different attributes. </p>
+<h3><a id="e"></a>Examples</h3>
+<p>Returns all files with any metadata attribute value matching the 
+string &quot;image&quot;:</p>
+<p class="code"> $ mdfind image</p>
+<p> Return all files that contain &quot;Len Deighton&quot; in the kMDItemAuthor metadata attribute:</p>
+<p class="code"> $ mdfind &quot;kMDItemAuthor = '*Len Deighton*'&quot;</p>
+<p> Return all files with any metadata attribute value matching the
+string &quot;skateboard&quot;. The find continues to run after gathering the initial results, providing a count of the number of files that match the
+query.</p>
+<p class="code"> $ mdfind -live skateboard</p>
+<p>Return all Microsoft.Word document files:</p>
+<p class="code">$ mdfind &quot;kMDItemContentType = 'com.microsoft.word.doc'&quot;</p>
+<p>Return  files where the composer name includes 'Eno' (non <b>c</b>ase sensitive search):</p>
+<p class="code">$ mdfind 'kMDItemComposer = &quot;*ENO*&quot;c'</p>
+<p>Return all image files matching the words 'maude' and 'paris':</p>
+<p class="code">$ mdfind &quot;kind:images maude paris&quot;</p>
+<p>Return all files with the filename 'readme.txt':</p>
+<p class="code">$ mdfind -name readme.txt</p>
+<p>Count the number of files with the filename 'readme.txt':</p>
+<p class="code">$ mdfind -name readme.txt -count</p>
+<p>Return all the files that have been tagged as 'Green':</p>
+<p class="code"> $ mdfind &quot;kMDItemUserTags = Green&quot;</p>
+<p>Return all the documents created with any version of Pixelmator:</p>
+<p><span class="code">$ mdfind &quot;kMDItemCreator = Pixelmator*&quot;</span></p>
+<p>Return all image files last edited yesterday:</p>
+<p class="code">$ mdfind &quot;kind:image date:yesterday&quot;</p>
+<p>Return all  files in the users home folder (~) that have been modified in the last 3 days:</p>
+<p class="code">$ mdfind -onlyin ~ 'kMDItemFSContentChangeDate &gt;= $time.today(-3)'</p>
+<p>Return all  the 32 bit application files (With macOS Catalina, Apple no longer supports 32-bit applications):</p>
+<p class="code">$ mdfind &quot;kMDItemExecutableArchitectures == 'i386' &amp;&amp; kMDItemExecutableArchitectures != 'x86_64' &amp;&amp; kMDItemKind == 'Application'&quot;</p>
+<p class="quote"><i>&ldquo;The real voyage of discovery consists not in seeking new landscapes but in having new eyes&rdquo; ~ Marcel Proust</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="https://developer.apple.com/library/archive/documentation/Carbon/Conceptual/SpotlightQuery/Concepts/QueryFormat.html">Spotlight Metadata Attributes</a> - List of all the kDM* attributes (or just use mdls to list the attributes of a file).<br>
+<a href="mdls.html">mdls</a> - List the Spotlight metadata attributes for a specified file.<br>
+<a href="mdutil.html">mdutil</a> - Manage Spotlight metadata store.<br>
+mdimport - Import file hierarchies into the Spotlight datastore.<br>
+<a href="find.html">find</a> - Search for files that meet a desired criteria.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

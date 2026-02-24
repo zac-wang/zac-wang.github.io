@@ -1,0 +1,54 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>hash Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>hash</h1> 
+<p>Refresh the cached/remembered location of commands. <br>
+Logging out and in will refresh this automatically, but if you have just updated or reinstalled a package you might want to force an update.</p>
+<pre>Syntax
+      hash [-lr] [-p <i>filename</i>] [-dt] [<i>name</i>]
+
+Key
+   -p   Use <i>filename </i>as the full file name of the command (no path search is performed).
+
+   -t   Print the full pathname to which each <i>name</i> corresponds.
+
+   -l   Display output in a format that can be reused as input.
+
+   -d   Forget the remembered location of each <i>name</i>.
+
+   -r   Forget all remembered locations.</pre>
+<p> For each <i>name</i>, the full file name of the command is determined by searching the directories in $PATH and remembered.</p>
+<p>  If multiple <i>name </i>arguments are supplied with -t, the name is printed before the hashed full pathname. If no arguments are given, or if only -l is supplied, information about remembered commands is printed. </p>
+<p>The return status is true unless a <i>name </i>is not found or an invalid option is supplied.</p>
+<p>This is a BASH shell builtin, to display your local syntax from the bash prompt type: <span class="code">help hash</span></p>
+<h3><a id="e"></a>Examples</h3>
+<p>Display the currently remembered location for getopt:<br>
+<span class="code">$ getopt<br>
+$ hash -t getopt</span></p>
+<p>Remove the  entry for getopt:<br>
+<span class="code">$ hash -d getopt</span></p>
+<p>hash is a bash built in command: <span class="code"> $ help hash </span></p>
+<p class="quote"><i>&ldquo;Remember me when I am gone away,
+Gone far away into the silent land...&rdquo; ~ Christina Georgina Rossetti </i></p>
+<h3>Related macOS commands</h3>
+<p>
+  <a href="history.html">history</a> - Command History.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

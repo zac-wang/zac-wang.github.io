@@ -1,0 +1,267 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>ls man page Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>ls</h1> 
+<p>List  directory contents.</p>
+<pre>Syntax
+      ls [-<i>Option(s)</i>] [<i>file</i> ...]
+
+      ls-F [-<i>Option(s)</i>] [<i>file</i> ...]
+             This built-in is just like 'ls -F', but much faster.<i>
+</i>
+      l      List files in long format 'ls -l'
+
+      ll     List files in long format, showing invisible files `ls -la'
+
+Options
+     -@      Display extended attribute keys and sizes.
+
+     -1      (The numeric digit 'one'.)  Force output to be one entry per line.
+              This is the default when output is not to a terminal.
+
+     -A      List all entries including those starting with a dot .
+             Except for . and ..
+             This option is <a href="https://superuser.com/questions/931554/on-os-x-why-does-sudo-ls-show-hidden-dot-files">always</a> set for the superuser (via <a href="sudo.html">sudo</a>).
+
+     -a      List all entries including those starting with a dot .
+
+     -B      Force printing of non-printable characters (as defined by
+             ctype(3) and current locale settings) in file names as \xxx,
+             where xxx is the numeric value of the character in octal.
+
+     -b      As -B, but use C escape codes whenever possible.
+
+     -C      Force multi-column output; this is the default when output is to
+             a terminal.
+
+     -c      Use time when file status was last changed for sorting or printing.
+
+     -d      Directories are listed as plain files (not searched recursively).
+
+     -D <i>format</i>
+             When printing in the long (-l) format, use <i>format</i> to format the date and time output.
+             The argument format is a string used by strftime(3).
+             Depending on the choice of format string, this may result in a different number of columns
+             in the output.  This option overrides the -T option. This option is not defined in POSIX.1.
+
+     -F      Display a slash <b>/</b> immediately after each pathname that is a directory,
+             an asterisk <b>*</b> after each that is executable, an at sign <b>@</b> after each symbolic link,
+             an equals sign <b>=</b> after each socket, a percent sign <b>%</b> after each whiteout,
+             and a vertical bar <b>|</b> after each that is a FIFO.
+
+     -f      Output is not sorted.
+
+     -G      Enable colour output.
+             This option is equivalent to defining CLICOLOR or COLORTERM in the environment and setting<br>             --color=auto. (See below.)
+
+     -g      This option is deprecated. This option is only available for compatibility
+             with POSIX; it is used to display the group name in the long (-l) format output
+             (the owner name is suppressed).
+
+     -H      Symbolic links on the command line are followed.
+             This option is assumed if none of the -F, -d, or -l options are specified.
+
+     -h      When used with the -l option, use unit suffixes: Byte, Kilobyte, Megabyte, Gigabyte,
+             Terabyte and Petabyte in order to reduce the number of digits to three or less
+             using base 2 for sizes.
+
+     -i      For each file, print the file's file serial number (inode number).
+
+     -k      If the -s option is specified, print the file size allocation in
+             kilobytes, not blocks.  This option overrides the environment
+             variable BLOCKSIZE.
+
+     -L      If argument is a symbolic link, list the file or directory the
+             link references rather than the link itself.  This option cancels
+             the -P option.
+
+     -l      List in long format. Ownership, Date/Time etc (See below)
+             For terminal output, a total sum of all the file sizes is 
+             output on a line before the long listing.
+             If the file is a symbolic link the pathname of the linked-to file is
+             preceded by ->
+
+     -m      Stream output format; list files across the page, separated by commas.
+
+     -n      Display user and group IDs numerically rather than converting to
+             a user or group name in a long (-l) output. This option turns on the -l option.
+
+     -O      Include the file flags in a long (-l) output.
+
+     -o      List in long format, but omit the group id.
+
+     -P      If <i>argument</i> is a symbolic link, list the link itself rather than
+             the object the link references.  This option cancels the -H and
+            -L options.
+
+     -p      Write a slash (/) after each filename if that file is a directory.
+
+     -q      Force printing of non-graphic characters in file names as the
+             character `?'; this is the default when output is to a terminal.
+
+     -R      Recursively list subdirectories encountered.
+
+     -r      Reverse the order of the sort to get reverse lexicographical
+             order or the oldest entries first.
+             (or largest files last, if combined with sort by size)
+
+     -S      Sort files by size
+
+     -s      Display the number of file system blocks actually used by each
+             file, in units of 512 bytes, where partial units are rounded up
+             to the next integer value.   If the output is to a terminal, a
+             total sum for all the file sizes is output on a line before the
+             listing.  The environment variable BLOCKSIZE overrides the unit
+             size of 512 bytes.
+
+     -T      When used with the -l (lowercase letter ``ell'') option, display
+             complete time information for the file, including month, day,
+             hour, minute, second, and year.
+
+     -t      Sort by time modified (most recently modified first) before
+             sorting the operands by lexicographical order.
+
+     -u      Use time of last access, instead of last modification of the file
+             for sorting (-t) or printing (-l).
+
+     -v      Force unedited printing of non-graphic characters.<br>             This is the default when output is not to a terminal.
+
+     -W      Display whiteouts when scanning directories. (-S) flag).
+
+     -w      Force raw printing of non-printable characters.  This is the
+             default when output is not to a terminal.
+
+     -x      The same as -C, except that the multi-column output is produced
+             with entries sorted across, rather than down, the columns.</pre>
+<p> The -1, -C, -x, and -l options all override each other; the last one specified determines the format used.<br> The -c and -u options override each other; the last one specified determines the file
+time used.<br>
+The -B, -b, -w, and -q options all override each other; the last one specified determines the format used for non-printable characters.<br>
+The -H, -L and -P options all override each other (either partially or fully); they are applied in the order specified.</p>
+<p> By default, ls lists one entry per line to standard output; the exceptions are to terminals or when the -C or -x options are specified.</p>
+<p> File information is displayed with one or more &lt;blank&gt;s separating the information associated with the -i, -s, and -l options.</p>
+<p>ls is pronounced as the two letters: &quot;<i>ell ess</i>&quot;</p>
+<h2>The Long Format</h2>
+<blockquote>
+<p> If the<span class="code"> -l </span>option is given, the following information is displayed for each file:<span class="code"> file
+mode, number of links, owner name, group name, number of bytes in the file, abbreviated month, day-of-month file was last modified, hour file last modified, minute file last modified, and the pathname</span>. <br>
+In addition, for each directory whose contents are displayed, the total number of 512-byte blocks used by the files in the directory is displayed on a line by itself, immediately before the information for the files in the
+directory.</p>
+<p> If the file or directory has extended attributes, the permissions field printed by the<span class="code"> -l </span>option is followed by an <span class="code">@</span> character. Otherwise, if the file or
+directory has extended security information, the permissions field printed by the -l option is followed by a <span class="code">+</span> character.</p>
+</blockquote>
+<p> If the modification time of the file is more than 6 months in the past or future, then the year of the last modification is displayed in place of the hour and minute fields.</p>
+<p> If the owner or group names are not a known user or group name, or the -n option is given, the numeric ID's are displayed.</p>
+<p> If the file is a character special or block special file, the major and minor device numbers for the file are displayed in the size field. If the file is a symbolic link, the pathname of the linked-to file is preceded by '<span class="code">-&gt;</span>'</p>
+<p> The file mode printed under the -l option consists of the entry type, owner permissions, and group permissions. The entry type character describes the type of file, as follows:</p>
+<pre> b Block special file.
+ c Character special file.
+ d Directory.
+ l Symbolic link.
+ s Socket link.
+ p FIFO.
+ - Regular file.</pre>
+<p> The next three fields are three characters each: owner permissions, group permissions, and other permissions. Each field has three character positions:</p>
+<p> 1. If <span class="code">r</span>, the file is readable; if <span class="code">-</span>, it is not readable.</p>
+<p> 2. If <span class="code">w</span>, the file is writable; if <span class="code">-</span>, it is not writable.</p>
+<p> 3. The first of the following that applies:</p>
+<blockquote>
+<p><span class="code">S</span> If in the owner permissions, the file is not executable and set-user-ID mode is set. If in the group permissions, the file is not executable and set-group-ID mode is set.<br> 
+<span class="code">s</span> If in the owner permissions, the file is executable and set-user-ID mode is set. If in the group permissions, the file is executable and setgroup-ID mode is set.<br>
+<span class="code">x</span> The file is executable or the directory is searchable.<br>
+<span class="code">-</span> The file is neither readable, writable, executable, nor set-user-ID nor set-group-ID mode, nor sticky. (See below.)</p>
+</blockquote>
+<p> These next two apply only to the third character in the last group (other permissions).</p>
+<blockquote>
+<p> <span class="code">T</span> The sticky bit is set (mode 1000), but not execute or search permission. (See chmod(1) or sticky(8).)<br>
+<span class="code">t </span>The sticky bit is set (mode 1000), and is searchable or executable. (See chmod(1) or sticky(8).)</p>
+</blockquote>
+<p> <span class="code">ls-F</span> passes its arguments to <span class="code">ls</span> if it is given any switches, so `<a href="alias.html">alias</a> ls ls-F' generally does the right thing.</p>
+<h2>Color ls Listings</h2>
+<blockquote>
+<p>To set up colour labeling, put the following in your <span class="code">~/.bash_profile</span> file (assuming bash is your default macOS shell): <br>
+<span class="code">export CLICOLOR=&quot;Yes&quot;</span></p>
+<p>You can also customise the colors further by setting the <a href="https://www.cyberciti.biz/faq/apple-mac-osx-terminal-color-ls-output-option/">LSCOLORS</a> variable.</p>
+</blockquote>
+<p>Other <a href="ls-env.html">ls Environment Settings</a></p>
+<h3><a id="e"></a>Examples</h3>
+<p>List the filenames in the current folder<br>
+<span class="code">$ ls</span><br>
+<br>
+List the filenames with their characteristics (Size, Privs, Owner, etc)<br>
+<span class="code">$ ls -l</span><br>
+<br>
+List the filenames with Size, Privs, Owner + Flags (-o option)<br>
+<span class="code">$ ls -lo</span></p>
+<p> List the filenames sorted by time modified (most recent first):<br>
+<span class="code">$ ls -lt</span><br>
+<br>
+List ALL files (including hidden):<br>
+<span class="code">$ ls -a</span><br>
+<br>
+List iPhone backup files:<br>
+<span class="code">$ ls -l ~/Library/iTunes/iPhone\ Software\ Updates<br>
+or<br>
+$ ls -l ~/&quot;Library/iTunes/iPhone Software Updates&quot;</span></p>
+<p>List all the file <a href="../bash/alias.html">links</a> in the current folder - in the ouptut of <span class="code">ls</span> each symbolic directory has<span class="code"> l </span>permission at the begining of the permission flags, so <span class="code">grep ^l </span>will list only symbolic links:<br>
+<span class="code">$ ls -lR | grep ^l</span><br>
+A less cryptic method is to use <span class="code">find . -type l</span></p>
+<p>Include a special character at the end that tells you what kind of file it is<br>
+<span class="code">$ ls -F</span><br>
+<br>
+List  .jpg files<br>
+<span class="code">$ ls *.jpg</span><br>
+<br>
+Filenames beginning with "a"<br>
+<span class="code">$ ls a*</span><br>
+<br>
+Filenames containing "att"<br>
+<span class="code">$ ls *att*</span><br>
+<br>
+Long list + show all + follow symlinks w. dest<br>
+<span class="code"> $ ls -lahL<br>
+</span><br>
+List sorted by Size<br>
+<span class="code">$ ls -l | sort -n +4<br>
+</span>or<br>
+<span class="code">$ ls -lrS</span><br>
+<br>
+ List all subdirectories<br>
+<span class="code">$ ls *</span></p>
+<p>Loop through all the files in a folder, note the use of quotes to cope with filenames that include spaces:<br>
+<span class="code">$ ls | while read FILE; do echo &quot;$FILE&quot;; done</span></p>
+<p>List all files, one per line, including subdirectories - using <a href="find.html">find</a><br>
+<span class="code">$ find ~/Documents/ -type f</span><br>
+</p>
+<p class="quote"><i>&ldquo;If the doors of perception were cleansed every thing would appear to man as it is, infinite&rdquo; ~ William Blake</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="chmod.html">chmod</a> - Change access permissions.<br>
+<a href="chflags.html">chflags</a> - Change a file or folder's flags.<br>
+<a href="find.html">find</a> - Search for files that meet a desired criteria.<br>
+<a href="lsbom.html">lsbom</a> - List a bill of materials file.<br>
+<a href="quota.html">quota</a> - Display disk usage and limits.<br>
+<a href="rm.html">rm</a> - Remove files<a href="rmdir.html">.<br>
+rmdir</a> - Remove folder(s).<br>
+<a href="sort.html">sort</a> - Sort text files.<br>
+<a href="stat.html">stat</a> - Display the status of a file.<br>
+sticky - Sticky text and append-only directories.<br>
+<a href="wc.html">wc</a> - Print byte, word, and line counts.<br>
+<a href="https://mywiki.wooledge.org/ParsingLs">Parsing the output of ls</a> - wooledge.org</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

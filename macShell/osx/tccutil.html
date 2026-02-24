@@ -1,0 +1,43 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>tccutil Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>tccutil</h1> 
+<p>Manage the privacy database.</p>
+<pre>Syntax
+      tccutil reset <i>service</i>
+
+Options
+
+      <i>Service</i>  Reset all decisions for the specified <i>service</i>, causing apps to
+               prompt again the next time they access the service.
+
+               If a bundle identifier is specified, the service will be reset for that bundle only.</pre>
+<p>The tccutil command manages the privacy database, which stores decisions      the user has made about whether apps may access personal data.</p>
+<h3><a id="e"></a>Examples</h3>
+<p class="code">$ tccutil reset AddressBook</p>
+<p class="code">$ tccutil reset All com.apple.Terminal</p>
+<p>Reset all app permissions:<span class="code"><br>
+$ tccutil reset All</span></p>
+<p class="quote"><i>&ldquo;Freedom is coming to mean little more than the right to ask permission&rdquo; ~ Joseph Sobran</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="security.html">security</a> - Administer Keychains, keys, certificates and the Security framework.<br>
+<a href="ulimit.html">ulimit</a> - limit the use of system-wide resources.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

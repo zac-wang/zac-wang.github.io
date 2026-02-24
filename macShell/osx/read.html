@@ -1,0 +1,64 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>read Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>read</h1> 
+<p>Read one line from the standard input, (or from a file) and assign the word(s) to variable <i>name</i>(s).</p>
+<pre>Syntax
+      read [-ers] [-a <i>aname</i>] [-p <i>prompt</i>] [-t <i>timeout</i>]
+              [-n <i>nchars</i>] [-d <i>delim</i>] [-u <i>fd</i>] [<i>name</i> ...]
+
+Key
+   -a <i>aname</i><br>             The <i>words</i> are assigned to sequential indices of the array variable <i>aname</i>, starting at 0.<br>             <i>aname</i> is unset before any new values are assigned.  Other name arguments are ignored.<br><br>   -d <i>delim</i><br>             The first character of <i>delim</i> is used to terminate the input line, rather than newline.
+<br>   -e        If the standard input is coming from a terminal, readline is used to obtain the line.
+<br>   -n <i>nchars</i><br>             read returns after reading <i>nchars</i> characters rather than waiting for a complete line of<br>             input.<br>   -p <i>prompt</i><br>             Display <i>prompt</i> on standard error, without a trailing newline, before attempting to read<br>             any input. The prompt is displayed only if input is coming from a terminal.
+<br>   -r        Do not treat a Backslash as an <a href="syntax-quoting.html">escape</a> character.  The backslash is considered to be part<br>             of the line. In particular, a backslash-newline pair can not be used as a line continuation.
+             Without this option, any backslashes in the input will be discarded.
+             You should almost always use the -r option with read.<br><br>   -s        Silent mode. If input is coming from a terminal, characters are not echoed.
+<br>   -t <i>timeout</i><br>             Cause read to time out and return failure if a complete line of input is not read<br>             within <i>timeout</i> seconds. This option has no effect if read is not reading input from<br>             the terminal or a pipe.
+<br>   -u <i>fd</i>     Read input from file descriptor <i>fd</i>.
+
+   <i>name</i>      The name(s) to assign to each word.
+             If no <i>names</i> are supplied, the line read is assigned to the variable $<span class="code">REPLY</span>. </pre>
+<p>One line is read from the standard input, or from the file descriptor <i>fd</i> supplied as an  argument to the -u option, and the first word is assigned to the first <i>name</i>, the second word to the second <i>name</i>, and so on, with leftover words and their intervening separators assigned to the last name. </p>
+<p>The read command modifies each line read; by default it removes all leading and trailing whitespace characters (spaces and tabs, or any whitespace characters present in <a href="syntax-variables.html">IFS</a>). If that is not desired, the IFS variable can be cleared with<span class="code"> IFS=</span><br>
+<br>
+If there are fewer words read from the standard input than <i>names</i>, the remaining names are assigned empty values.<br>
+The characters in the value of the <code><a href="syntax-variables.html">IFS</a></code> variable are used to split the line into words. </p>
+<p>The backslash character '\' can be used to remove any special meaning for the next character read, and for line continuation.<br>
+</p>
+<p>The return code is zero, unless end-of-file is encountered, read times out, or an invalid file descriptor is supplied as the argument to -u.</p>
+<p>This is a BASH shell builtin, to display your local syntax from the bash prompt type: <span class="code">help [r]ead</span></p>
+<h3><a id="e"></a>Examples</h3>
+<p class="code">$ read MYVAR<br>
+$ 
+echo You entered $MYVAR</p>
+<p class="code">$ read<br>
+$ echo You entered $REPLY</p>
+<p class="code">$  echo &quot;First Second Third Fourth &quot; | while read -r -d ' ' ret1; do printf &quot;=$ret1=&quot;; done =First==Second==Third==Fourth=</p>
+<p class="code">$ echo &quot;First Second Third Fourth &quot; | while read -r -d ' ' ret1; do printf &quot;=$ret1= \n&quot;; done<br>
+=First=<br>
+=Second=<br>
+=Third=<br>
+=Fourth=</p>
+<p class="quote"><i>“Let us read and let us dance - two amusements that will never do any harm to the world”  ~ Voltaire</i></p>
+<h3>Related macOS commands</h3>
+<p><a href="expr.html">expr</a> - Evaluate expressions.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

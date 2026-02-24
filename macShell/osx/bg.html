@@ -1,0 +1,74 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>bg Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>bg</h1> 
+<p>Send to background.</p>
+<pre>Syntax
+      bg [<i>jobspec</i> ...]
+      <i>job</i> ... <b>&amp;</b></pre>
+<p> Appending an ampersand ( &amp; ) to the command runs the job in the background.</p>
+<p>Resume each suspended job <i>jobspec</i> in the background, as if it had been  started  with <span class="code">&</span>.   </p>
+<p><span class="code">bg</span> takes a “<i>jobspec</i>” available from <a href="jobs.html" class="code">jobs</a>, not a PID.</p>
+<p>If              
+<i>jobspec</i>  is  not present, the shell's notion of the current job is used. </p>
+<p><span class="code">bg <i>jobspec</i></span> returns 0              
+unless run when job control is disabled or, when run with job control enabled,  any  specified              
+<i>jobspec</i> was not found or was started without job control.</p>
+<p>To kill a specific background job use, kill %<i>jobspec</i>.</p>
+<p>bg is a BASH shell builtin and a ZSH shell builtin, to display your local syntax from the bash prompt type: <span class="code">help bg</span></p>
+<h3><a id="e"></a>Examples</h3>
+<p>Put the job with job id 0 in the background:</p>
+<blockquote>
+<p><span class="code"> $ bg %0</span></p>
+</blockquote>
+<p>To start a <em>new</em> process in the background you can do:</p>
+<blockquote>
+<p class="code"> $ long_running_command &amp;</p>
+</blockquote>
+<p>Send the current foreground job to the background using <a href="syntax-bashkeyboard.html#process">CTRL-Z</a> and bg:</p>
+<blockquote>
+<p class="code">$ long_running_command</p>
+<p class="code">$ Ctrl-Z</p>
+<p class="code">$ [2]+  Stopped                 long_running_command<br>
+$ 
+bg</p>
+</blockquote>
+<p>View all the background jobs using jobs:</p>
+<blockquote>
+<pre>$ jobs
+[1]   Running<span class="code">     long_running_command</span> &
+[2]-  Running     someothercommand &</pre>
+</blockquote>
+<p>Bring a background job to the foreground. When executed without arguments, this will take the most recent background job to the foreground:</p>
+<blockquote>
+<p class="code">$ fg</p>
+</blockquote>
+<p>Kill  job #2:</p>
+<blockquote>
+<p class="code">$ kill %2</p>
+</blockquote>
+<p><i class="quote">&ldquo;Keep your eyes on the stars, and your feet on the ground&rdquo; ~ Theodore Roosevelt</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="fg.html">fg</a> - Send job to foreground.<br>
+<a href="jobs.html">jobs</a> - List active jobs.<br>
+<a href="taskpolicy.html">taskpolicy</a> - Execute a program with an altered I/O or scheduling policy.<br>
+<a href="wait.html">wait</a> - Wait for a process to complete.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

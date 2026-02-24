@@ -1,0 +1,69 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>system_profiler Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>system_profiler</h1> 
+<p>Report system hardware and software configuration.</p>
+<pre>Syntax
+      system_profiler [-usage]
+
+      system_profiler [-listDataTypes]
+
+      system_profiler [-xml] <i>dataType1</i> ... <i>dataTypeN</i>
+
+      system_profiler [-xml] [-detailLevel <i>level</i>]
+
+Key:
+   -xml                Generate a report in XML format.  If the XML report
+                       is redirected to a file with a ".spx" suffix that
+                       file can be opened with System Profiler.app.
+
+   -listDataTypes      List the available datatypes.
+
+   -detailLevel <i>level</i>  The level of detail for the report:
+
+                         mini       report with no personal information
+                         basic      basic hardware and network information
+                         full       all available information
+
+   -usage              Print usage info and examples.</pre>
+<p>system_profiler is a replacement for /usr/sbin/AppleSystemProfiler.</p>
+<h3><a id="e"></a>Examples</h3>
+<p> Generate a text report with the standard detail level.<br>
+<span class="code">$ system_profiler</span></p>
+<p> Generate a report of all <a href="https://support.apple.com/en-us/HT208436">32 bit software</a> and save to a text file on the desktop:<br>
+<span class="code">$ 
+system_profiler SPApplicationsDataType | grep -B 6 -A 2 &quot;(Intel): No&quot; &gt; ~/Desktop/non64bit.txt</span></p>
+<p>Generate a short report containing no personal information.<br>
+<span class="code">$ system_profiler -detailLevel mini</span></p>
+<p> Show a list of the available data types.<br>
+<span class="code">$ system_profiler -listDataTypes</span></p>
+<p>Generate a text report containing only software and network data.<br>
+<span class="code">$ system_profiler SPSoftwareDataType SPNetworkDataType</span></p>
+<p>Create an XML file which can be opened by System Profiler.app<br>
+<span class="code">$ system_profiler -xml &gt; MyReport.spx</span></p>
+<p class="quote"><i>&ldquo;Why a four-year-old child could understand this report...<br>
+Run out and find me a four-year-old child. I can't make head nor tail out of it&rdquo; - Groucho Marx</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="serverinfo.html">serverinfo</a> - Server information.<br>
+<a href="uname.html">uname</a> - Print the Darwin OS Kernel version / release / machine name.<br>
+<a href="sw_vers.html">w_vers</a> - Print macOS operating system version.<br>
+<a href="who.html">who</a> - Print who is currently logged in.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>shasum Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>shasum</h1> 
+<p>Print or Check SHA Checksums.</p>
+<pre>Syntax
+      shasum [<i>OPTION</i>] [<i>FILE</i>]...
+
+      shasum [<i>OPTION</i>] --check [<i>FILE</i>]
+
+Options
+   -a, --algorithm    1 (default), 224, 256, 384, 512
+   -b, --binary       Read files in binary mode (default on DOS/Windows)
+   -c, --check        Check SHA sums against given list
+   -p, --portable     Read files in portable mode
+                      produces same digest on Windows/Unix/Mac
+   -t, --text         Read files in text mode (default)
+
+   The following two options are useful only when verifying checksums:
+
+   -s, --status       don't output anything, status code shows success
+   -w, --warn         warn about improperly formatted SHA checksum lines
+
+   -h, --help         Display help and exit
+   -v, --version      Output version information and exit
+
+   With no FILE, or when FILE is -, read standard input.</pre>
+<p>The sums are computed as described in FIPS PUB 180-2.  When checking,
+        the input should be a former output of this program.  The default mode
+        is to print a line with checksum, a character indicating type (`*'
+for binary, `?' for portable, ` ' for text), and name for each FILE.</p>
+<p>The shasum script provides the easiest and most convenient way to
+compute SHA message digests.  Rather than writing a program, the user
+ feeds data to the script via the command line, and waits for the
+results to be printed on standard output.  Data can be fed to shasum
+through files, standard input, or both.</p>
+<p> The following command shows how easy it is to compute digests for
+typical inputs such as the NIST test vector &quot;abc&quot;:</p>
+<p class="code"> perl -e &quot;print qw(abc)&quot; | shasum</p>
+<p> Or, if you want to use SHA-256 instead of the default SHA-1, 
+say:</p>
+<p class="code"> perl -e &quot;print qw(abc)&quot; | shasum -a 256</p>
+<p> Since shasum uses the same interface employed by the familiar sha1sum
+program (and its somewhat outmoded anscestor md5sum), you can install
+this script as a convenient drop-in replacement.</p>
+<p>shasum is implemented using the Perl module Digest::SHA or Digest::SHA::PurePerl.  author: Mark Shelor Copyright (c) 2003-2008 </p>
+<h3><a id="e"></a>Examples</h3>
+<p>Calculate the sha-256 checksum for example.txt</p>
+<p><span class="code">$ shasum -a 256 example.txt</span><br>
+<br>Or using an <a href="alias.html">alias</a>:<br>
+<br>
+<span class="code">$ alias sha256='shasum -a 256'<br>
+$ sha256 example.txt</span></p>
+<p class="quote"><i>&ldquo;In expanding the field of knowledge, we but increase the horizon of ignorance&rdquo; ~ Henry Miller </i> </p>
+<h3>Related macOS commands</h3>
+<p><span class="code"><a href="openssl.html">openssl</a> sha1 example.txt</span><br>
+sha256sum (coreutils).</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

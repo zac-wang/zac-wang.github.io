@@ -1,0 +1,227 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>ping Man Page Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>ping</h1> 
+<p>Test a network connection.</p>
+<pre>Syntax
+      ping [-AaCDdfnoQqRrv] [-b <i>boundif</i>] [-c <i>count</i>] [-G <i>sweepmaxsize</i>] [-g <i>sweepminsize</i>]
+         [-h <i>sweepincrsize</i>] [-i <i>wait</i>] [-k <i>trafficclass</i>] [-K <i>netservicetype</i>] [-l <i>preload</i>]
+            [-M mask | time] [-m <i>ttl</i>] [-P <i>policy</i>] [-p <i>pattern</i>] [-S <i>src_addr</i>] [-s <i>packetsize</i>] [-t <i>timeout</i>]
+               [-W <i>waittime</i>] [-z <i>tos</i>] [--apple-connect] [--apple-print] <b><i>host</i></b>
+
+      ping [-AaDdfLnoQqRrv] [-b <i>boundif</i>] [-c <i>count</i>] [-I <i>iface</i>]
+         [-i <i>wait</i>] [-k <i>trafficclass</i>] [-K <i>netservicetype</i>] [-l <i>preload</i>]
+            [-M mask | time] [-m <i>ttl</i>] [-P <i>policy</i>] [-p <i>pattern</i>] [-S <i>src_addr</i>] [-s <i>packetsize</i>] [-t <i>timeout</i>]
+               [-T <i>ttl</i>] [-W <i>waittime</i>] [-z <i>tos</i>] [--apple-connect] [--apple-print] <b><i>mcast-group</i></b>
+
+Key
+
+   -A         Audible.  Output a bell (ASCII 0x07) character when no packet is received before the next
+              packet is transmitted. To cater for round-trip times that are longer than the interval
+              between transmissions, further missing packets cause a bell only if the maximum number of
+              unreceived packets has increased.
+
+   -a         Audible.  Include a bell (ASCII 0x07) character in the output when any packet is received.
+              This option is ignored if other format options are present.
+
+   -b <i>boundif</i> Bind the socket to interface boundif for sending.  This option is an Apple addition.
+
+   -C         Prohibit the socket from using the cellular network interface.  This option is an Apple addition.
+
+   -c <i>count</i>   Stop after sending (and receiving) <i>count</i> ECHO_RESPONSE packets.
+              If this option is not specified, ping will operate until interrupted.
+              If this option is specified in conjunction with ping sweeps, each sweep will consist of count packets.
+
+   -d         Debug, Set the SO_DEBUG option on the socket being used.
+
+   -D         Set the Don't Fragment bit.
+
+   -f         Flood ping, output packets as fast as they come back or 100 times per second.
+
+   -G <i>sweepmaxsize</i>
+              Specify the maximum size of ICMP payload when sending sweeping pings.
+              This option is required for ping sweeps.
+
+   -g <i>sweepminsize</i>
+              Specify the size of ICMP payload to start with when sending sweeping pings.
+              The default value is 0.
+
+   -h <i>sweepincrsize</i>
+              Specify the number of bytes to increment the size of ICMP payload after each sweep when
+              sending sweeping pings.  The default value is 1.
+
+   -I <i>iface</i>   Source multicast packets with the given interface address.
+              This flag only applies if the ping destination is a multicast address.
+
+   -i <i>wait</i>    Wait <i>wait </i>seconds between sending each packet.  The default is to wait for one second
+              between each packet.  The wait time may be fractional, but only the super-user may specify
+              values less than 0.1 second.  This option is incompatible with the -f option.
+
+   -k <i>trafficclass</i>
+              Specifies the traffic class to use for sending ICMP packets.
+              The supported traffic classes are BK_SYS, BK, BE, RD, OAM, AV, RV, VI, VO and CTL.
+              By default ping uses the control traffic class (CTL).  This option is an Apple addition.
+
+   -K <i>netservicetype</i>
+              Specifies the network service type to use for sending ICMP packets.
+              The supported network service type are BK_SYS, BK, BE, RV, AV, RD,OAM, VI, SIG and VO.
+              Note this overrides the default traffic class (-k can still be specified after -K to use both).
+              This option is an Apple addition.
+
+   -L         Suppress loopback of multicast packets.  This flag only applies if the ping destination is a multicast address.
+
+   -l <i>preload</i> If preload is specified, ping sends that many packets as fast as possible before
+              falling into its normal mode of behavior. Only the super-user may use this option.
+
+   -M <i>mask</i> | <i>time</i>
+              Use ICMP_MASKREQ or ICMP_TSTAMP instead of ICMP_ECHO.
+              For <i>mask</i>, print the netmask of the remote machine.  Set the net.inet.icmp.maskrepl MIB variable
+              to enable ICMP_MASKREPLY.  For <i>time</i>, print the origination, reception and transmission timestamps.
+
+   -m <i>ttl</i>     Set the IP Time To Live for outgoing packets.
+              If not specified, the kernel uses the value of the net.inet.ip.ttl MIB variable.
+
+   -n         Numeric output only. No attempt will be made to lookup symbolic
+              names for host addresses.
+
+   -o         Exit successfully after receiving one reply packet.
+
+   -P <i>policy</i>  Policy specifies IPsec policy for the ping session.
+              For details please refer to ipsec(4) and ipsec_set_policy(3).
+
+   -p <i>pattern</i>
+              Specify up to 16 'pad' bytes to fill out the packet sent.
+              This is useful for diagnosing data-dependent problems in a
+              network. eg, '-p ff' will fill the packet sent with all ones.
+
+   -Q         Somewhat quiet output.  Don't display ICMP error messages that are in response to our
+              query messages.  Originally, the -v flag was required to display such errors, but -v
+              displays all ICMP error messages.  On a busy machine, this output can be overbearing.
+              Without the -Q flag, ping prints out any ICMP error messages caused by its own ECHO_REQUEST messages.
+
+   -q         Quiet output. Only display the summary lines at startup time and when finished.
+ 
+   -R         Record route. Includes the RECORD_ROUTE option in the ECHO_REQUEST packet and
+              display the route buffer on returned packets.
+              Note that the IP header is only large enough for nine such routes.
+              Many hosts ignore or discard this option.
+ 
+   -r         Bypass the normal routing tables and send directly to a host on an attached network.
+              If the host is not on a directly-attached network, an error is returned.
+              This option can be used to ping a local host through an interface that has no route through it
+              (e.g., after the interface was dropped by routed(8)).
+
+   -S <i>src_addr</i>
+              Use the following IP address as the source address in outgoing packets.
+              On hosts with more than one IP address, this option can be used to force the source address
+              to be something other than the IP address of the interface the probe packet is sent on.
+              If the IP address is not one of this machine's interface addresses, an error is returned and nothing is sent.
+
+   -s <i>packetsize</i>
+              The number of data bytes to be sent.
+              The default is 56, which translates into 64 ICMP data bytes when combined with the 8 bytes of
+              ICMP header data. This option cannot be used with ping sweeps.
+
+   -T <i>ttl</i>     Set the IP Time To Live for multicasted packets.
+              This flag only applies if the ping destination is a multicast address.
+
+   -t <i>timeout</i> Specify a timeout, in seconds, before ping exits regardless of how many packets have been received.
+
+   -v         Verbose output. ICMP packets other than ECHO_RESPONSE that are received are listed.
+
+   -W <i>waittime</i>
+              Time in <b>MilliSeconds</b> to wait for a reply for each packet sent.
+              If a reply arrives later, the packet is not printed as replied, but considered as replied when
+              calculating statistics. n.b. Many other Unix variants specify this option in Seconds.
+
+   -z <i>tos</i>     Use the specified type of service.
+
+   --apple-connect
+              Connect the socket to the destination address.  This option is an Apple addition.
+
+   --apple-print
+              Print the time a packet was received.  This option is an Apple addition.</pre>
+<p> When using ping for fault isolation, it should first be run on the local host, to verify that the local network interface is up and running. Then, hosts and gateways further and further away should be 'pinged'.</p>
+<p>By default macOS has &quot;stealth mode&quot; turned on that will block pings to <span class="code">localhost</span>. To turn off Stealth mode so that you can test pinging localhost, go to System Preferences, Security &amp; Privacy, Firewall, Firewall Options and untick <b>Enable Stealth Mode</b></p>
+<p>Ping is intended for use in network testing, measurement and management. Because of the load it can impose on the network, it is unwise to use ping during normal operations or from automated scripts. </p>
+<h2>Flood Ping</h2>
+<blockquote>
+<p> For every ECHO_REQUEST sent a period '.' is printed, while for every ECHO_REPLY received a backspace is printed. This provides a rapid display of how many packets are being dropped. Only the super-user can use this option. This can be very hard on a network and should be used with caution.</p>
+<p>Round-trip times and packet loss statistics are computed. If duplicate packets are received, they are not included in the packet loss calculation, although the round trip time of these packets is used in calculating the minimum/average/maximum round-trip time numbers. When the specified number of packets have been sent (and received) or if the program is terminated with a SIGINT, a brief summary is displayed.</p>
+<p>Flood pinging is not recommended in general, and flood pinging the broadcast address should only be done under very controlled conditions.</p>
+</blockquote>
+<h2>ICMP Packet Details</h2>
+<blockquote>
+<p> An IP header without options is 20 bytes. An ICMP ECHO_REQUEST packet contains an additional 8 bytes worth of ICMP header followed by an arbitrary amount of data. When a packetsize is given, this indicated the size of this extra piece of data (the default is 56). Thus the amount of data received inside of an IP packet of type ICMP ECHO_REPLY will always be 8 bytes more than the requested data space (the ICMP header).</p>
+<p> If the data space is at least eight bytes large, ping uses the first eight bytes of this space to include a timestamp which it uses in the computation of round trip times. If less than eight bytes of pad are specified, no round trip times are given.</p>
+</blockquote>
+<h2>Duplicate and Damaged Packets</h2>
+<blockquote>
+<p> Ping will report duplicate and damaged packets. <br>
+Duplicate packets  are rarely; if ever; a good sign, although the presence of low levels of duplicates might not always be cause for alarm.<br>
+Damaged packets are a serious cause for alarm and often indicate broken hardware somewhere in the ping packet's path (in the network or in the hosts).</p>
+</blockquote>
+<h2>Different Data Patterns</h2>
+<blockquote>
+<p> The (inter)network layer should never treat packets differently depending on the data contained in the data portion. Unfortunately, data-dependent<br>
+problems have been known to sneak into networks and remain undetected for long periods of time. If you have a data-dependent problem you will probably 
+have to do a lot of testing to find it. If you manage to find a file that either can't be sent across the network or that takes much longer to transfer than other similar length files. You can then examine this file for repeated patterns that you can test using the -p option of ping.
+</p>
+</blockquote>
+<h2>TTL Details</h2>
+<blockquote>
+<p> The Time To Live, (TTL) value of an IP packet represents the maximum number of IP routers that the packet can go through before being thrown away. In current practice you can expect each router in the Internet to decrement the TTL field by exactly one.</p>
+<p> The TCP/IP specification states that the TTL field for TCP packets should be set to 60, but many systems use smaller values (4.3 BSD uses 30, 4.2 used 15).</p>
+<p> The maximum possible value of this field is 255, and most Unix systems set the TTL field of ICMP ECHO_REQUEST packets to 255. This is why you will find you can `ping' some hosts, but not reach them with telnet(1) or <a href="ftp.html">ftp</a>.</p>
+<p> In normal operation ping prints the ttl value from the packet it receives. When a remote system receives a ping packet, it can do one of three things with the TTL field in its response:</p>
+<ul>
+<li> Not change it; this is what Berkeley Unix systems did before the 4.3BSD-Tahoe release. In this case the TTL value in the received packet will be 255 minus the number of routers in the round-trip path.</li>
+<li> Set it to 255; this is what current Berkeley Unix systems do. In this case the TTL value in the received packet will be 255 minus the number of routers in the path from the remote system to the pinging host.</li>
+<li> Set it to some other value. Some machines use the same value for ICMP packets that they use for TCP packets, for example either 30 or 60. Others can  use completely wild values.</li>
+</ul>
+</blockquote>
+<h2>Exit Status</h2>
+<blockquote>
+<p>The ping utility exits with one of the following values:</p>
+<p><span class="code">0 </span>At least one response was heard from the specified host. <br>
+<span class="code">2 </span>The transmission was successful but no responses were received. <br>
+<span class="code">any other value </span>- An error occurred.  These values are defined in <span class="code">sysexits.h</span></p>
+</blockquote>
+<p>PING is <a href="https://web.archive.org/web/20200427033101/http://ftp.arl.army.mil/~mike/ping.html">named</a> after the sound that a sonar makes.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Ping example.com, waiting for 5 seconds before sending the next packet:<br>
+<span class="code">$ ping -i 5 example.com</span></p>
+<p>Ping example.com, waiting only 0.1 second between pings:<br>
+<span class="code">$ ping -i 0.1  example.com</span></p>
+<p>Ping example.com, giving an audible beep when the peer is reachable:<br>
+<span class="code">$ ping -a example.com</span></p>
+<p>Ping example.com, printing the full network route ECHO_REQUEST sent and ECHO_REPLY received:<br>
+<span class="code">$ ping -R example.com</span></p>
+<p class="quote"><i>&quot;There's a Nong Nang Ning,
+Where the trees go Ping!&quot; ~ Spike Milligan </i> </p>
+<h3>Related macOS commands</h3>
+<p class="space"> netstat - show network status.<br>
+<a href="ipconfig.html">ifconfig</a> - configure network interface parameters.<br>
+<a href="ipconfig.html">ipconfig</a> - View and control IP configuration state.<br>
+<a href="networkquality.html">networkQuality</a> - Network quality testing tool.<br>
+routed - network RIP and router discovery routing daemon.<br>
+<a href="scselect.html">scselect</a> - Switch between network locations.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

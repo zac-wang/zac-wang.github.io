@@ -1,0 +1,86 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>traceroute6 Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>traceroute6</h1> 
+<p>Uses the IPv6 protocol hop limit field to elicit an ICMPv6 TIME_EXCEEDED response from each gateway      along the path to some host.</p>
+<pre>Syntax
+      traceroute6 [-dIlnNrvU] [-f firsthop] [-g gateway] [-m hoplimit]
+         [-p port] [-q probes] [-s src] [-w waittime] target [datalen]
+
+Options
+   -d          Debug mode.
+
+   -f <i>firsthop</i> Specify how many hops to skip in trace.
+
+   -g <i>gateway</i>  Specify intermediate gateway (traceroute6 uses routing header).
+
+   -I          Use ICMP6 ECHO instead of UDP datagrams.
+
+   -l          Print both host hostnames and numeric addresses.
+               Normally traceroute6 prints only hostnames if -n is not specified,
+               and only numeric addresses if -n is specified.
+
+   -m <i>hoplimit</i> Specify maximum hoplimit, up to 255.  The default is 30 hops.
+
+   -n          Do not resolve numeric address to hostname.
+
+   -N          Use a packet with no upper layer header for the probes, instead of UDP datagrams.
+
+   -p <i>port</i>     Set UDP port number to port.
+
+   -q <i>probes</i>   Set the number of probe per hop count to probes.
+
+   -r          Bypass the normal routing tables and send directly to a host on an attached network.
+               If the host is not on a directly-connected network, an error is returned.
+               This option corresponds to the SO_DONTROUTE socket option; it can be used to ping a local host
+               through an interface that has no route through it
+               (e.g., after the interface was dropped by a routing daemon).
+
+   -s <i>src</i>      <i>Src</i> specifies the source IPv6 address to be used.
+
+   -U          Use UDP datagrams for the probes.  This is the default.
+
+   -v          Be verbose.
+
+   -w <i>waittime</i> Specify the delay time between probes.</pre>
+<p><span class="body"> The only mandatory parameter is the destination host name or IPv6 address.  The default probe datagram carries 12 bytes of pay-      load, in addition to the IPv6 header.  The size of the payload can be specified by giving a length (in bytes) after the destination host name.</span></p>
+<p>This program prints the route to the given destination and the round-trip time to each gateway, in the same manner as tracer-      oute.      Here is a list of possible annotations after the round-trip time for each gateway:</p>
+<pre>   !N      Destination Unreachable - No Route to Host.
+
+   !P      Destination Unreachable - Administratively Prohibited.
+
+   !S      Destination Unreachable - Not a Neighbour.
+
+   !A      Destination Unreachable - Address Unreachable.
+
+   !       This is printed if the hop limit is <= 1 on a port unreachable message.  This means that the packet got to the
+           destination, but that the reply had a hop limit that was just large enough to allow it to get back to the source
+           of the traceroute6.  This was more interesting in the IPv4 case, where some IP stack bugs could be identified by
+           this behaviour.</pre>
+<p>Return Values</p>
+<p>The traceroute6 utility will exit with 0 on success, and non-zero on errors.</p>
+
+<p class="quote"><i>&ldquo;2. The tendency to worry about things that cannot be changed or corrected.&rdquo; ~ Marcus Tullius Cicero </i>(The Six Mistakes of Man)</p>
+<h3>Related macOS commands</h3>
+<p class="space"> netstat - Show network status.<br>
+<a href="traceroute.html">traceroute</a> - Trace Route to Host<br>
+<a href="ping.html">ping</a> - Test a network connection.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

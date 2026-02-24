@@ -1,0 +1,62 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>createhomedir Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1><span class="space">createhomedir</span></h1> 
+<p>Create and populate home directories on the local computer..</p>
+<pre>Syntax
+      createhomedir [-scbalh] [-n <i>directoryDomainName</i>] [-u <i>username</i>]
+
+Options:
+
+   -s     Create home directories for server home paths only (default).
+
+   -c     Create home directories for local home paths only.
+
+   -b     Create home directories for both server and local home paths.
+
+   -a     Create home directories for users defined in all directory domains of the server's search path.
+
+   -l     Create home directories for users defined in the local directory domain.
+
+   -L     Causes the created home directory to be localized.
+
+   -n <i>directoryDomainName</i>
+          Create home directories for users defined in a specific directory domain in the server's search path.
+
+   -u <i>username</i>
+          Create a home directory for a specific user defined in the domain(s) identified in the -a, -l, or -n parameter.
+          If you omit the -a, -l, and -n parameters when you use the -u parameter, -a is assumed.
+
+   -i     Read the username list from standard input and create specified home directories.
+          Each username should be on its own line.
+
+   -h     Usage help.</pre>
+<p>When using the -a option, search limits of various directory servers (such as Open Directory or Active Directory) can prevent      all possible home directories from being created. In this case, you may need to specify the usernames explicitly.</p>
+<p class="code">/usr/sbin/createhomedir</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Create a home directory for the user <span class="code">BreonnaT</span>, this will not overwrite if the directory already exists:<br>
+</p>
+<pre>$ createhomedir -u BreonnaT<span class="code"><br></span></pre>
+<p class="quote">&ldquo;While most of us in the crowd cowered and sought cover, it was those uneducated rickshaw drivers who pedaled out directly toward the troops to pick up the bodies of the dead and wounded. Some of the rickshaw drivers were shot, but the rest saved many, many lives that night, rushing the wounded to hospitals as tears streamed down their cheeks. It would be churlish to point out that such people are ill-prepared for democracy, when they risked their lives for it” ~ The New York Times, The Tiananmen Square Protests, 1989</p>
+<h3>Related macOS commands</h3>
+<p><span class="space"><a href="dscl.html">dscl</a> - Directory Service command line utility</span>.<br>
+<span class="space"><a href="sysadminctl.html">sysadminctl</a> - Administer system user accounts.</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

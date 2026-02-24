@@ -1,0 +1,70 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>uniq Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>uniq</h1> 
+<p>Report or filter out repeated lines in a file. <br>
+  Reads standard input comparing adjacent lines, and writes a copy of each unique 
+  input line to the standard output. <br>
+The second and succeeding copies of identical 
+adjacent input lines are not written. </p>
+<pre>Syntax
+       uniq [-c | -d | -u] [-f <i>fields</i>] [-s <i>chars</i>] [<i>input</i>_<i>file</i> [<i>output</i>_<i>file</i>]]
+
+Options<i>
+</i>     <b>-c</b>      Precede each output line with the count of the number of times
+             the line occurred in the input, followed by a single space.
+
+     <b>-d</b>      Distinct - Don't output lines that are not repeated in the input.
+
+     <b>-f</b> <i>fields</i>
+             Ignore the first <i>fields</i> in each input line when doing compar-
+             isons.  A field is a string of non-blank characters separated
+             from adjacent fields by blanks.  Field numbers are one based,
+             i.e. the first field is field one.
+
+     <b>-s</b> <i>chars</i>
+             Ignore the first <i>chars</i> characters in each input line when doing
+             comparisons.  If specified in conjunction with the <b>-f</b> option, the
+             first <i>chars</i> characters after the first <i>fields</i> fields will be ignored.
+             Character numbers are one based, i.e. the first character
+             is character one.
+
+     <b>-u</b>      Don't output lines that are repeated in the input.
+             Print only lines that are unique in the INPUT.</pre>
+<p><b>  </b>By default, <span class="code">uniq</span> prints the unique lines in a sorted file, it 
+discards all but one of identical successive input lines. so that the OUTPUT contains unique lines.</p>
+<p><span class="code">uniq</span> will only compare lines that appear <i>successively</i> in the input.</p>
+<p>Repeated lines in the input will not be 
+  detected if they are not adjacent, so it may be necessary to sort the files 
+first.</p>
+<p>If an <i>InputFile</i> of <span class="code">-</span> (or nothing) is given, then uniq will read from standard input.</p>
+<p>If no <i>OutputFile</i> file is specified, <span class="code">uniq</span> writes to standard output.<br>
+<br>
+The historic +number and -number options have been deprecated 
+but are still supported in this implementation.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Count the frequency of some words:</p>
+<p class="code">echo &quot;one two three one three&quot; | tr -cs &quot;A-Za-z&quot; &quot;\n&quot;  | sort | uniq -c | sort -n -r</p>
+<p class="quote"><i>&ldquo;Do you know what you are? You are a marvel. You are unique&rdquo; ~ Pablo Picasso</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="sort.html">sort</a> - Sort text files.<br>
+<a href="tr.html">tr</a> - Translate, squeeze, and/or delete characters.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

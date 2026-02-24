@@ -1,0 +1,137 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>ps Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>ps</h1> 
+<p>Process status, information about processes running in memory.</p>
+<pre>Syntax
+
+      ps [-aCcefhjlMmrSTuvwx] [-O <i>fmt</i>] [-o <i>fmt</i>]  [-G <i>gid</i>[,<i>gid</i>...]] [-g <i>grp</i>[,<i>grp</i>...]] [-u <i>uid</i>[,<i>uid</i>...]]
+            [-p <i>pid</i>[,<i>pid</i>...]] [-t <i>tty</i>[,<i>tty</i>...]] [-U <i>user</i>[,<i>user</i>...]]
+
+      ps [-L]
+
+Options
+     -a    Display information about other users' processes as well as your own.
+
+     -A    Display information about other users' processes, including those without controlling terminals.
+
+     -c    Change the 'command' column output to just contain the executable name
+           rather than the full command line.
+
+     -C    Change the way the cpu percentage is calculated by using a 'raw' cpu calculation
+           that ignores 'resident' time (this normally has no effect).       
+
+     -d    Like -A, but excludes session leaders.
+
+     -e    Display information about other users' processes, including those without controlling terminals.
+           Identical to -A.
+
+     -E    Display the environment as well.  This does not reflect changes in the environment after process launch.
+
+     -f    Display the uid, pid, parent pid, recent CPU usage, process start time, controlling tty, elapsed CPU
+           usage, and the associated command. If the -u option is also used, display the user name rather than the
+           numeric uid. When -o or -O is used to add to the display following -f, the command field is not
+           truncated as severely as it is in other formats.
+
+     -G    Display information about processes which are running with the specified real group IDs.
+
+     -g    Display information about processes with the specified process group leaders.
+
+     -h    Repeat the information header as often as necessary to guarantee
+           one header per page of information.
+
+     -j    Print information associated with the following keywords: user,
+           pid, ppid, pgid, sess, jobc, state, tt, time and command.
+
+     -L    List the set of available <a href="ps_keywords.html">keywords</a> available for the -O and -o options.
+
+     -l    Display information associated with the following keywords: uid,
+           pid, ppid, cpu, pri, nice, vsz, rss, wchan, state, tt, time and command.
+
+     -M    Print the threads corresponding to each task.
+
+     -m    Sort by memory usage, instead of the combination of controlling terminal and process ID.
+
+     -O    Add the information associated with the space or comma separated list of <a href="ps_keywords.html">keywords</a> 
+           specified, after the <b>process ID</b>, in the default information display.
+           Keywords can  be appended with an equals(=) sign and a string. 
+           This causes the printed header to use the specified string instead of the standard header.
+
+     -o    Display information associated with the space or comma separated list of <a href="ps_keywords.html">keywords</a> specified.
+           Keywords can  be appended with an equals (=) sign and a string.
+           This causes the printed header to use the specified string instead of the standard header.
+           If all keywords have empty header texts, no header line is written.
+
+     -p    Display information associated with the specified process IDs.
+
+     -r    Sort by current cpu usage, instead of the combination of controlling terminal and process ID.
+
+     -S    Change the way the process time is calculated by summing all
+           exited children to their parent process.
+
+     -T    Display information about processes attached to the device associated with the standard input.
+
+     -t    Display information about processes attached to the specified terminal device.
+
+     -U    Display the processes belonging to the specified real user IDs.
+
+     -u    Display the processes belonging to the specified usernames.
+
+     -v    Display information associated with the following keywords: pid, state, time, sl,
+           re, pagein, vsz, rss, lim, tsiz, %cpu, %mem and command.
+           The -v option implies the -m option.
+
+     -w    Use 132 columns to display information, instead of the default which is your window size.
+           If the -w option is specified more than once, ps will use as many columns as necessary
+           without regard for your window size. When output is not to a terminal, an unlimited number of<br>           columns are always used.
+
+     -X    When displaying processes matched by other options, skip any processes which do not have a controlling terminal.
+
+     -x    When displaying processes matched by other options, include processes which do not have a controlling terminal.
+           This is the opposite of the -X option.
+           If both -X and -x are specified in the same command, then ps will use the one which was specified last.</pre>
+<p>Since ps cannot run faster than the system and is run as any other 
+  scheduled process, the information it displays can never be exact.</p>
+<p>The ps utility displays a header line, followed by lines containing information about all of your processes that have controlling      terminals.      </p>
+<p>A different set of processes can be selected for display by using any combination of the -a, -G, -g, -p, -T, -t, -U, and -u options.      If more than one of these options are given, then ps will select all processes which are matched by at least one of the given options.      For the processes which have been selected for display, ps will usually display one line per process.  </p>
+<p>The -M option may result in      multiple output lines (one line per thread) for some processes.  By default all of these output lines are sorted first by controlling      terminal, then by process ID.  </p>
+<p>The -m, -r, and -v options will change the sort order.  If more than one sorting option was given, then      the selected processes will be sorted by the last sorting option which was specified.      </p>
+<p>For the processes which have been selected for display, the information to display is selected based on a set of keywords (see the -L,      -O, and -o options).  The default output format includes, for each process, the process' ID, controlling terminal, CPU time (including      both user and system time), state, and associated command.</p>
+<h2>Environment</h2>
+<blockquote>
+<p> The following environment variables affect the execution of ps:</p>
+<p> <span class="code">COLUMNS</span> If set, specifies the user's preferred output width in column positions.  By default, ps attempts to automatically<br>
+determine the terminal width.</p>
+</blockquote>
+<p><b>Examples</b></p>
+<p>Display all  processes associated with <em>any</em> controlling terminal:</p>
+<p class="code">$ ps</p>
+<p>Display all  processes  on the <em>current</em> controlling terminal. (Linux/POSIX behavior):</p>
+<p class="code"> $ ps -T</p>
+<p class="quote"><i>&ldquo;A human being is a part of the whole, called by us &quot;Universe&rdquo;, a part limited in time and space&quot; ~ Albert Einstein</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="execsnoop.html">execsnoop</a> - Snoop new process execution.<br>  
+<a href="kill.html">kill</a> - Stop a process from running.<br>
+<a href="lsof.html">lsof</a> - List open files.<br>
+<a href="opensnoop.html">opensnoop</a> - Snoop file opens as they occur.<br>
+<a href="top.html">top</a> - Display process information.<br>
+<a href="w.html">w</a> - Show who is logged on and what they are doing.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

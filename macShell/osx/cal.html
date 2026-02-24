@@ -1,0 +1,81 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>cal Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>cal / ncal</h1> 
+<p>Display a calendar. ncal offers an alternative layout,
+more options and the date of easter. </p>
+<pre>Syntax
+     cal [-jy] [[<i>month</i>] <i>year</i>]
+<br>     cal [-j] -m <i>month</i> [<i>year</i>]
+<br>     ncal [-jJpwy] [-s <i>country_code</i>] [[<i>month</i>] <i>year</i>]
+<br>     ncal [-Jeo] [<i>year</i>]
+
+Options:
+ 
+   -J       Display Julian Calendar, if combined with the -e option, display
+            date of easter according to the Julian Calendar.
+
+   -e       Display date of easter (for western churches).
+
+   -j       Display Julian days (days one-based, numbered from January 1).
+
+   -m <i>month</i> Display the specified month.
+
+   -o       Display date of orthodox easter (Greek and Russian Orthodox Churches).
+
+   -p       Print the country codes and switching days from Julian to Grego-
+            rian Calendar as they are assumed by ncal.  The country code as
+            determined from the local environment is marked with an asterisk.
+
+   -s <i>country_code</i>
+            Assume the switch from Julian to Gregorian Calendar at the date
+            associated with the country_code.  If not specified, ncal tries
+            to guess the switch date from the local environment or falls back
+            to September 2, 1752.  This was when Great Britain and her
+            colonies switched to the Gregorian Calendar.
+
+   -w       Print the number of the week below each week column.
+
+   -y       Display a calendar for the specified year.</pre>
+<p>If a single parameter is provided, that will specify a 4 digit year (1 - 9999) to display.<br>
+<br>
+If two parameters are provided, they will denote the Month (1 - 12) and Year (1 - 9999).<br>
+<br>
+If no arguments are specified, the current month is displayed.</p>
+<p><span class="code">cal</span> Displays weeks starting on Sunday, even though most <a href="../locale.html">locales</a> start the week on Monday.</p>
+<p><span class="code">ncal</span> (New Calendar) Displays a vertical layout starting on Monday  and displays the date of easter. <br>
+The ncal format makes a year fit on a 25x80 terminal. </p>
+<p>If no parameters are specified, the current month's calendar is displayed.</p>
+<p>The year must be specified with 4 digits. A year starts on 01 Jan.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Show the calendar for 2022<br>
+<span class="code">$ cal 2022</span></p>
+<p>Copy the calendar to the clipboard<br>
+<span class="code">$ cal | <a href="pbcopy.html">pbcopy</a></span><br>
+<br>
+<i class="quote">&ldquo;If everything seems under control, then you're not going fast enough&rdquo; - Mario Andretti</i></p>
+<h3>Related macOS commands</h3>
+<p> <span class="space">calendar - reminder service.<br>
+<a href="dc.html">dc</a> - Desk Calculator.<br>
+<a href="units.html">units</a> - Convert units from one scale to another.<br>
+<a href="wc.html">wc</a> - Print byte, word, and line counts.<br>
+<a href="https://funrei.wordpress.com/2008/01/23/become-a-non-autistic-calendar-counting-genius/">Calculate the day of the week, for any date, in your head</a></span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

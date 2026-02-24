@@ -1,0 +1,55 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>qlmanage Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>qlmanage</h1> 
+<p>Quick Look Server debug and management tool.</p>
+<pre>Syntax
+      qlmanage -r
+
+      qlmanage -m [<i>name</i> ...]
+
+      qlmanage -t [-d <i>debugLevel</i>] [-x] [-i] [-s <i>size</i>] [-f <i>factor</i>] [-c <i>contentTypeUTI</i> [-g <i>generator</i>]] [<i>file</i> ...]
+
+      qlmanage -p [-d <i>debugLevel</i>] [-x] [-c <i>contentTypeUTI</i> [-g <i>generator</i>]] [<i>file</i> ...]
+
+      qlmanage -h
+
+Key
+   
+   -r   Reset the Quick Look Server and all Quick Look client's generator cache.
+
+   -m   Get all sorts of information on Quick Look server including the list of detected generators.
+
+   -t   Display the Quick Look generated thumbnails (if available) for the specified files.
+        This will open the image in a separate window.
+
+   -p   Display the Quick Look generated previews for the specified file(s).
+        This will open the image in a separate window.
+
+   -h   Help.</pre>
+<p>qlmanage allows you to test your Quick Look generators and manage Quick Look Server.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Preview an image:</p>
+<p class="code">$ qlmanage -p catmeme.png</p>
+<p class="quote"><i>&ldquo;Sometimes not seeing things can be a blessing&rdquo; ~ August Strindberg</i></p>
+<h3>Related macOS commands</h3>
+<p><a href="https://gist.github.com/walesmd/7315613">Reset QuickLook generators</a> and disk cache to resolve issues with <span class="code">IconServicesAgent</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

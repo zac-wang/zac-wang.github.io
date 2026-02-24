@@ -1,0 +1,71 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>pbs Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>pbs</h1> 
+<p>General helper tool.</p>
+<pre>Syntax
+      pbs [-debug] [-dump] [-dump_cache] [-dump_pboard] [-dump_userdefs]
+         [-flush_pboard] [-flush_userdefs] [-flush] [-existing_languages] <i>language1 language2</i> ...
+
+Key
+   -debug
+      Output debugging information regarding what pbs is doing.
+
+   -dump_pboard
+      Print the private pasteboard containing the current Services information.
+      Use this to determine which apps are providing Services and where they are located on the filesystem.
+
+   -dump_userdefs
+      Print the userdef cache of Services information.
+      pbs caches Services information in its userdefs to avoid scanning the entire system every boot.
+      Changed apps are still detected via FSEvents, so there is no need to flush the userdef cache
+      when installing a new Service.
+
+   -dump
+      Equivalent to -dump_pboard and -dump_userdefs, printing.
+
+   -flush_pboard
+      Erase the private pasteboard containing Services information.
+      The next time the Services menu is shown, pbs will scan for changed Services and update the pasteboard.
+
+   -flush_userdefs
+      Erase the userdef cache.
+
+   -flush
+      Equivalent to -flush_pboard and -flush_userdefs, entirely resetting pbs.
+      The next time Services information is needed, pbs will do a complete rescan for apps vending Services,
+      and read their plist.	Note: this rescan may be very expensive!</pre>
+<p>pbs is an agent for the Services menu.  It scans for and vends available Services, to populate the Services menu.</p>
+<p>pbs is NOT related to the pasteboard.  The pasteboard is managed by the pboard agent.      pbs normally runs the first time Services are needed in any login session.  You may run it manually for debugging Services. </p>
+<p>If      run without any options, pbs will scan for changed Services, cache them along with their English localization on a private      pasteboard, and immediately update the Services menu in all running apps. It will also log about any invalid Services declarations in Info.plist. This is useful when developing or testing Services, because it immediately applies any changes.      </p>
+<p>ServicesMenu.strings files for a localization are loaded only when an app running under that localization shows the Services      menu.  </p>
+<p>You may pass pbs <a href="../locale.html">language</a> codes (e.g. &quot;<span class="code">fr</span>&quot;) to cause it to load that localization immediately.  Language codes are not case sensitive and will accept a dash '-' or underscore '_' interchangably where needed. You may also pass the      flag <span class="code">-existing_languages</span> to reload already loaded localizations.      pbs has additional options that are useful for debugging, in particular the <span class="code">-dump_pboard</span> option.</p>
+<p>pbs has historically had responsibilities that ranged from pasteboard management to Unicode glyph generation,      but now it only does Services.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Scan for and cache Services in English/American  language:<br>
+<span class="code">$ /System/Library/CoreServices/pbs &quot;en-US&quot;</span></p>
+<p>Scan for and cache Services in English/UK language:<br>
+<span class="code">$ /System/Library/CoreServices/pbs &quot;en-GB&quot;</span><br>
+<br>
+<i class="quote">"Philosophy is a battle against the bewitchment of our intelligence by means of our language&quot; ~ Ludwig Wittgenstein</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="dscacheutil.html">dscacheutil</a> - Query or flush the Directory Service/DNS cache</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>dscacheutil Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>dscacheutil</h1> 
+<p>Directory Service  cache - Gather information, statistics, initiate queries, flush the cache.<br>
+dscacheutil replaces most of the functionality of the<span class="code">lookupd</span> tool provided prior to OS X Leopard.</p>
+<pre>Syntax
+
+      dscacheutil -q <i>category</i> [-a <i>key value</i>]
+
+      dscacheutil -cachedump [-buckets] [-entries [category]]
+
+      dscacheutil -configuration
+
+      dscacheutil -flushcache
+
+      dscacheutil -statistics
+
+      dscacheutil -h
+
+Options
+
+     -h      List the options for calling dscacheutil
+
+     -q <i>category</i>
+             Initiate a query using standard calls.  These calls will either
+             return results from the cache or go fetch live data and place
+             them in the cache.  By default if no specific query is requested
+             via -a then all results within that category will be returned.
+
+     -a key <i>value</i>
+             Optional flag to -q for a specific key with a value.
+
+     -cachedump
+             Dump an overview of the cache by default.  Additional flags will
+             provide more detailed information.
+
+     -buckets
+             Use in conjunction with -cachedump to also print hash bucket
+             usage of the current cache.
+
+     -entries [<i>category</i>]
+             Use in conjunction with -cachedump to dump detailed information
+             about cache entries.  An optional category can be supplied to
+             only see types of interest.
+
+     -configuration
+             Print current configuration information, such as the search pol-
+             icy from Directory Service and cache parameters.
+
+     -flushcache
+             Flush the entire cache. This should only be used in extreme cases.
+             Validation information is used within the cache along with other 
+             techniques to ensure the OS has valid information
+             available to it.
+
+     -statistics
+             Print statistics from the cache including an overview and
+             detailed call statistics.  Some calls are not cached but are
+             derived from other calls internally.  Cache hits and cache misses
+             are not always be equal to external calls.  For example getad-
+             drinfo is actually a combination of gethostbyname with other
+             calls internally to the cache to maximize cache hit rate.
+
+     Available categories and associated keys:
+
+     <u>group</u>       name or gid
+
+     <u>host</u>        name or ip_address (used for both IPv6 and IPv4)
+
+     <u>mount</u>       name
+
+     <u>protocol</u>    name or number
+
+     <u>rpc</u>         name or number
+
+     <u>service</u>     name or port
+
+     <u>user</u>        name or uid
+</pre>
+<h3><a id="e"></a>Examples</h3>
+<p>Lookup a user:</p>
+<pre>$ dscacheutil -q user -a name jdoe
+      name: jdoe
+      password: ********
+      uid: 501
+      gid: 501
+      dir: /Users/jdoe
+      shell: /bin/csh
+      gecos: John Doe</pre>
+<p>Lookup all users:</p>
+<pre>$ dscacheutil -q user</pre>
+<p>Dump cache overview:</p>
+<pre>$ dscacheutil -cachedump</pre>
+<p>Dump cache details with user entries:</p>
+<pre>$ dscacheutil -cachedump -entries user
+</pre>
+<p>Flush the DNS cache,  the mDNSResponder will automatically restart.</p>
+<pre># macOS 10.7, 10.8, and 10.9, <a href="sw_vers.html">10.10.4</a> and above:
+$ sudo killall -HUP mDNSResponder
+
+# for older (pre 2009) versions of macOS:
+
+# macOS 10.5 and 10.6:
+$ sudo dscacheutil -flushcache
+
+# macOS 10.10.1, 10.10.2, and 10.10.3:
+sudo discoveryutil mdnsflushcache</pre>
+<p> Tip: You can use an <a href="alias.html">alias</a> to save  remembering long commands:<br>
+</p>
+<pre>
+$ alias flushdns='sudo killall -HUP mDNSResponder'</pre>
+<p>In normal operation, there should be no need to flush DNS entries, if your ISP provided DNS is unreliable, consider using Open DNS (     <span class="code">208.67.222.222</span> and <span class="code">208.67.220.220</span>) and/or Google DNS (<span class="code">8.8.8.8</span> and <span class="code">4.4.4.4</span>) as an alternative.</p>
+<p class="quote"><i>&ldquo;Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week in the woods. Wash your spirit clean&rdquo; ~ John Muir</i></p><h3>Related macOS commands</h3>
+<p class="space"><span class="code">/private/etc/hosts</span> - macOS Hosts file.<br>
+<a href="hostname.html">hostname</a> - Print or set system name.<br>
+dsmemberutil(1).<br>
+Windows equivalent: <span class="code"><a href="../nt/ipconfig.html">ipconfig </a>/ flushdns</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>afinfo Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>afinfo</h1> 
+<p>Audio File Info.</p>
+<pre>Syntax
+      afinfo [option...] <i>audio_file(s)</i>
+
+Options: (may appear before or after arguments)
+   -h
+   --help
+        Print help.
+
+   -b
+   --brief
+        Print a brief (one line) description of the audio file.
+
+   -r
+   --real
+        Get the estimated duration after obtaining the real packet count.
+
+   --leaks
+        Run leaks at the end of the conversion.
+
+   -i --info
+       print contents of the InfoDictionary.
+
+   -u --userprop } 4-cc<br>       Find and print a property or user data property (as hex string) [does not print to xml].
+<br>   -c --chunkdata } 4-cc<br>       Find and print a chunk (as hex string) [does not print to xml].
+
+   -x
+   --xml
+       Print output in xml format.
+
+   --warnings
+       Print warnings if any (by default warnings are not printed in non-xml output mode)</pre>
+<p>The macOS Finder Get Info window for an audio file displays: Genre, Author, Year Recorded, Sample Rate, Duration and Channels, where available.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Get file information for  jolene.mp3:<br>
+</p>
+<pre>$ afinfo jolene.mp3
+File:           jolene.mp3
+File type ID:   MPG3
+Num Tracks:     1
+----
+Data format:    2 ch,  44100 Hz, '.mp3' (0x00000000) 0 bits/channel, 0 bytes/packet, 1152 frames/packet, 0 bytes/frame
+                no channel layout.
+estimated duration: 219.742025 sec
+audio bytes: 8789681
+audio packets: 8412
+bit rate: 320000 bits per second
+packet size upper bound: 1052
+maximum packet size: 1045
+audio data file offset: 33
+optimized
+----</pre>
+<p>Pipe the output to grep or awk to return individual values:<br>
+<span class="code">$ afinfo jolene.mp3 |grep 'bit rate'<br>
+bit rate: 320000 bits per second<br>
+</span>
+<br>
+<i class="quote">&ldquo;You've achieved success in your field when you don't know whether what you're doing is work or play” ~ Warren Beatty</i></p>
+<h3>Related macOS commands</h3>
+<p><span class="space">Local man page: <a href="x-man-page://afinfo">afinfo </a>- Command line help page on your local machine.<br>
+<a href="afconvert.html">afconvert</a> - Audio File Convert.<br>
+<a href="afplay.html">afplay</a> - Audio File Play.</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

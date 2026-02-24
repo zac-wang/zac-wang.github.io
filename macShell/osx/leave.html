@@ -1,0 +1,43 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>leave Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>leave</h1> 
+<p>Remind you when you have to leave.</p>
+<pre>Syntax
+      leave [[+]<i>hhmm</i>]
+
+Key
+   <i>hhmm</i>    The time of day is in the form hhmm where hh is a time in hours (on a 12 or 24 hour clock),
+           and mm are minutes.  All times are converted to a 12 hour clock, and assumed to be in the next 12 hours.
+
+     +     If the time is preceded by '+', the alarm will go off in hours and minutes from the current time.</pre>
+<p>If no argument is given, leave prompts with &quot;When do you have to leave?&quot;.  A reply of newline causes leave to exit, otherwise the reply is assumed to be a time.  This form is suitable for inclusion in a .login or .profile. </p>
+<p>To get rid of leave you should either log off or use <span class="code"><a href="kill.html">kill</a> -s KILL</span> giving its process id.</p>
+<p>The leave utility waits until the specified time, then reminds you that you have to leave.  You are reminded 5 minutes and 1 minute      before the actual time, at the time, and every minute thereafter.  When you log off, leave exits just before it would have printed the      next message.</p>
+<h3><a id="e"></a>Examples</h3>
+<p># Set an alarm for 6:40pm <br>
+<span class="code">$ leave 1840 Alarm set for Fri Nov 20 18:40:00 CET 2020. (pid 3121)</span></p>
+<p class="quote">&ldquo;When you think of shooting somebody in the back cause your scared? Think about that.  They're running that way, away from YOU because they're scared and you shoot them because you're afraid for your life? <br>
+That is the most cowardly. Truly weak. And a coward with a gun is the most dangerous thing in the world&rdquo; ~ Toni Morrison</p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="calendar.html">calendar</a> - Reminder Service.<br>
+<a href="wait.html">wait</a> - Wait for a process to complete.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

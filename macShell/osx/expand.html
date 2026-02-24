@@ -1,0 +1,50 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>expand Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>expand / unexpand</h1> 
+<p>expand tabs to spaces, and vice versa. </p>
+<pre>Syntax
+      expand [-tabstop] [-tab1,tab2,...,tabn] <i>file</i> ...
+
+      unexpand [-a] <i>file</i> ...
+</pre>
+<p><span class="code">expand</span> processes the named files or the standard input writing the standard
+output with tabs changed into blanks.  Backspace characters are preserved
+into the output and decrement the column count for tab calculations.
+<span class="code">expand</span> is useful for pre-processing character files (before sorting,
+looking at specific columns, etc.) that contain tabs.<br>
+<br>
+If a single tabstop argument is given, then tabs are set tabstop spaces
+apart instead of the default 8.  If multiple tabstops are given then the<br>
+tabs are set at those specific columns.<br>
+<br>
+<span class="code">unexpand</span> puts tabs back into the data from the standard input or the
+named files and writes the result on the standard output.</p>
+<pre>Options:
+
+     -a    By default when unexpanding, only leading blanks and tabs are reconverted to 
+           maximal strings of tabs.  If the -a option is given, then tabs are inserted
+           whenever they would compress the resultant file by replacing two or more
+           characters.</pre>
+<p class="quote"><i>&ldquo;I would rather train someone and lose them, than not train them and keep them&rdquo; ~ Zig Ziglar</i></p>
+<h3>Related macOS commands</h3>
+<p><a href="tr.html">tr</a> - Translate, squeeze, and/or delete characters.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>mount Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>mount</h1> 
+<p>mount a file system<span class="body"><br>
+  All files accessible in a Unix system are arranged in one big tree, the file 
+  hierarchy, rooted at /. These files can be spread out over several devices. 
+  The mount command serves to attach the file system found on some device to the 
+  big file tree.</span><br>
+  The system maintains a list of currently mounted file systems. If no arguments 
+are given to mount, this list is printed. </p>
+<pre>Syntax
+      mount [-adfruvw] [-t <i>ufs</i> | <i>lfs</i> | <i>external_type</i>]
+
+      mount [-dfruvw] special | node
+
+      mount [-dfruvw] [-o <i>options</i>] [-t <i>ufs</i> | <i>lfs</i> | <i>external_type</i>] special node
+
+Options
+   <b>-a</b>  All the filesystems described in <b>fstab(5)</b> are mounted.  Excep-
+  tions are those marked as ``noauto'' or are excluded by the <b>-t</b>
+        flag (see below).
+     
+
+  <b>-d</b>  Causes everything to be done except for the actual system call.
+  This option is useful in conjunction with the <b>-v</b> flag to deter-
+  mine what the <b>mount</b> command is trying to do.
+
+  <b>-f</b>  Forces the revocation of write access when trying to downgrade a
+  filesystem mount status from read-write to read-only.
+
+  <b>-o</b>  Options are specified with a <b>-o</b> flag followed by a comma sepa-
+  rated string of options.  The following options are available:
+
+       async   All I/O to the file system should be done asynchronously.
+         This can be somewhat dangerous with respect to losing
+         data when faced with system crashes and power outages.
+         This is also the default.  It can be avoided with the
+         <i>noasync</i> option.
+
+       force   The same as <b>-f</b>; forces the revocation of write access
+         when trying to downgrade a filesystem mount status from
+         read-write to read-only.
+
+       noasync
+         This filesystem should not force all I/O to be written
+         asynchronously.
+
+       noauto  This filesystem should be skipped when mount is run with
+         the <b>-a</b> flag.
+
+       nodev   Do not interpret character or block special devices on
+         the file system.  This option is useful for a server that
+         has file systems containing special devices for architec-
+         tures other than its own.
+
+       noexec  Do not allow execution of any binaries on the mounted
+         file system.  This option is useful for a server that has
+         file systems containing binaries for architectures other
+         than its own.
+
+       nosuid  Do not allow set-user-identifier or set-group-identifier
+         bits to take effect.
+
+       rdonly  The same as <b>-r</b>; mount the file system read-only (even the
+         super-user can not write it).
+
+       sync    All I/O to the file system should be done synchronously.
+
+       update  The same as <b>-u</b>; indicate that the status of an already
+         mounted file system should be changed.
+
+       union   Causes the namespace at the mount point to appear as the
+         union of the mounted filesystem root and the existing
+         directory.   Lookups will be done in the mounted filesys-
+         tem first.   If those operations fail due to a non-exis-
+         tent file the underlying directory is then accessed.  All
+         creates are done in the mounted filesystem.
+
+       Any additional options specific to a filesystem type that is not
+       one of the internally known types (see the <b>-t</b> option) can be
+       passed as a comma separated list; these options are distinguished
+       by a leading ``-'' (dash).   Options that take a value are speci-
+       fied using the syntax -option=value.  For example, the mount com-
+       mand:
+       mount -t hfs -o nosuid,-w,-m=755 /dev/disk2s9 /tmp
+
+       causes <b>mount</b> to execute the equivalent of:
+
+       /sbin/mount_hfs -o nosuid -w -m 755 /dev/disk2s9 /tmp
+
+  <b>-r</b>  The file system is to be mounted read-only.  Mount the file sys-
+  tem read-only (even the super-user can not write it).  The same
+  as the ``rdonly'' argument to the <b>-o</b> option.
+
+  <b>-t</b> <i>ufs</i> | <i>lfs</i> | <i>external</i> <i>type</i>
+
+  The argument following the <b>-t</b> is used to indicate the file system
+  type.  The type <i>ufs</i> is the default.  The <i>-t</i> option can be used to
+  indicate that the actions should only be taken on filesystems of
+  the specified type.  More than one type can be specified in a
+  comma separated list.  The list of filesystem types can be pre-
+  fixed with ``no'' to specify the filesystem types for which
+  action should <i>not</i> be taken.  For example, the <b>mount</b> command:
+
+     mount -a -t nonfs,hfs
+
+  mounts all filesystems except those of type NFS and HFS.
+
+  If the type is not one of the internally known types, mount will
+  attempt to execute a program in <i>/sbin/mount</i><b>_</b><i>XXX</i> where <i>XXX</i> is
+  replaced by the type name.   For example, nfs filesystems are
+  mounted by the program <i>/sbin/mount</i><b>_</b><i>nfs</i>.
+
+  <b>-u</b>  The <b>-u</b> flag indicates that the status of an already mounted file
+  system should be changed.  Any of the options discussed above
+  (the <b>-o</b> option) can be changed; also a file system can be changed
+  from read-only to read-write or vice versa.  An attempt to change
+  from read-write to read-only will fail if any files on the
+  filesystem are currently open for writing unless the <b>-f</b> flag is
+  also specified.  The set of options is determined by first
+  extracting the options for the file system from the fstab table,
+  then applying any options specified by the <b>-o</b> argument, and
+  finally applying the <b>-r</b> or <b>-w</b> option.
+
+  <b>-v</b>  Verbose mode.
+
+  <b>-w</b>  The file system object is to be read and write.
+
+  The options specific to NFS filesystems are described in the
+  <b>mount_nfs(8)</b> manual page.</pre>
+<p>The mount command calls the mount(2) system call to prepare and graft a special device or the remote node (rhost:path) on to the file system tree at the point node. If either <span class="code">special</span> or <span class="code">node</span> are not 
+provided, the appropriate information is taken from the fstab(5) file.<b><br><br>
+</b><i class="quote">&ldquo;The Ten Commandments and the Sermon on the Mount contain my religion&rdquo; ~ John Adams</i></p>
+<h3>Related macOS commands</h3>
+<p><a href="bless.html">  <span class="space">bless</span></a><span class="space"> - Set volume bootability and startup disk options.<br>
+<a href="diskutil.html">diskutil</a> - Disk utilities - Format, Verify, Repair.<br>
+<a href="df.html">df</a> - Display free disk space.<br>
+<a href="hdiutil.html">hdiutil</a> - manipulate disk images.<br>
+<a href="sharing.html">sharing</a> - Create share points for afp, ftp and smb services.<br>
+<a href="umount.html">umount</a> - detach/unmount a device.</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

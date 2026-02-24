@@ -1,0 +1,63 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>ntfs.util Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>ntfs.util (/System/Library/Filesystems/ntfs.fs/ntfs.util)</h1> 
+<p>NTFS file system utility, supports the mounting, probing, and unmounting of
+NTFS file systems.</p>
+<pre>Syntax
+      ntfs.util -k <i>device</i>
+
+      ntfs.util -m <i>device mountpoint mountflag1 mountflag2 mountflag3 mountflag4
+</i>
+      ntfs.util -p <i>device mountflag1 mountflag2</i>
+
+      ntfs.util -u <i>device mountpoint</i>
+
+Key
+    -k   Get the UUID key for the NTFS file system at <i>device</i>.
+
+    -m   Mount the NTFS file system located on device onto
+         mountpoint with the flags mountflag1 mountflag2
+         mountflag3 mountflag4.
+
+    -p   Probe the device for an NTFS file system using the
+         flags mountflag1 mountflag2.  If the probe is successful
+         i.e. the device contains a valid NTFS file system,
+         its label is printed to the standard output stream.
+
+    -u   Unmount the NTFS file system located at device and
+         mounted on mountpoint.
+
+The mountflags referenced above are:
+    •   mountflag1: removable or fixed
+    •   mountflag2: readonly or writeable
+    •   mountflag3: suid or nosuid
+    •   mountflag4: dev or nodev</pre>
+<p>
+To get a list of the available attributes for use in constructing
+queries, see mdimport(1), particularly the -X switch.</p>
+<p class="quote"><i>&ldquo;He who loves practice without theory is like the sailor who boards ship without a rudder and compass and never knows where he may cast&rdquo; ~ Leonardo da Vinci</i></p>
+<h3>Related macOS commands</h3>
+<p>
+
+hfs.util - HFS/HFS+ file system utility (Mount/unmount).<br>
+ufs.util - UFS file system utility (Mount/unmount).</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

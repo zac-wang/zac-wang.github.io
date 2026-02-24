@@ -1,0 +1,60 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>su Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>su</h1> 
+<p>Substitute user identity.<br>
+  Switch to a different user/group ID. A shell is executed, and additional arguments 
+  may be passed to the shell.<br>
+If su is executed by root, no password is requested. </p>
+<pre>Syntax
+      su [-flm] [login] [-c shell arguments]
+
+Options
+     -c     Invoke the following command in a subshell as the specified user.
+
+     -f     If the invoked shell is csh(1), this option prevents it from
+            reading the `.cshrc' file.
+
+     -l     Simulate a full login.  The environment is discarded except for
+       HOME, SHELL, PATH, TERM, and USER.   HOME and SHELL are modified
+       as above.  USER is set to the target login.  PATH is set to
+       `/bin:/usr/bin'.   TERM is imported from your current environ-
+       ment.  The invoked shell is the target login's, and su will
+       change directory to the target login's home directory.  This
+       option is identical to just passing "-", as in "su -".
+
+     -m     Leave the environment unmodified.  The invoked shell is your
+       login shell, and no directory changes are made.  As a security
+       precaution, if the target user's shell is a non-standard shell
+       (as defined by getusershell(3)) and the caller's real uid is non-
+       zero, su will fail.</pre>
+<p>The -l and -m options are mutually exclusive; the last one specified overrides 
+  any previous ones. </p>
+<p>Only users in group ``wheel'' (normally gid 0) or group ``admin'' 
+  (nor- mally gid 20) can su to ``root''. <br>
+  under macOS 10.2, nobody is a member of "wheel" so this is effectively forbidden. 
+  Use <a href="sudo.html">sudo</a> instead. </p>
+<p>By default (unless the prompt is reset by a startup file) the super-user prompt is set to ``#'' to remind one of its awesome power.</p>
+<p>su uses the environment variables: HOME, PATH, TERM and USER.</p>
+<p class="quote"><i>&ldquo;It was just like Romeo and Juliet, only it ended in tragedy&rdquo; ~ Milhouse (The Simpsons) </i></p>
+<h3>Related macOS commands</h3>
+<p> suspend - Stop the shell in its tracks, much as if it had been sent a stop signal with ^Z</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

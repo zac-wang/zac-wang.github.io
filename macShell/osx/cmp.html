@@ -1,0 +1,71 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>cmp Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>cmp</h1> 
+<p>Compare two files.<br>
+  The cmp utility compares two files of any type and writes the results to the 
+  standard output. By default, cmp is silent if the files are the same; if they 
+  differ, the byte and line number at which the first difference occurred is reported.</p>
+<pre>Syntax
+      cmp [<i>option</i>..] <i>file1 </i>[<i>file2 </i>[<i>skip1 </i>[<i>skip2</i>]]]
+
+Options
+   -b  --print-bytes
+              Print differing bytes.
+
+   -i <i>SKIP</i>  --ignore-initial=<i>SKIP</i>
+              Skip the first <i>SKIP</i> bytes of input.
+
+   -i <i>SKIP1</i>:<i>SKIP2</i>  --ignore-initial=<i>SKIP1</i>:<i>SKIP2</i>
+              Skip the first SKIP1 bytes of FILE1 and the first SKIP2 bytes of
+              FILE2.
+
+   -l  --verbose
+              Output byte numbers and values of all differing bytes.
+
+   -n <i>LIMIT</i>  --bytes=<i>LIMIT</i>
+              Compare at most <i>LIMIT</i> bytes.
+
+   -s  --quiet  --silent
+              Output nothing; yield exit status only.
+
+   -v  --version
+              Output version info.
+
+   --help Output help.</pre>
+<p><i>skip1</i> and <i>skip2</i> are the number of bytes to skip in each file. SKIP
+values can be followed by the following multiplicative suffixes: kB
+1000, K 1024, MB 1,000,000, M 1,048,576, GB 1,000,000,000, G
+1,073,741,824, and so on for T, P, E, Z, Y.<br>
+The offset 
+  is decimal by default, but can be expressed as a hex or octal value by preceding 
+  it with a leading `0x' or `0'.</p>
+<p><span class="code">info diff </span>will return full examples for both <span class="code">diff</span> and <span class="code">cmp</span> </p>
+<p>If a <i>File</i> is<span class="code"> - </span>or missing, read from standard input.</p>
+<p>cmp exits with one of the following values:</p>
+<p>0 The files are identical.<br>
+  1 The files are different; this includes the case where one file is identical to the first part of the other. In the latter case, if the -s option has not 
+  been specified, cmp writes to standard output that EOF was reached in the shorter file (before any differences were found).<br>
+  >1 An error occurred. </p>
+<p class="quote"><i>&ldquo;First rate people hire other first rate people. Second rate people hire third rate people. Third rate people hire fifth rate people&quot; - Andr&eacute; Weil</i></p>
+<h3>Related macOS commands</h3>
+<p><a href="diff.html">diff</a> - Display the differences between two files.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

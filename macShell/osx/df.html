@@ -1,0 +1,86 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>df Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>df</h1> 
+<p>Display free disk space.<br>
+  With no arguments, `df' reports the space used and available on all currently 
+  mounted filesystems (of all types). Otherwise, `df' reports on the filesystem 
+containing each argument <i>file</i>. </p>
+<pre>Syntax
+      df [-b | -h | -H | -k | -m | -P] [-ailn] [-t <i>type</i>]
+           [<i>file</i> | <i>filesystem</i> ...]
+
+Options
+     -a    Show all mount points, including those that were mounted with the
+           MNT_IGNORE flag.
+
+     -b    Use 512-byte blocks rather than the default.  Note that this
+           overrides the BLOCKSIZE specification from the environment.
+
+     -g    Use 1073741824-byte (1-Gbyte) blocks rather than the default.
+           Note that this overrides the BLOCKSIZE specification from the
+           environment.
+
+     -H    "Human-readable" output.  Use unit suffixes: Byte, Kilobyte,
+           Megabyte, Gigabyte, Terabyte and Petabyte in order to reduce the
+           number of digits to three or less using base 10 for sizes.
+
+     -h    "Human-readable" output.  Use unit suffixes: Byte, Kilobyte,
+           Megabyte, Gigabyte, Terabyte and Petabyte in order to reduce the
+           number of digits to three or less using base 2 for sizes.
+
+     -i    Include statistics on the number of free inodes.
+
+     -k    Use 1024-byte (1-Kbyte) blocks rather than the default.  Note
+           that this overrides the BLOCKSIZE specification from the environment.
+
+     -l    Only display information about locally-mounted filesystems.
+
+     -m    Use 1048576-byte (1-Mbyte) blocks rather than the default.   Note
+           that this overrides the BLOCKSIZE specification from the environment.
+
+     -n    Print out the previously obtained statistics from the filesystems.
+           This option should be used if it is possible that one or
+           more filesystems are in a state such that they will not be able
+           to provide statistics without a long delay.  When this option is
+           specified, df will not request new statistics from the filesystems,
+           but will respond with the possibly stale statistics that
+           were previously obtained.
+
+     -P    Use POSIX compliant output of 512-byte blocks rather than the
+           default.  Note that this overrides the BLOCKSIZE specification
+           from the environment.
+
+     -t    Only print out statistics for filesystems of the specified types.
+           More than one type can be specified in a comma separated list.
+           The list of filesystem types can be prefixed with `no' to specify
+           the filesystem types for which action should not be taken.
+           For example, the df command:
+
+           df -t nonfs,mfs
+
+           lists all filesystems except those of type NFS and MFS.  The
+           lsvfs(1) command can be used to find out the types of filesystems
+           that are available on the system.</pre>
+<p class="quote"><i>&ldquo;A prediction is worth twenty explanations&rdquo; - K. Brecher</i></p>
+<h3>Related macOS commands</h3>
+<p><a href="quota.html">quota</a> - Display disk usage and limits.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

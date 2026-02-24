@@ -1,0 +1,43 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>scselect System Configuration Select Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>scselect</h1> 
+<p>Switch between network &quot;locations&quot; created in the Network preference pane.</p>
+<pre>Syntax
+      scselect [-n] [<i>new-location-name</i>]
+         
+Key
+   -n  Delay changing the system's "location" until the next system boot (or
+       the next time that the system configuration preferences are changed).
+
+   <i>new-location-name</i>
+       If not specified, a list of the available "location" names and associated
+       identifiers will be reported on standard output.  If specified, this argument
+       is matched with the "location" names and identifiers and the matching set is activated.</pre>
+<p>scselect provides access to the system configuration sets, commonly referred to as &quot;locations&quot;.  When invoked with no arguments, scselect displays the names and associated identifiers for each defined &quot;location&quot; and indicates which is currently active.  </p>
+<p>scselect also allows the user to select or change the active &quot;location&quot; by specifying its name or identifier.  Changing the &quot;location&quot; causes an immediate system re-configuration, unless the -n option is supplied. </p>
+<p>At present, the majority of preferences associated with a &quot;location&quot; relate to the system's network configuration.</p>
+<p><i><span class="quote">&ldquo;Everything you read in newspapers is absolutely true, except for that rare story of which you happen to have first-hand knowledge&rdquo; ~ Erwin Knoll </span></i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="ifconfig.html">ifconfig</a> - Configure network interface parameters.<br>
+netstat   - Show network status.<br>
+<a href="ping.html">ping</a> - Test a network connection.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

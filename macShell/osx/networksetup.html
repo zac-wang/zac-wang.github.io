@@ -1,0 +1,994 @@
+<!-- Creator     : groff version 1.22 -->
+<!-- CreationDate: Thu Aug 10 18:51:19 2023 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p>NETWORKSETUP(8) BSD System Manager&rsquo;s Manual
+NETWORKSETUP(8)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:6%;"><b>networksetup</b> &mdash;
+configuration tool for network settings in System
+Preferences.</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:23%;"><b>networksetup</b>
+[<b>&minus;listnetworkserviceorder</b>]
+[<b>&minus;listallnetworkservices</b>]
+[<b>&minus;listallhardwareports</b>]
+[<b>&minus;detectnewhardware</b>]
+[<b>&minus;getmacaddress&nbsp;</b><i>hardwareport</i>]
+[<b>&minus;getcomputername</b>]
+[<b>&minus;setcomputername&nbsp;</b><i>computername</i>]
+[<b>&minus;getinfo&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setmanual&nbsp;</b><i>networkservice&nbsp;ip&nbsp;subnet&nbsp;router</i>]
+[<b>&minus;setdhcp&nbsp;</b><i>networkservice&nbsp;[clientid]</i>]
+[<b>&minus;setbootp&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setmanualwithdhcprouter&nbsp;</b><i>networkservice&nbsp;ip</i>]
+[<b>&minus;getadditionalroutes&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setadditionalroutes&nbsp;</b><i>networkservice&nbsp;</i>[<i>dest1&nbsp;mask1&nbsp;gate1</i>]&nbsp;[<i>dest2&nbsp;mask2&nbsp;gate2</i>]&nbsp;<i>...&nbsp;[destN&nbsp;maskN&nbsp;gateN</i>]]
+[<b>&minus;setv4off&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setv6off&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setv6automatic&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setv6linklocal&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setv6manual&nbsp;</b><i>networkservice&nbsp;address&nbsp;prefixLength&nbsp;router</i>]
+[<b>&minus;getv6additionalroutes&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setv6additionalroutes&nbsp;</b><i>networkservice&nbsp;</i>[<i>dest1&nbsp;prefixlength1&nbsp;gate1</i>]&nbsp;[<i>dest2&nbsp;prefixlength2&nbsp;gate2</i>]&nbsp;<i>...&nbsp;[destN&nbsp;prefixlengthN&nbsp;gateN</i>]]
+[<b>&minus;getdnsservers&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setdnsservers&nbsp;</b><i>networkservice&nbsp;dns1&nbsp;[dns2]&nbsp;[...]</i>]
+[<b>&minus;getsearchdomains&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setsearchdomains&nbsp;</b><i>networkservice&nbsp;domain1&nbsp;[domain2]&nbsp;[...]</i>]
+[<b>&minus;create6to4service&nbsp;</b><i>networkservicename</i>]
+[<b>&minus;set6to4automatic&nbsp;</b><i>networkservice</i>]
+[<b>&minus;set6to4manual&nbsp;</b><i>networkservice&nbsp;relayAddress</i>]
+[<b>&minus;getftpproxy&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setftpproxy&nbsp;</b><i>networkservice&nbsp;domain&nbsp;portnumber&nbsp;authenticated&nbsp;username&nbsp;password</i>]
+[<b>&minus;setftpproxystate&nbsp;</b><i>networkservice&nbsp;on&nbsp;</i>|&nbsp;<i>off</i>]
+[<b>&minus;getwebproxy&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setwebproxy&nbsp;</b><i>networkservice&nbsp;domain&nbsp;portnumber&nbsp;authenticated&nbsp;username&nbsp;password</i>]
+[<b>&minus;setwebproxystate&nbsp;</b><i>networkservice&nbsp;on&nbsp;</i>|&nbsp;<i>off</i>]
+[<b>&minus;getsecurewebproxy&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setsecurewebproxy&nbsp;</b><i>networkservice&nbsp;domain&nbsp;portnumber&nbsp;authenticated&nbsp;username&nbsp;password</i>]
+[<b>&minus;setsecurewebproxystate&nbsp;</b><i>networkservice&nbsp;on&nbsp;</i>|&nbsp;<i>off</i>]
+[<b>&minus;getstreamingproxy&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setstreamingproxy&nbsp;</b><i>networkservice&nbsp;domain&nbsp;portnumber&nbsp;authenticated&nbsp;username&nbsp;password</i>]
+[<b>&minus;setstreamingproxystate&nbsp;</b><i>networkservice&nbsp;on&nbsp;</i>|&nbsp;<i>off</i>]
+[<b>&minus;getgopherproxy&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setgopherproxy&nbsp;</b><i>networkservice&nbsp;domain&nbsp;portnumber&nbsp;authenticated&nbsp;username&nbsp;password</i>]
+[<b>&minus;setgopherproxystate&nbsp;</b><i>networkservice&nbsp;on&nbsp;</i>|&nbsp;<i>off</i>]
+[<b>&minus;getsocksfirewallproxy&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setsocksfirewallproxy&nbsp;</b><i>networkservice&nbsp;domain&nbsp;portnumber&nbsp;authenticated&nbsp;username&nbsp;password</i>]
+[<b>&minus;setsocksfirewallproxystate&nbsp;</b><i>networkservice&nbsp;on&nbsp;</i>|&nbsp;<i>off</i>]
+[<b>&minus;getproxybypassdomains&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setproxybypassdomains&nbsp;</b><i>networkservice&nbsp;domain1&nbsp;[domain2]&nbsp;[...]</i>]
+[<b>&minus;getproxyautodiscovery&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setproxyautodiscovery&nbsp;</b><i>networkservice&nbsp;on&nbsp;</i>|&nbsp;<i>off</i>]
+[<b>&minus;getpassiveftp&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setpassiveftp&nbsp;</b><i>networkservice&nbsp;on&nbsp;</i>|&nbsp;<i>off</i>]
+[<b>&minus;getairportnetwork&nbsp;</b><i>device</i>]
+[<b>&minus;setairportnetwork&nbsp;</b><i>device&nbsp;network&nbsp;[password]</i>]
+[<b>&minus;getairportpower&nbsp;</b><i>device</i>]
+[<b>&minus;setairportpower&nbsp;</b><i>device&nbsp;on&nbsp;</i>|&nbsp;<i>off</i>]
+[<b>&minus;listpreferredwirelessnetworks&nbsp;</b><i>hardwareport</i>]
+[<b>&minus;addpreferredwirelessnetworkatindex&nbsp;</b><i>hardwareport&nbsp;network&nbsp;index&nbsp;securitytype&nbsp;[password]</i>]
+[<b>&minus;removepreferredwirelessnetwork&nbsp;</b><i>hardwareport&nbsp;network</i>]
+[<b>&minus;removeallpreferredwirelessnetworks&nbsp;</b><i>hardwareport</i>]
+[<b>&minus;getnetworkserviceenabled&nbsp;</b><i>networkservice</i>]
+[<b>&minus;setnetworkserviceenabled&nbsp;</b><i>networkservice&nbsp;on&nbsp;</i>|&nbsp;<i>off</i>]
+[<b>&minus;createnetworkservice&nbsp;</b><i>networkservicename&nbsp;hardwareport</i>]
+[<b>&minus;renamenetworkservice&nbsp;</b><i>networkservice&nbsp;newnetworkservicename</i>]
+[<b>&minus;duplicatenetworkservice&nbsp;</b><i>networkservice&nbsp;newnetworkservicename</i>]
+[<b>&minus;removenetworkservice&nbsp;</b><i>networkservice</i>]
+[<b>&minus;ordernetworkservices&nbsp;</b><i>service1&nbsp;[service2]&nbsp;[service3]&nbsp;[...]</i>]
+[<b>&minus;getMTU&nbsp;</b><i>hardwareport</i>]
+[<b>&minus;setMTU&nbsp;</b><i>hardwarePort&nbsp;value</i>]
+[<b>&minus;listvalidMTUrange&nbsp;</b><i>hardwareport</i>]
+[<b>&minus;getmedia&nbsp;</b><i>hardwareport</i>]
+[<b>&minus;setmedia&nbsp;</b><i>hardwareport&nbsp;subtype&nbsp;[option1]&nbsp;[option2]&nbsp;[...]</i>]
+[<b>&minus;listvalidmedia&nbsp;</b><i>hardwareport</i>]
+[<b>&minus;createVLAN&nbsp;</b><i>name&nbsp;parentdevice&nbsp;tag</i>]
+[<b>&minus;deleteVLAN&nbsp;</b><i>name&nbsp;parentdevice&nbsp;tag</i>]
+[<b>&minus;listVLANs</b>]
+[<b>&minus;listdevicesthatsupportVLAN</b>]
+[<b>&minus;isBondSupported&nbsp;</b><i>device</i>]
+[<b>&minus;createBond&nbsp;</b><i>name&nbsp;[device1]&nbsp;[device2]&nbsp;[...]</i>]
+[<b>&minus;deleteBond&nbsp;</b><i>bond</i>]
+[<b>&minus;addDeviceToBond&nbsp;</b><i>device&nbsp;bond</i>]
+[<b>&minus;removeDeviceFromBond&nbsp;</b><i>device&nbsp;bond</i>]
+[<b>&minus;listBonds</b>]
+[<b>&minus;showBondStatus&nbsp;</b><i>bond</i>]
+[<b>&minus;listpppoeservices</b>]
+[<b>&minus;showpppoestatus&nbsp;</b><i>name</i>]
+[<b>&minus;createpppoeservice&nbsp;</b><i>device&nbsp;name&nbsp;account&nbsp;password&nbsp;[pppoeName]</i>]
+[<b>&minus;deletepppoeservice&nbsp;</b><i>service</i>]
+[<b>&minus;setpppoeaccountname&nbsp;</b><i>service&nbsp;account</i>]
+[<b>&minus;setpppoepassword&nbsp;</b><i>service&nbsp;password</i>]
+[<b>&minus;connectpppoeservice&nbsp;</b><i>service</i>]
+[<b>&minus;disconnectpppoeservice&nbsp;</b><i>service</i>]
+[<b>&minus;listlocations</b>]
+[<b>&minus;getcurrentlocation</b>]
+[<b>&minus;createlocation&nbsp;</b><i>location&nbsp;[populate]</i>]
+[<b>&minus;deletelocation&nbsp;</b><i>location</i>]
+[<b>&minus;switchtolocation&nbsp;</b><i>location</i>]
+[<b>&minus;version</b>] [<b>&minus;help</b>]
+[<b>&minus;printcommands</b>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:6%;">The <b>networksetup</b> command
+is used to configure network settings typically configured
+in the System Preferences application. The
+<b>networksetup</b> command requires at least admin
+privileges to change network settings. If the &quot;Require
+an administrator password to access system-wide
+preferences&quot; option is selected in System Preferences
+&gt; Security &amp; Privacy, then root privileges are
+required to change network settings.</p>
+
+<p style="margin-left:6%; margin-top: 1em">Any flag that
+takes a password will accept &quot;-&quot; in place of the
+password to indicate it should read the password from
+stdin.</p>
+
+<p style="margin-left:6%; margin-top: 1em">A list of flags
+and their descriptions:</p>
+
+
+<p style="margin-top: 1em"><b>&minus;listnetworkserviceorder</b></p>
+
+<p style="margin-left:17%;">Displays a list of network
+services in the order they are contacted for a connection,
+along with the corresponding port and device for each. An
+asterisk (*) next to a service means the service is
+inactive.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;listallnetworkservices</b></p>
+
+<p style="margin-left:17%;">Displays a list of all the
+network services on the server&rsquo;s hardware ports. An
+asterisk (*) denotes that a network service is disabled.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;listallhardwareports</b></p>
+
+<p style="margin-left:17%;">Displays list of hardware ports
+with corresponding device name and ethernet address.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;detectnewhardware</b></p>
+
+<p style="margin-left:17%;">Detects new network hardware
+and creates a default network service on the hardware.</p>
+
+<p style="margin-top: 1em"><b>&minus;getmacaddress</b>
+<i>hardwareport</i></p>
+
+<p style="margin-left:17%;">Displays ethernet (or Wi-Fi)
+address for hardwareport or device specified.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;getcomputername</b></p>
+
+<p style="margin-left:17%;">Displays the computer name.</p>
+
+<p style="margin-top: 1em"><b>&minus;setcomputername</b>
+<i>computername</i></p>
+
+<p style="margin-left:17%;">Sets computer name to
+&lt;computername&gt;. This name is used by AFP.</p>
+
+<p style="margin-top: 1em"><b>&minus;getinfo</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays the IP address, subnet
+mask, router, and hardware address for the
+&lt;networkservice&gt; that you specify.</p>
+
+<p style="margin-top: 1em"><b>&minus;setmanual</b>
+<i>networkservice ip subnet router</i></p>
+
+<p style="margin-left:17%;">Set the TCP/IP configuration
+for &lt;networkservice&gt; to manual with IP address set to
+&lt;ip&gt;, Subnet Mask set to &lt;subnet&gt;, and Router
+address set to &lt;router&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setdhcp</b>
+<i>networkservice [clientid]</i></p>
+
+<p style="margin-left:17%;">Use this command to set the
+TCP/IP configuration for the specified
+&lt;networkservice&gt; to use DHCP. The client ID is
+optional. Specify &quot;Empty&quot; for [clientid] to clear
+the DHCP client id.</p>
+
+<p style="margin-top: 1em"><b>&minus;setbootp</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Use this command to set the
+TCP/IP configuration for the specified
+&lt;networkservice&gt; to use BOOTP.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setmanualwithdhcprouter</b>
+<i>networkservice ip</i></p>
+
+<p style="margin-left:17%;">Use this command to specify a
+manual IP address to use for DHCP for the specified
+&lt;networkservice&gt;.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;getadditionalroutes</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Use this command to display the
+list of additional IPv4 routes configured for the
+service.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setadditionalroutes</b>
+<i>networkservice</i> [<i>dest1 mask1 gate1</i>] [<i>dest2
+mask2 gate2</i>] <i>... [destN maskN gateN</i>]</p>
+
+<p style="margin-left:17%;">Use this command to set the
+list of IPv4 additional routes configured for the service.
+Each route is specified as a (destination address, subnet
+mask, gateway address) tuple. Specifying no tuples clears
+the list of routes.</p>
+
+<p style="margin-top: 1em"><b>&minus;setv4off</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Use this command to turn IPv4
+off on the specified &lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setv6off</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Use this command to turn IPv6
+off on the specified &lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setv6automatic</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Use this command to set IPv6 to
+get its addresses automatically for
+&lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setv6linklocal</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Use this command to set IPv6 to
+only use link local for &lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setv6manual</b> <i>ip
+prefixlength router</i></p>
+
+<p style="margin-left:17%;">Use this command to set IPv6 to
+get its addresses manually for &lt;networkservice&gt;.
+Specify the ip address, the prefix length and the
+router.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;getv6additionalroutes</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Use this command to display the
+list of additional IPv6 routes configured for the
+service.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setv6additionalroutes</b>
+<i>networkservice</i> [<i>dest1 prefixlength1 gate1</i>]
+[<i>dest2 prefixlength2 gate2</i>] <i>... [destN
+prefixlengthN gateN</i>]</p>
+
+<p style="margin-left:17%;">Use this command to set the
+list of additional routes configured for the service. Each
+route is specified as a <br>
+(destination address, prefix length, gateway address) tuple.
+Specifying no tuples clears the list of routes.</p>
+
+<p style="margin-top: 1em"><b>&minus;getdnsservers</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays DNS info for
+&lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setdnsservers</b>
+<i>networkservice dns1 [dns2] [...]</i></p>
+
+<p style="margin-left:17%;">Use this command to specify the
+IP addresses of servers you want the specified
+&lt;networkservice&gt; to use to resolve domain names. You
+can list any number of servers (replace dns1, dns2, and so
+on with the IP addresses of domain name servers). If you
+want to clear all DNS entries for the specified network
+service, type &quot;empty&quot; in place of the DNS server
+names.</p>
+
+<p style="margin-top: 1em"><b>&minus;getsearchdomains</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays Domain Name info for
+&lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setsearchdomains</b>
+<i>networkservice domain1 [domain2] [...]</i></p>
+
+<p style="margin-left:17%;">Use this command to designate
+the search domain for the specified &lt;networkservice&gt;.
+You can list any number of search domains (replace domain1,
+domain2, and so on with the name of a local domain). If you
+want to clear all search domain entries for the specified
+network service, type &ldquo;empty&rdquo; in place of the
+domain name.</p>
+
+<p style="margin-top: 1em"><b>&minus;create6to4service
+&minus;&lt;newnetworkservicename&gt;</b></p>
+
+<p style="margin-left:17%;">Use this command to create a
+new 6 to 4 service with name
+&lt;newnetworkservicename&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;set6to4automatic
+&minus;&lt;newnetworkservicename&gt;</b></p>
+
+<p style="margin-left:17%;">Use this command to set the 6
+to 4 service such that it will get the relay address
+automatically.</p>
+
+<p style="margin-top: 1em"><b>&minus;set6to4manual
+&minus;&lt;newnetworkservicename&gt;
+&minus;&lt;relayaddress&gt;</b></p>
+
+<p style="margin-left:17%;">Use this command to set the 6
+to 4 service such that it will get the relay address
+manually. Specify the &lt;relayaddress&gt; that you would
+like to set.</p>
+
+<p style="margin-top: 1em"><b>&minus;getftpproxy</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays FTP proxy (server,
+port, enabled value) info for &lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setftpproxy</b>
+<i>networkservice domain portnumber authenticated username
+password</i></p>
+
+<p style="margin-left:17%;">Set FTP proxy for
+&lt;networkservice&gt; with &lt;domain&gt; and &lt;port
+number&gt;. Turns proxy on. Optionally, specify &lt;on&gt;
+or &lt;off&gt; for &lt;authenticated&gt; to enable and
+disable authenticated proxy support. Specify
+&lt;username&gt; and &lt;password&gt; if you turn
+authenticated proxy support on.</p>
+
+<p style="margin-top: 1em"><b>&minus;setftpproxystate</b>
+<i>networkservice on</i> | <i>off</i></p>
+
+<p style="margin-left:17%;">Set FTP proxy on
+&lt;networkservice&gt; to either &lt;on&gt; or
+&lt;off&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;getwebproxy</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays Web proxy (server,
+port, enabled value) info for &lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setwebproxy</b>
+<i>networkservice domain portnumber authenticated username
+password</i></p>
+
+<p style="margin-left:17%;">Set Web proxy for
+&lt;networkservice&gt; with &lt;domain&gt; and &lt;port
+number&gt;. Turns proxy on. Optionally, specify &lt;on&gt;
+or &lt;off&gt; for &lt;authenticated&gt; to enable and
+disable authenticated proxy support. Specify
+&lt;username&gt; and &lt;password&gt; if you turn
+authenticated proxy support on.</p>
+
+<p style="margin-top: 1em"><b>&minus;setwebproxystate</b>
+<i>networkservice on</i> | <i>off</i></p>
+
+<p style="margin-left:17%;">Set Web proxy on
+&lt;networkservice&gt; to either &lt;on&gt; or
+&lt;off&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;getsecurewebproxy</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays Secure Web proxy
+(server, port, enabled value) info for
+&lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setsecurewebproxy</b>
+<i>networkservice domain portnumber authenticated username
+password</i></p>
+
+<p style="margin-left:17%;">Set Secure Web proxy for
+&lt;networkservice&gt; with &lt;domain&gt; and &lt;port
+number&gt;. Turns proxy on. Optionally, specify &lt;on&gt;
+or &lt;off&gt; for &lt;authenticated&gt; to enable and
+disable authenticated proxy support. Specify
+&lt;username&gt; and &lt;password&gt; if you turn
+authenticated proxy support on.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setsecurewebproxystate</b>
+<i>networkservice on</i> | <i>off</i></p>
+
+<p style="margin-left:17%;">Set SecureWeb proxy on
+&lt;networkservice&gt; to either &lt;on&gt; or
+&lt;off&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;getstreamingproxy</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays Streaming proxy
+(server, port, enabled value) info for
+&lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setstreamingproxy</b>
+<i>networkservice domain portnumber authenticated username
+password</i></p>
+
+<p style="margin-left:17%;">Set Streaming proxy for
+&lt;networkservice&gt; with &lt;networkservice&gt;. Turns
+proxy on. Optionally, specify &lt;on&gt; or &lt;off&gt; for
+&lt;authenticated&gt; to enable and disable authenticated
+proxy support. Specify &lt;username&gt; and &lt;password&gt;
+if you turn authenticated proxy support on.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setstreamingproxystate</b>
+<i>networkservice on</i> | <i>off</i></p>
+
+<p style="margin-left:17%;">Set Streamingproxy on
+&lt;networkservice&gt; to either &lt;on&gt; or
+&lt;off&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;getgopherproxy</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays Gopher proxy (server,
+port, enabled value) info for &lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setgopherproxy</b>
+<i>networkservice domain portnumber authenticated username
+password</i></p>
+
+<p style="margin-left:17%;">Set Gopher proxy for
+&lt;networkservice&gt; with &lt;domain&gt; and &lt;port
+number&gt;. Turns proxy on. Optionally, specify &lt;on&gt;
+or &lt;off&gt; for &lt;authenticated&gt; to enable and
+disable authenticated proxy support. Specify
+&lt;username&gt; and &lt;password&gt; if you turn
+authenticated proxy support on.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setgopherproxystate</b>
+<i>networkservice on</i> | <i>off</i></p>
+
+<p style="margin-left:17%;">Set Gopher proxy on
+&lt;networkservice&gt; to either &lt;on&gt; or
+&lt;off&gt;.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;getsocksfirewallproxy</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays SOCKS Firewall proxy
+(server, port, enabled value) info for
+&lt;networkservice&gt;.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setsocksfirewallproxy</b>
+<i>networkservice domain portnumber authenticated username
+password</i></p>
+
+<p style="margin-left:17%;">Set SOCKS Firewall proxy for
+&lt;networkservice&gt; with &lt;domain&gt; and &lt;port
+number&gt;. Turns proxy on. Optionally, specify &lt;on&gt;
+or &lt;off&gt; for &lt;authenticated&gt; to enable and
+disable authenticated proxy support. Specify
+&lt;username&gt; and &lt;password&gt; if you turn
+authenticated proxy support on.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setsocksfirewallproxystate</b>
+<i>networkservice on</i> | <i>off</i></p>
+
+<p style="margin-left:17%;">Set SOCKS Firewall proxy to
+either &lt;on&gt; or &lt;off&gt;.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;getproxybypassdomains</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays Bypass Domain Names
+for &lt;networkservice&gt;.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setproxybypassdomains</b>
+<i>networkservice domain1 [domain2] [...]</i></p>
+
+<p style="margin-left:17%;">Set the Bypass Domain Name
+Servers for &lt;networkservice&gt; to &lt;domain1&gt;
+[domain2] [...]. Any number of Domain Name servers can be
+specified. Specify &quot;Empty&quot; for &lt;domain1&gt; to
+clear all Domain Name entries.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;getproxyautodiscovery</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays Proxy Auto Discover
+for &lt;networkservice&gt;.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setproxyautodiscovery</b>
+<i>networkservice on</i> | <i>off</i></p>
+
+<p style="margin-left:17%;">Set Proxy Auto Discover for
+&lt;networkservice&gt; to either &lt;on&gt; or
+&lt;off&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;getpassiveftp</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays whether Passive FTP is
+on or off for &lt;networkservice&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setpassiveftp</b>
+<i>networkservice on</i> | <i>off</i></p>
+
+<p style="margin-left:17%;">Set Passive FTP to either
+&lt;on&gt; or &lt;off&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;setautoproxyurl</b>
+<i>networkservice url</i></p>
+
+<p style="margin-left:17%;">Set proxy auto-config to url
+for &lt;networkservice&gt; and enable it.</p>
+
+<p style="margin-top: 1em"><b>&minus;getautoproxyurl</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays proxy auto-config
+(url, enabled) info for &lt;networkservice&gt;.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setsocksfirewallproxystate</b>
+<i>networkservice on</i> | <i>off</i></p>
+
+<p style="margin-left:17%;">Set SOCKS Firewall proxy to
+either &lt;on&gt; or &lt;off&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;getairportnetwork</b>
+<i>hardwareport</i></p>
+
+<p style="margin-left:17%;">Displays current Wi-Fi
+Network.</p>
+
+<p style="margin-top: 1em"><b>&minus;setairportnetwork</b>
+<i>hardwareport network [password]</i></p>
+
+<p style="margin-left:17%;">Set Wi-Fi Network to
+&lt;network&gt; using optional [password] if specified.</p>
+
+<p style="margin-top: 1em"><b>&minus;getairportpower</b>
+<i>hardwareport</i></p>
+
+<p style="margin-left:17%;">Displays whether Wi-Fi power is
+on or off.</p>
+
+<p style="margin-top: 1em"><b>&minus;setairportpower</b>
+<i>hardwareport on</i> | <i>off</i></p>
+
+<p style="margin-left:17%;">Set Wi-Fi power to either
+&lt;on&gt; or &lt;off&gt;.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;listpreferredwirelessnetworks</b>
+<i>hardwareport</i></p>
+
+<p style="margin-left:17%;">List the preferred wireless
+networks for &lt;hardwareport&gt;</p>
+
+
+<p style="margin-top: 1em"><b>&minus;addpreferredwirelessnetworkatindex</b>
+<i>hardwareport network index securitytype
+[password]</i></p>
+
+<p style="margin-left:17%;">Add wireless network named
+&lt;network&gt; to preferred list for &lt;hardwareport&gt;
+at &lt;index&gt;. Store the optional password in the
+keychain For security type, use OPEN for none, WPA for WPA
+Personal, WPA2 for WPA2 Personal, WPA/WPA2 for WPA/WPA2
+Personal, WPAE for WPA Enterprise, WPA2E for WPA2
+Enterprise, WPAE/WPA2E for WPA/WPA2 Enterprise, WEP for
+plain WEP, and 8021XWEP for 802.1X WEP.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;removepreferredwirelessnetwork</b>
+<i>hardwareport network</i></p>
+
+<p style="margin-left:17%;">Remove &lt;network&gt; from the
+preferred wireless network list for &lt;hardwareport&gt;</p>
+
+
+<p style="margin-top: 1em"><b>&minus;removeallpreferredwirelessnetworks</b>
+<i>hardwareport</i></p>
+
+<p style="margin-left:17%;">Remove all networks from the
+preferred wireless network list for &lt;hardwareport&gt;</p>
+
+
+<p style="margin-top: 1em"><b>&minus;getnetworkserviceenabled</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Displays whether a service is
+on or off (enabled or disabled).</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setnetworkserviceenabled</b>
+<i>networkservice on</i> | <i>off</i></p>
+
+<p style="margin-left:17%;">Use this command to turn the
+specified network service on or off (enable or disable).</p>
+
+
+<p style="margin-top: 1em"><b>&minus;createnetworkservice</b>
+<i>networkservicename hardwareport</i></p>
+
+<p style="margin-left:17%;">Create a service named
+&lt;networkservice&gt; on port &lt;hardwareport&gt;. The new
+service will be enabled by default.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;renamenetworkservice</b>
+<i>networkservice newnetworkservicename</i></p>
+
+<p style="margin-left:17%;">Use this command to rename the
+specified network service &lt;networkservice&gt; to
+&lt;newnetworkservicename&gt;.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;duplicatenetworkservice</b>
+<i>networkservice newnetworkservicename</i></p>
+
+<p style="margin-left:17%;">Use this command to duplicate
+an existing network service &lt;networkservice&gt; and
+rename it to the specified name
+&lt;newnetworkservicename&gt;.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;removenetworkservice</b>
+<i>networkservice</i></p>
+
+<p style="margin-left:17%;">Use this command to delete a
+network service &lt;networkservice&gt;. You cannot use this
+command to delete the last remaining service for a hardware
+port. To do so, you use the -setnetworkserviceenabled
+command.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;ordernetworkservices</b>
+<i>service1 [service2] [service3] [...]</i></p>
+
+<p style="margin-left:17%;">Use this command to designate
+the order network services are contacted on the specified
+hardware port. Name the network you want contacted first,
+then the second, and so on. Use
+&quot;listnetworkserviceorder&quot; to view current service
+order. Note: use quotes around service names which contain
+spaces (ie. &quot;Built-in Ethernet&quot;).</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setMTUAndMediaAutomatically</b>
+<i>hardwarePort</i></p>
+
+<p style="margin-left:17%;">Set hardwareport or device
+specified back to automatically setting the MTU and
+Media.</p>
+
+<p style="margin-top: 1em"><b>&minus;getMTU</b>
+<i>hardwareport</i></p>
+
+<p style="margin-left:17%;">Get the MTU value for
+hardwareport or device specified.</p>
+
+<p style="margin-top: 1em"><b>&minus;setMTU</b>
+<i>hardwarePort value</i></p>
+
+<p style="margin-left:17%;">Set MTU for hardwareport or
+device specified.</p>
+
+<p style="margin-top: 1em"><b>&minus;listValidMTURange</b>
+<i>hardwareport</i></p>
+
+<p style="margin-left:17%;">List the valid MTU range for
+hardwareport or device specified.</p>
+
+<p style="margin-top: 1em"><b>&minus;getMedia</b>
+<i>hardwareport</i></p>
+
+<p style="margin-left:17%;">Show both the current setting
+for media and the active media on hardwareport or device
+specified.</p>
+
+<p style="margin-top: 1em"><b>&minus;setMedia</b>
+<i>hardwareport subtype [option1] [option2] [...]</i></p>
+
+<p style="margin-left:17%;">Set media for hardwareport or
+device specified to subtype. Specify optional [option1] and
+additional options depending on subtype. Any number of valid
+options can be specified.</p>
+
+<p style="margin-top: 1em"><b>&minus;listValidMedia</b>
+<i>hardwareport</i></p>
+
+<p style="margin-left:17%;">List valid media options for
+hardwareport or device name. Enumerates available subtypes
+and options per subtype.</p>
+
+<p style="margin-top: 1em"><b>&minus;createVLAN</b> <i>name
+parentdevice tag</i></p>
+
+<p style="margin-left:17%;">Create a VLAN with the name
+&lt;name&gt; over the parent device &lt;parentdevice&gt; and
+with the tag &lt;tag&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;deleteVLAN</b> <i>name
+parentdevice tag</i></p>
+
+<p style="margin-left:17%;">Delete the VLAN with the name
+&lt;name&gt; over the parent device &lt;parentdevice&gt; and
+with the tag &lt;tag&gt;.</p>
+
+<p style="margin-top: 1em"><b>&minus;listVLANs</b></p>
+
+<p style="margin-left:17%;">List the VLANs that have been
+created.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;listdevicesthatsupportVLAN</b></p>
+
+<p style="margin-left:17%;">List the devices that support
+VLANs.</p>
+
+<p style="margin-top: 1em"><b>&minus;isBondSupported</b>
+<i>device</i></p>
+
+<p style="margin-left:17%;">Displays YES if the device can
+be added to a bond. NO if it cannot.</p>
+
+<p style="margin-top: 1em"><b>&minus;createBond</b> <i>name
+[device1] [device2] [...]</i></p>
+
+<p style="margin-left:17%;">Create a bond with the
+user-defined-name name and optionally add any listed devices
+if they support bonding.</p>
+
+<p style="margin-top: 1em"><b>&minus;deleteBond</b>
+<i>bond</i></p>
+
+<p style="margin-left:17%;">Delete the bond with the
+specified device-name.</p>
+
+<p style="margin-top: 1em"><b>&minus;addDeviceToBond</b>
+<i>device bond</i></p>
+
+<p style="margin-left:17%;">Add device to bond.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;removeDeviceFromBond</b>
+<i>device bond</i></p>
+
+<p style="margin-left:17%;">Remove device from bond.</p>
+
+<p style="margin-top: 1em"><b>&minus;listBonds</b></p>
+
+<p style="margin-left:17%;">List of all bonds.</p>
+
+<p style="margin-top: 1em"><b>&minus;showBondStatus</b>
+<i>bond</i></p>
+
+<p style="margin-left:17%;">Display the status of the
+specified bond.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;listpppoeservices</b></p>
+
+<p style="margin-left:17%;">List all PPPoE services in the
+current set.</p>
+
+<p style="margin-top: 1em"><b>&minus;showpppoestatus</b>
+<i>name</i></p>
+
+<p style="margin-left:17%;">Display the status of the PPPoE
+service with the specified name.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;createpppoeservice</b>
+<i>device name account password [pppoeName]</i></p>
+
+<p style="margin-left:17%;">Create a PPPoE service on the
+specified device with the service name specified.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;deletepppoeservice</b>
+<i>service</i></p>
+
+<p style="margin-left:17%;">Delete the service.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;setpppoeaccountname</b>
+<i>service account</i></p>
+
+<p style="margin-left:17%;">Set the account name for the
+service.</p>
+
+<p style="margin-top: 1em"><b>&minus;setpppoepassword</b>
+<i>service password</i></p>
+
+<p style="margin-left:17%;">Set the password for the
+service.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;connectpppoeservice</b>
+<i>service</i></p>
+
+<p style="margin-left:17%;">Connect the service.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;disconnectpppoeservice</b>
+<i>service</i></p>
+
+<p style="margin-left:17%;">Disconnect the service.</p>
+
+<p style="margin-top: 1em"><b>&minus;listlocations</b></p>
+
+<p style="margin-left:17%;">List all network locations.</p>
+
+
+<p style="margin-top: 1em"><b>&minus;getcurrentlocation</b></p>
+
+<p style="margin-left:17%;">Display the name of the current
+set.</p>
+
+<p style="margin-top: 1em"><b>&minus;createlocation</b>
+<i>location [populate]</i></p>
+
+<p style="margin-left:17%;">Create a set with the
+user-defined-name name and optionally populate it with the
+default services.</p>
+
+<p style="margin-top: 1em"><b>&minus;deletelocation</b>
+<i>location</i></p>
+
+<p style="margin-left:17%;">Delete the set.</p>
+
+<p style="margin-top: 1em"><b>&minus;switchtolocation</b>
+<i>location</i></p>
+
+<p style="margin-left:17%;">Make the specified set the
+current set.</p>
+
+<p style="margin-top: 1em"><b>&minus;version</b></p>
+
+<p style="margin-left:17%;">Displays version of
+networksetup tool.</p>
+
+<p style="margin-top: 1em"><b>&minus;help</b></p>
+
+<p style="margin-left:17%; margin-top: 1em">Displays a list
+of all the commands available in the Network Setup Tool,
+with explanatory information.</p>
+
+<p style="margin-top: 1em"><b>&minus;printcommands</b></p>
+
+<p style="margin-left:17%;">Displays a list of commands
+with no detail.</p>
+
+<p style="margin-top: 1em"><b>FILES</b> <br>
+/usr/sbin/networksetup <b><br>
+EXAMPLES</b></p>
+
+<p style="margin-left:6%;"><b>networksetup</b>
+-listallnetworkservices</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-setmanual &quot;Built-in Ethernet&quot; 192.168.100.100
+255.255.255.0 192.168.100.1</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-setdnsservers &quot;Built-in Ethernet&quot; 192.168.100.100
+192.168.100.12</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-setsearchdomains &quot;Built-in Ethernet&quot; company.com
+corp.com</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-setwebproxy &quot;Built-in Ethernet&quot; proxy.company.com
+80</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-setwebproxy &quot;Built-In Ethernet&quot; proxy.company.com
+80 On authusername authpassword</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-duplicatenetworkservice &quot;Built-In Ethernet&quot;
+&quot;Local LAN&quot;</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-getdnsservers &quot;Built-In Ethernet&quot;</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-setMTU en0 1500</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-setMedia en0 autoselect</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-setMedia en0 100baseTX half-duplex</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-createBond MyBond en0 en1</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-addDeviceToBond en0 bond0</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-setpppoepassword MyPPPoE - &lt;
+~/Desktop/MyPasswordFile.txt</p>
+
+
+<p style="margin-left:6%; margin-top: 1em"><b>networksetup</b>
+-createlocation Home populate</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:6%;">systemsetup(8)</p>
+
+<p style="margin-left:6%; margin-top: 1em">macOS
+July&nbsp;29, 2020 macOS</p>
+<hr>
+</body>
+</html>

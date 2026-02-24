@@ -1,0 +1,62 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>cancel Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>cancel</h1> 
+<p>Cancel print jobs. </p>
+<pre>Syntax
+      cancel [ -E ] [ -U <i>username</i> ] [ -a ] [ -h <i>hostname</i>[:<i>port</i>] ] [ -u <i>username</i> ] [ -x ] [ id ]
+         [ <i>destination</i> ] [ <i>destination-id</i> ]
+
+Options
+   -a       Cancel all jobs on the named destination, or all jobs on all destinations if none
+            is provided.
+
+   -E       Force encryption when connecting to the server.
+
+   -h <i>hostname</i>[:<i>port</i>]
+            Specify an alternate server.
+
+   -U <i>username</i>
+            The username to use when connecting to the server.
+
+   -u <i>username</i>
+            Cancel jobs owned by <i>username</i>.
+
+   -x       Delete job data files in addition to canceling.</pre>
+<p>Unlike the System V printing system, CUPS allows printer names to contain any printable        character  except  SPACE, TAB, &quot;/&quot;, or &quot;#&quot;. Also, printer and class names are not case-        sensitive.</p>
+<p>Administrators wishing to prevent unauthorized cancellation of jobs via the  -u  option        should require authentication for Cancel-Jobs operations in cupsd.conf(5).</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Cancel the current print job: <br>
+<span class="code">cancel</span><br>
+<br>
+Cancel job &quot;myprinter-42&quot;:<br>
+<span class="code">cancel myprinter-42</span><br>
+<br>
+Cancel all jobs:<br>
+<span class="code">cancel -a</span></p>
+<p class="quote"><i>&ldquo;Effective management always means asking the right question&rdquo; ~ Robert Heller </i></p>
+<h3>Related macOS commands</h3>
+<p><span class="space"><a href="lp.html">lp</a> - Print.<br>
+<a href="lpr.html">lpr</a> - Print files.<br>
+<a href="lprm.html">lprm</a> - Remove jobs from the print queue.<br>
+<a href="lpstat.html">lpstat</a> - Printer status information.</span><br>
+</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

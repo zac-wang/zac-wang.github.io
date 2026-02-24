@@ -1,0 +1,56 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>command Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>command</h1> 
+<p>Run <i>command</i> with <i>args</i> suppressing the normal shell function lookup.</p>
+<pre>Syntax
+      command [-pVv] <i>command</i> [<i>arg</i>...]
+
+Key
+    -p   Use a default value for PATH that will find all the standard utilities.
+
+    -v   Print a description of <i>command</i>
+
+    -V   Print a verbose description of <i>command</i></pre>
+<p>Only builtin commands or commands found in the PATH are executed.  </p>
+<p>Exit Status<br>
+If the -V or -v option is  supplied, the exit status is 0 if command was found, and 1 if not.  <br>
+If neither option is supplied
+and an error occurred or command cannot be found, the exit status is 127.  <br>
+Otherwise, the exit
+status of the command builtin is the exit status of <i>command</i>.</p>
+<p>This is a BASH shell builtin, to display your local syntax from the bash prompt type: <span class="code">help command</span><br>
+</p>
+<h3><a id="e"></a>Examples</h3>
+<pre>$ command ls
+</pre>
+<p class="quote"><i>&ldquo;I'm not dumb. I just have a command of thoroughly useless information&rdquo; - Bill Watterson</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="builtin.html">builtin</a> - Run a shell builtin.<br>
+<a href="chroot.html">chroot</a> - Run a command with a different root directory.<a href="crontab.html"><br>
+crontab</a> - Schedule a command to run at a later time.<br>
+<a href="exec.html">exec</a> - Execute a command.<br>
+<a href="if.html">if</a> - Conditionally perform a command.<br>
+<a href="nohup.html">nohup</a> - Run a command immune to hangups.<br>
+<a href="source.html">.source</a> - Run commands from a file.<br>
+<a href="su.html">su</a> - Run a command with substitute user and group id.<br>
+<a href="type.html">type</a> - Describe a command.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

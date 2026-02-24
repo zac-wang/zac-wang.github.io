@@ -1,0 +1,75 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>serverinfo Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>serverinfo</h1> 
+<p>Server information.</p>
+<pre>Syntax
+      serverinfo [<i>options</i>] <i>command</i>
+
+Options:
+   --quiet|-q
+        Prevent status messages from being printed to stdout
+
+Available commands (there must be exactly one):
+   --hardware
+        Return status 0 if executed on server hardware.
+   --software [<i>PATH</i>]
+        Return status 0 if the root volume has a server OS installed
+        Use optional argument PATH to specify mountpoint of alternate volume.
+   --configured [<i>PATH</i>]
+        Return status 0 if the server is configured
+        Use optional argument PATH to specify mountpoint of alternate volume.
+   --perfmode
+        Return status 0 if the server performance mode is enabled.
+   --setperfmode BOOL
+        Enable the server performance mode if BOOL is true
+        All other values will disable the server performance mode
+        Valid values of true (case-insensitive): TRUE, YES, enabled, on, 1
+        Returns status 0 if the mode is changed successfully.
+   --prefix
+        Print the server install path prefix.
+   --productname
+        Print the server product name.
+   --shortversion
+        Print the short version.
+   --buildversion
+        Print the build version.
+   --minimumserverversion
+        Print the minimum server version for this os.
+   --plist
+        Print a plist containing server information about the running system.
+   --help|-h
+        Print this usage message.</pre>
+<p>The -q quiet mode is intended for use in shell script conditionals.</p>
+<h3><a id="e"></a>Examples</h3>
+<p> Is performance mode enabled?:<br>
+<span class="code">$ if serverinfo -q --perfmode; then echo Performance mode enabled; else echo disabled; fi</span></p>
+<p> Are we running on server hardware?:<br>
+<span class="code">$ serverinfo --hardware<br>
+$ 
+if serverinfo -q --hardware; then echo Running on server hardware; fi</span></p>
+<p class="quote"><i class="quote">&ldquo;The measure of your quality as a public person, as a citizen, is the gap between what you do and what you say&rdquo; ~   Ramsey Clark </i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="system_profiler.html">system_profiler</a> - Report system configuration.<br>
+<a href="sw_vers.html">w_vers</a> - Print macOS operating system version.<br>
+<a href="uname.html">uname</a> - Print the Darwin OS Kernel version / release / machine name.<br>
+<a href="hostname.html">hostname</a> -  Print or set system name.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>id Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>id</h1> 
+<p>User identity - display the user and group names (and IDs)<br>
+  The <span class="code">groups</span> utility has been obsoleted by id, and is equivalent to `id 
+-Gn [<i>user</i>]' </p>
+<pre>Syntax
+      id [<i>user</i>]
+      id -A
+      id -G [-n] [<i>user</i>]
+      id -M
+      id -P [<i>user</i>]
+      id -g [-nr] [<i>user</i>]
+      id -p [<i>user</i>]
+      id -u [-nr] [<i>user</i>]
+
+Options
+   -A     Display the process audit user ID and other process audit properties, which requires privilege.
+
+   -G     Display the different group IDs (effective, real and supplementary)
+         as white-space separated numbers, in no particular order.
+
+   -M     Display the MAC label of the current process.
+
+   -P     Display the id as a password file entry.
+
+   -g     Display the effective group ID as a number.
+
+   -n     Display the name of the user or group ID for the -G, -g and -u
+          options instead of the number.  If any of the ID numbers cannot
+          be mapped into names, the number will be displayed as usual.
+
+   -p     Make the output human-readable.  If the user name returned by
+          getlogin(2) is different from the login name referenced by the
+          user ID, the name returned by getlogin(2) is displayed, preceded
+          by the keyword `login'.  The user ID as a name is displayed,
+          preceded by the keyword `uid'.  If the effective user ID is
+          different from the real user ID, the real user ID is displayed as
+          a name, preceded by the keyword `euid'.  If the effective group
+          ID is different from the real group ID, the real group ID is displayed
+          as a name, preceded by the keyword `rgid'.  The list of
+          groups to which the user belongs is then displayed as names, preceded
+          by the keyword `groups'.  Each display is on a separate line.
+
+   -r     Display the real ID for the -g and -u options instead of the
+         effective ID.
+
+   -u     Display the effective user ID as a number.   </pre>
+<p>Displays the user and group names and numeric IDs, of the calling 
+process, to the standard output.</p>
+<p> If the real and effective IDs are different, both are displayed, 
+  otherwise only the real ID is displayed.</p>
+<p>The id utility exits 0 on success, and &gt;0 if an error occurs.</p>
+<p> If a <i>user</i> (login name or user ID) is specified, the user 
+  and group IDs of that user are displayed. In this case, the real and effective 
+IDs are assumed to be the same.</p>
+<p class="quote"><i>"There is no monument dedicated to the memory of a committee" 
+  ~ Lester 
+  J. Pourciau</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"> The historic <span class="code">groups</span> command is equivalent to <span class="code">id -Gn [user]</span><br>
+The historic <span class="code">whoami</span> command is equivalent to <span class="code">id -un</span><br>
+<a href="who.html">who</a> - Print all users currently logged in.<br>
+<span class="code">whoami </span>- Print real user name.<br>
+Equivalent (Linux) bash command:<a href="../bash/who.html">who</a> - Print all users currently logged in.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

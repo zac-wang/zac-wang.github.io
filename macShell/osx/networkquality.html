@@ -1,0 +1,53 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title> Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>networkQuality</h1> 
+<p> Network quality testing tool.</p>
+<pre>Syntax
+      networkQuality [-chsv] [-I <i>interface</i>] [-C <i>configuration URL</i>]
+
+Key
+   -C <i>configuration URL</i>
+            Use custom configuration URL. See https://github.com/network-quality/server for server implementation details.
+
+   -I <i>interface</i>
+            Bind test to interface (e.g., en0, pdp_ip0,...)
+
+            If not specified, the default interface will be used.
+
+   -c       Produce computer-readable output
+
+   -h       Show help
+
+   -s       Run tests sequentially instead of parallel upload/download
+
+   -v       Verbose output</pre>
+<p> networkQuality allows for measuring the different aspects of Network Quality, including:      Maximal capacity (often described as speed)      The responsiveness of the connection. Responsiveness measures the quality of your network by the number of roundtrips completed per minute (RPM) under      working conditions. See <a href="https://support.apple.com/kb/HT212313">HT212313</a> </p>
+<p>Other aspects of the connection that affect the quality of experience.      </p>
+<p>NOTE: This tool will connect to the Internet to perform its tests. This will use data on your Internet service plan.      For more details about the RPM score and the methodology around the testing, see <a href="https://datatracker.ietf.org/doc/draft-cpaasch-ippm-responsiveness/">https://datatracker.ietf.org/doc/draft-cpaasch-ippm-responsiveness/</a></p>
+<p class="quote"><i>&quot;Arithmetic is being able to count up to twenty without taking off your shoes&quot; ~ Mickey Mouse</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="ping.html">ping</a> - Test a network connection<br>
+netstat - show network status.<br>
+<a href="ipconfig.html">ifconfig</a> - configure network interface parameters.<br>
+<a href="ipconfig.html">ipconfig</a> - View and control IP configuration state.</p>
+<!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>bg Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>klist</h1> 
+<p>List cached Kerberos tickets. List the Kerberos principal and Kerberos tickets held in a credentials cache (also known as the ticket file).</p>
+<pre>Syntax
+      klist [-c <i>cache</i> | --cache=<i>cache</i>] [-s | -t | --test] [-T | --tokens] [-5 | --v5]
+         [-v | --verbose] [-l | --list-caches] [-f] [--version] [--help]
+
+Key
+   -c <i>cache</i>, --cache=<i>cache</i>
+             Credential cache to list.
+
+   -s, -t, --test
+             Test for there being an active and valid TGT for the local realm of the user in the credential cache.
+
+   -T, --tokens
+             Display AFS tokens.
+
+   -5, --v5
+             Display v5 cred cache (this is the default).
+
+   -f      Include ticket flags in short form, each character stands for a specific flag, as follows:
+                   F    forwardable
+                   f    forwarded
+                   P    proxiable
+                   p    proxied
+                   D    postdate-able
+                   d    postdated
+                   R    renewable
+                   I    initial
+                   i    invalid
+                   A    pre-authenticated
+                   H    hardware authenticated
+
+             This information is also output with the --verbose option, but in a more verbose way.
+
+   -v, --verbose
+             Verbose output. Include all possible information:
+                   Server         The principal the ticket is for
+                   Ticket etype   The encryption type used in the ticket, followed by the key version of the ticket, if available.
+                   Session key    The encryption type of the session key, if it's different from the encryption type of the ticket.
+                   Auth time      The time the authentication exchange took place.
+                   Start time     The time that this ticket is valid from (only printed if it's different from the auth time).
+                   End time       When the ticket expires, if it has already expired this is also noted.
+                   Renew till     The maximum possible end time of any ticket derived from this one.
+                   Ticket flags   The flags set on the ticket.
+                   Addresses      The set of addresses from which this ticket is valid.
+
+     -l, --list-caches
+             List the credential caches for the current users, not all cache types supports listing multiple caches.</pre>
+<h3><a id="e"></a>Examples</h3>
+<p>Query the Kerberos v5 ticket cache to determine if any tickets are present:</p>
+<p class="code">C:\&gt; klist</p>
+<p>List the credential caches for the current users:</p>
+<p class="code">C:\&gt; klist -l</p>
+<p class="quote"><i>&ldquo;Find out who you are and do it on purpose&rdquo; ~ Dolly Parton</i></p>
+<h3>Related macOS commands</h3>
+<p class="space">kdestroy(1)<br>
+kinit(1)<br>
+<span class="code">man krb5.conf</span> - Configuration file for Kerberos 5 (connect to Active Directory/SMB shares)<br>
+Equivalent Windows command: <a href="../nt/klist.html">klist</a> - List cached Kerberos tickets.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

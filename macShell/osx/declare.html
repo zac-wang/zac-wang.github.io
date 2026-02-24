@@ -1,0 +1,69 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>declare Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>declare</h1> 
+<p>Declare variable(s) and/or give them attributes.</p>
+<pre>Syntax
+      declare [-afFirtx] [-p] [<i>name</i>[=<i>value</i>] ...]
+<br>      typeset [-afFirtx] [-p] [<i>name</i>[=<i>value</i>] ...]
+
+Key
+   -a     Each <i>name</i> is an array variable.
+<br>   -f     Use function names only.
+
+   -F     Inhibit the display of function definitions (implies -f)
+          only the function name and attributes are printed.<br>
+   -i     The variable is treated as an integer; arithmetic evaluation (see ARITHMETIC EVALUATION)
+          is performed when the variable is assigned a <i>value</i>.<br>
+   -r     Make names readonly.  These names cannot then be assigned values by subsequent assignment<br>          statements or unset.<br>
+   -t     Give each name the trace attribute.
+          Traced functions inherit the DEBUG and RETURN traps from the calling shell.
+          The trace attribute has no  special  meaning  for variables.<br>
+   -x     Mark names for export to subsequent commands via the environment.
+
+   -p     Display the attributes and values of each name.
+          When -p is used, additional options are ignored. </pre>
+<p> If no names are given then display the values
+of variables. </p>
+<p>Using `+' instead of `-' turns off the attribute instead, e.g. <span class="code">+i</span> means don't treat as an integer - one exception is that +a can not
+be used to destroy an array variable. </p>
+<p>When used in a function, makes each name local, as with
+the <a href="local.html">local</a> command. </p>
+<p>If a variable name is followed by <span class="code">=<i>value</i></span>, the value of the variable is set
+to <span class="code"><i>value</i></span></p>
+<p>The return value is 0 unless an invalid option is encountered, an attempt is made
+to define a function using ``-f foo=bar'', an attempt is made to assign a value to a readonly
+variable, an attempt is made to assign a value to an array variable without using the compound
+assignment syntax (see Arrays above), one of the names is not a valid shell variable name, an
+attempt is made to turn off readonly status for a readonly variable, an attempt is made to
+turn off array status for an array variable, or an attempt is made to display a non-existent
+function with -f.</p>
+<p>If the extdebug shell option is
+enabled using shopt, the source file name and line number where the function is defined are
+displayed as well. </p>
+<p>declare is a bash builtin command</p>
+<p class="quote"><i>&ldquo;I have nothing to declare but my genius&rdquo; - Oscar Wilde</i></p>
+<h3>Related macOS commands</h3>
+<p>
+<span class="space"><a href="for.html">for</a> - Expand <var>words</var>, and execute <var>commands</var>.<br>
+<a href="while.html">while</a> - Loop to execute commands.<br>
+until - Loop to execute commands.</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

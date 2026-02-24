@@ -1,0 +1,49 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>mkfile Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>mkfile</h1> 
+<p>Create a file.</p>
+<pre>Syntax
+          mkfile [ -nv ] size[b|k|m|g] <i>filename</i> ...
+Options
+   -n     Create an empty filename.  The size is noted,  but  disk  blocks
+          aren't allocated until data is written to them.
+
+   -v     Verbose.  Report the names and sizes of created files.</pre>
+<p>mkfile  creates  one  or  more  files that are suitable for use as NFS-        mounted swap areas.  The sticky bit is set, and the file is padded with        zeroes  by  default.   Non-root  users  must  set  the sticky bit using        chmod(1).  </P>
+<p>The default size unit is bytes, but the  following  suffixes        may  be  used  to  <a href="../convert.html">multiply</a> by  the given factor: <br>
+b (512), k (1024), m        (1048576), and g (1073741824).</P>
+<p>The file may be given any extension, (e.g. .jpg) but the file created will not have the correct (.jpg) header inserted.</P>
+<p>If  a  client's  swap  file  is  removed  and recreated, it must be re-exported before the client will be able to access it.  <br>
+This action  may        only be done when the client is not running.</P>
+<h3><a id="e"></a>Examples</h3>
+<p> Create a 10 MB file,  padded with        zeroes:<br>
+</p>
+<pre>$ mkfile 10m ~/newfile.txt
+</pre>
+<p>Create a 10 MB 'empty' file:<br>
+</p>
+<pre>$ mkfile 10m ~/newfile.txt</pre>
+<p class="quote"><i>&quot;Make each program do one thing well. To do a new job, build afresh rather than complicate old programs by adding new features&quot; ~ Ken Thompson</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="chmod.html">chmod</a> - Change access permissions.<br>
+<a href="stat.html">stat</a> - Display the status of a file.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

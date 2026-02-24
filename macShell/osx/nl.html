@@ -1,0 +1,120 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>nl Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>nl</h1>
+<p>Number lines and write files, writes each <i>FILE</i> to standard output, 
+  with line numbers added to some or all of the lines. <br>
+If no input file (or '-' ) is given nl will read from standard input.</p>
+<pre>Syntax
+      nl [<i>options</i>]... [<i>File</i>]...
+
+OPTIONS
+
+-b <i>STYLE</i>
+     Select the numbering style for lines in the body section of each
+     logical page.  When a line is not numbered, the current line number
+     is not incremented, but the line number separator character is
+     still prepended to the line.  
+     The styles are:
+
+     'a'          number all lines,
+
+     't'          number only nonempty lines (default for body),
+
+     'n'          do not number lines (default for header and footer),
+
+     'pREGEXP'    number only lines that contain a match for REGEXP.
+
+-d <i>CD</i>
+     Set the section delimiter characters to CD; default is '\:'. If
+     only C is given, the second remains ':'.  (Remember to protect '\'
+     or other metacharacters from shell expansion with quotes or extra
+     backslashes.)
+
+-f <i>STYLE</i>
+     Specify the same as -b type except for logical page footer lines.
+     The default type for logical page footer lines is n.
+
+-h <i>STYLE</i>
+     Specify the same as -b type except for logical page header lines.
+     The default type for logical page header lines is n.
+
+-i <i>INCR</i>
+     Increment line numbers by <i>INCR</i> (default 1).
+
+-l <i>NUMBER</i>
+     If numbering of all lines is specified for the current logical section using the
+     corresponding -b a, -f a or -h a option, specify the number of adjacent blank lines
+     to be considered as one. For example, -l 2 results in only the second adjacent
+     blank line being numbered. The default num value is 1.  Where fewer than <i>NUMBER</i> 
+     consecutive empty lines occur, do not number them.  An empty line is one that
+     contains no characters, not even spaces or tabs.
+
+-n <i>FORMAT</i>
+     Select the line numbering format (default is 'rn'):
+
+    'ln'     left justified, no leading zeros;
+
+    'rn'     right justified, no leading zeros;
+
+    'rz'     right justified, leading zeros.
+
+-p
+     Do not reset the line number at the start of a logical page.
+
+-s <i>SEP</i>
+     Separate the line number from the text line in the output with
+     <i>SEP</i> (default is the TAB character).
+
+-v <i>NUMBER</i>
+     Set the initial line number on each logical page to NUMBER
+     (default 1).
+
+-w <i>NUMBER</i>
+     Use NUMBER characters for line numbers (default 6).</pre>
+<p>'nl' decomposes its input into (logical) pages; by default, the 
+  line number is reset to 1 at the top of each logical page.<br>
+<br>
+'nl' treats all of the input files as a single document; it does not reset line 
+  numbers or logical pages between files. <br>
+<br>
+A logical page consists of three sections: header, body, and footer. Any of 
+  the sections can be empty. Each can be numbered in a different style from the 
+  others. <br>
+<br>
+The beginnings of the sections of logical pages are indicated in the input file 
+  by a line containing exactly one of these delimiter strings:<br>
+<span class="code">\:\:\:</span> start of header;<br>
+<span class="code">\:\:</span> start of body;<br>
+<span class="code">\:</span> start of footer. <br>
+The two characters from which these strings are made can be changed from<span class="code"> \ </span>and<span class="code"> : </span>via options (see above), but the pattern and length of each string cannot 
+  be changed. A section delimiter is replaced by an empty line on output. <br>
+<br>
+Any text that comes before the first section delimiter string in the input file 
+  is considered to be part of a body section, so 'nl' treats a file that contains 
+no section delimiters as a single body section. </p>
+<p class="quote"><i>&quot;Seek not the favor of the multitude; it is seldom got by honest and lawful means. But seek the testimony of few; and number not voices, but weigh them&quot; ~ Immanuel Kant</i></p>
+<h3>Related macOS commands</h3>
+<p><span class="space"><a href="comm.html">comm</a> - Compare two sorted files line by line.<br>
+<a href="csplit.html">csplit</a> - Split a file into context-determined pieces.<br>
+<a href="expand.html">expand</a> - Convert tabs to spaces.<br>
+<a href="seq.html">seq</a> - Print numeric sequences.</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>mv Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>mv</h1> 
+<p>Move files and/or folders.</p>
+<pre>Syntax
+      mv [<i>options</i>] <i>source target</i>
+
+Options
+     -n     Do not overwrite any existing file.
+
+     -i     Prompt before moving a file that would overwrite an existing file.
+            A response 'y' or 'Y', will allow the move to proceed (writes to standard error)
+
+     -f     Force, always overwrite destination files, do not prompt for confirmation.
+
+     -v     Verbose, show filenames.</pre>
+<p><span class="body">If the last argument (<i>target</i>) names an existing directory, 'mv' moves each other given 
+  file into a file with the same name in that directory. Otherwise, if only two 
+  files are given, it renames the first as the second. It is an error if the last 
+argument is not a directory and more than two files are given.</span></P>
+<p>The <a href="syntax-bashkeyboard.html">key combination</a> <span class="code">Ctrl+w</span> (cut last word followed by <span class="code">Ctrl-y, Ctrl-y</span> (Paste twice) can be useful when writing <span class="code">mv</span> commands, to quickly create two copies of the path, you can then just edit the destination to generate the new name.</P>
+<p>The mv utility now supports HFS+ Finder and Extended Attributes and resource forks.  The mv utility will no longer strip resource forks      from HFS files.  For an alternative method, refer to <a href="cp.html">cp</a>.</P>
+<p>If the Apple Finder is used to remove the file extension from a file, it will actually set the extension to be hidden instead, which <em>Get Info</em> will reveal. Use <span class="code">mv</span> to genuinely remove or change the file extension, but note this will not  convert any file type it just changes the name.</P>
+<p>The -n and -v options are non-standard and their use in scripts 
+used across multiple unix machines is not recommended. Notwithstanding this many users find it useful to set an <span class="code"><a href="alias.html">alias</a> mv=&quot;mv -iv&quot;</span> in their <a href="syntax-profile.html">startup file</a>, so that progress is always displayed and files do not get overwritten without a confirmation.</P>
+<h3><a id="e"></a>Examples</h3>
+<p>Move all files with names ending in ".jpg" from the current folder
+to the Documents directory<br>
+<span class="code">$ mv *.jpg ~/Documents</span><br>
+<br>
+Move the "Documents" folder to "Documents backup", quotes are needed because of the space in the folder name.<br>
+<span class="code">$ mv Documents "Documents backup"</span></p>
+<p>Move the file Hunter.txt to the Trash. The tilde ~ indicates that the <span class="code">.Trash</span> folder is located in the users home.</p>
+<p class="code">$ mv Hunter.txt ~/.Trash</p>
+<p>Rename all files in the current directory adding a .WAV file extension:<br>
+<span class="code">$ for file in *; do mv "$file" "$file.wav"; done</span></p>
+<p>Rename all .txt files in the current directory to .html<br>
+<span class="code">$ for f in *.txt; do <b>mv</b> &quot;$f&quot; &quot;$<b>{</b>f%txt<b>}</b>html&quot;; done</span></p>
+<p>Using bash shell <a href="syntax-expand.html#parameter">parameter expansion</a> <code>${<i>parameter</i>/<i>pattern</i>/<i>string</i>}</code><br>
+</p>
+<blockquote>
+<p> Rename all files in the current directory, replacing spaces with underscores:<br>
+<span class="code">ls | while read f; do <b>mv</b> &quot;$f&quot; &quot;${f// /_}&quot;;done</span></p>
+<p>Reversing this to replace underscores with spaces:<br>
+<span class="code">for f in *.txt; do mv &quot;$f&quot; &quot;${f//_/ }&quot;;done</span></p>
+<p>Rename  files that end with 'copy.txt' to just .txt<span class="code"><br>
+for f in *copy.html; do <b>mv</b> &quot;$f&quot; &quot;${f/copy.txt/.txt}&quot;;done</span></p>
+Move all .jpg files in the current directory, to the 'CA' sub-folder, and for those with &quot;New York&quot; in the filename, replace with &quot;California_&quot; 
+<p><span class="code">$ mkdir CA<br>
+$ for f in *.jpg; do <b>mv</b> &quot;$f&quot; &quot;CA/$<b>{</b>f/New York/California_<b>}</b>&quot;; done</span><br>
+</p>
+</blockquote>
+<p class="quote">&ldquo;Any intelligent fool can make things bigger and more complex...<br>
+It takes a touch of genius - and a lot of courage to move in the opposite direction&rdquo; ~ E.F. Schumacher</p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="cp.html">cp</a> - Copy files.<br>
+CpMac - Copy a file while preserving metadata and forks (Developer Tools).<br>
+<a href="dd.html">dd</a> - Data Duplicator - convert and copy a file.<br>
+<a href="install.html">install</a> - Copy files and set attributes.<br>
+MvMac - Copy a filewhile preserving metadata and forks (Developer Tools).<br>
+<a href="tar.html">tar</a> - store or extract files to an archive (allows symbolic links to be copied as links).</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

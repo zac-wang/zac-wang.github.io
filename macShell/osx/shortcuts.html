@@ -1,0 +1,78 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>shortcuts Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>shortcuts</h1> 
+<p>Manage macOS shortcuts. </p>
+<pre>Syntax
+      shortcuts list [-f <i>Folder</i>] [<span class="code">--folders</span>]
+
+      shortcuts run &quot;<i>Shortcut Name</i>&quot; [-i <i>InputFile</i>] [-o <i>OutputFile</i>]
+
+      shortcuts view &quot;<i>Shortcut Name</i>&quot;
+
+      shortcuts sign --mode {people-who-know-me | Anyone}
+
+Key
+   <i>Shortcut Name</i>  The name of the shortcut to view/run.
+                  If the name contains spaces, either surrround with quotes: &quot;Combine Images&quot;
+                  or escape the space with a backslash:  Combine\ Images
+
+   -f             List the shortcuts in a custom folder.
+                  You cannot list the contents of generated folders such as “Quick Actions” or “Menu Bar”.
+
+   -i
+   --input-path   An input file (or set of files) to be processed by the shortcut. Wildcards accepted.
+
+   -o
+   --output-path  Write the output to a file.</pre>
+<p>You can sign a shortcut you previously exported using <span class="code">shortcuts sign</span>.<br>
+When you sign a shortcut, Apple receives a copy for validation, to prevent unauthorised tampering when you share it. </p>
+<p>Shortcut signing has two modes:</p>
+<ul>
+<li> <b>Anyone</b> : Anyone can import your shortcut.</li>
+<li><b> People-who-know-me</b> : Only people who have you in their contacts will be able to import your shortcut. Your contact info will be included in the shortcut file.</li>
+</ul>
+<p>The shortcuts command will exit 0 on a successful run or 1 on error.</p>
+<h3><a id="e"></a>Examples</h3>
+<p> List the shortcuts in a custom folder with the name “Music”:</p>
+<p class="code">$  shortcuts list -f Music</p>
+<p>List all your folders instead of the shortcuts:</p>
+<p class="code">$ shortcuts list --folders</p>
+<p>Open a shortcut in the GUI editor. This can be helpful when troubleshooting an errant shortcut: </p>
+<p class="code">$ shortcuts view &quot;My shortcut&quot;</p>
+<p>Run the shortcut &quot;Combine Images&quot;:<br>
+<br>
+<span class="code">$ shortcuts run &quot;Combine Images&quot;</span><br>
+<br>
+Run the “Combine Images” shortcut and pass all .jpg files on the Desktop: </p>
+<p><span class="code">$ shortcuts run &quot;Combine Images&quot; -i ~/Desktop/*.jpg</span><br>
+<br>
+Run the “Combine Images” shortcut and combine all the images on the Desktop to a PNG file:</p>
+<p><span class="code">$ shortcuts run &quot;Combine Images&quot; -i ~/Desktop/*.jpg -o ~/Desktop/combined.png</span><br>
+<br>
+Sign a shortcut named “ss64”:</p>
+<p class="code">$ shortcuts sign --mode people-who-know-me --input &quot;ss64.shortcut&quot; --output &quot;ss64 signed.shortcut&quot;</p>
+<p class="quote"><i>&ldquo;It’s not a self-driving car unless you can sleep in it&rdquo; ~ Alex Roy</i></p>
+<h3>Related macOS commands</h3>
+<p><a href="https://support.apple.com/en-gb/guide/shortcuts-mac/welcome/mac">Shortcuts User Guide</a> - Apple.<br>
+<a href="https://support.apple.com/en-gb/guide/shortcuts-mac/apdf01f8c054/5.0/mac/12.0">Sharing shortcuts</a> through iCloud or as a file.<br>
+<a href="ln.html">ln</a> - Make links between files (hard links, symbolic links).</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

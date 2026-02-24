@@ -1,0 +1,154 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>pkgutil Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>pkgutil</h1> 
+<p> Query and manipulate MacOS Installer packages and receipts.</p>
+<pre>Syntax
+      pkgutil [<i>options</i>] [commands]
+
+Options
+
+   --force, -f
+                 Don't ask for confirmation before performing a potentially destructive or ambiguous operation.
+
+   --verbose, -v
+                 Output in a "human-readable" format with extra headers, footers, indentation, and other contextual information.
+
+   --volume path
+                 Perform all operations on the specified volume or home directory.  The root volume '/' will be used if unspecified.
+
+   --edit-pkg package-id
+                 Specifies an existing receipt to be modified in-place by --learn.
+
+   --only-files
+                 List only files (not directories) in --files listing.
+
+   --only-dirs
+                 List only directories (not files) in --files listing.
+
+   --regexp    Try to match package-id arguments as a regular expression if an exact match isn't found. See egrep(1) and
+                 re_format(7) for syntax.
+
+   -help, -h  A brief summary of commands and usage.</pre>
+<p> pkgutil reads and manipulates MacOS Installer flat packages, and provides access to the ``receipt'' database used by the      Installer. Options are processed first, and affect the operation of all commands. Multiple commands are performed sequentially      in the given order.      </p>
+<p>The files and directories where receipts are stored are <b>subject to change</b>. Always use pkgutil to query or modify them.</p>
+<p>RECEIPT DATABASE COMMANDS</p>
+<pre>   --packages, --pkgs
+                 List all installed package IDs on the specified --volume.
+
+   --pkgs-plist
+                 List all installed package IDs on the specified --volume in macOS plist(5) format.
+
+   --pkgs=REGEXP
+                 List all installed package IDs matching REGEXP on the specified --volume.  The equal sign (=) is required or the
+                 search string will be ignored and all package IDs will be returned.  Be mindful of escaping characters in both your
+                 shell and the regular expression.  (Eg, 'pkgutil --pkgs=\\.D' searches for package IDs matching the literal '.D'
+                 after escaping the backslash from your shell and then the dot from the regex to make it literal.) Regular
+                 expressions are more complex than simple shell globbing.
+                 A dot (.) matches any character, while '*' matches zero or more of the previous character.
+                 See re_format(7) for a complete description of the syntax.
+
+   --files package-id
+                 List all of the files installed under the package-id.
+
+   --export-plist package-id
+                 Print all receipt information about the specified package-id in the standard macOS plist(5) format.
+
+   --verify package-id
+                 Run repair_packages(8) to verify the specified package-id.
+
+   --repair package-id
+                 Run repair_packages(8) to repair the specified package-id.
+
+   --pkg-info package-id
+                 Print extended information about the specified package-id.
+
+   --pkg-info-plist package-id
+                 Print extended information about the specified package-id in macOS plist(5) format.
+
+   --forget package-id
+                 Discard all receipt data about package-id, but do not touch the installed files.
+                 DO NOT use this command from an installer package script to fix broken package design.
+
+   --learn path
+                 Update the ACLs of the given path in the receipt identified by --edit-pkg.  This affects subsequent repair
+                 operations on the package. This command cannot be used from package postinstall scripts, but if a postinstall
+                 script changes the ACLs on the installed files, the receipt is automatically be updated to reflect those changes. 
+                 This command will not update the filesystem permissions in the receipt.
+
+   --pkg-groups package-id
+                 List all of the package groups this package-id is a member of.
+
+   --groups    List all of the package groups on the specified --volume.
+
+   --groups-plist
+                 List all of the package groups on the specified --volume in macOS plist(5) format.
+
+   --group-pkgs group-id
+                 List all of the packages that are members of this group-id.
+
+   --file-info path
+                 Show the metadata known about path.
+
+   --file-info-plist path
+                 Show the metadata known about path in macOS plist(5) format.</pre>
+<p> FILE COMMANDS<br>
+</p>
+<pre>   --expand pkg-path dir-path
+                 Expand the flat package at pkg-path into a new directory specified by dir-path.
+
+   --flatten dir-path pkg-path
+                 Flatten the dir-path into a new flat package created at pkg-path.
+                 The directory to be flattened must have the proper contents and layout for a flat package.
+                 This is not intended as a substitute for pkgbuild(1).
+
+   --bom path    Extract any BOM files from the flat pkg at path into /tmp and return the filename(s).
+                 Suggested use is as an argument to lsbom(8).  Eg, "lsbom `pkgutil --bom path`".
+                 Note that some flat package archives may contain no BOM, one BOM, or several BOMs.
+
+   --payload-files path
+                 List the files archived within the payload of the uninstalled flat package(s) contained at path.
+                 This should be equivalent to "lsbom -s `pkgutil --bom path`".
+                 Note that flat package archives may contain more than one package, and the destination location
+                 for the uninstalled package(s) is unknown to this command.
+
+   --check-signature pkg-path
+                 Check the validity and trust of the signature on the package at pkg-path.
+                 In addition to the status of the signature, the associated certificate chain will be shown.</pre>
+<h3><a id="e"></a>Examples</h3>
+<p>List all the installed packages on this mac:</p>
+<p class="code">$ pkgutil --pkgs</p>
+<p>List all the files of the AddressBook package:</p>
+<p class="code">$ pkgutil --files com.apple.pkg.AddressBook</p>
+<p>List only directories of the AddressBook package:</p>
+<p class="code">$ pkgutil --files com.apple.pkg.AddressBook --only-dirs</p>
+<p>List the MacOS package(s) a file belongs to (if any) in this case for the file zsh:</p>
+<p class="code">$ pkgutil --file-info /bin/zsh</p>
+<p>Expand a  MacOS package to the downloads folder, this allows you to extract the individual files from a .pkg installer:</p>
+<p class="code">$ pkgutil –expand example.pkg ~/Downloads</p>
+<p class="quote"><i> &ldquo;What frightens me is the idea that what Radiohead does is basically packaged back to people in the form of entertainment, to play in their car stereos on their way to work&rdquo; ~ Thom Yorke on Thom Yorke</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="installer.html">installer</a> - System software and .pkg package installer tool.<br>
+repair_packages(8)<br>
+pkgbuild(1)<br>
+productbuild(1)<br>
+<a href="xcode-select.html">xcode-select</a> - Install the command line developer tools.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

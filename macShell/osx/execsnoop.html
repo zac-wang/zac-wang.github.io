@@ -1,0 +1,77 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>execsnoop Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>execsnoop</h1> 
+<p> Snoop new process execution. Uses DTrace.</p>
+<pre>Syntax
+      execsnoop [-a|-A|-ejhsvZ] [-c <i>command</i>]
+
+Key
+   -a     print all data
+
+   -A     dump all data, space delimited
+
+   -e     safe output, parseable. This prevents the ARGS field  containing
+          "\n"s, to assist postprocessing.
+
+   -j     print project ID
+
+   -s     print start time, us
+
+   -v     print start time, string
+
+   -Z     print zonename
+
+   -c <i>command</i>
+          command name to snoop</pre>
+<p> execsnoop  prints  details  of  new  processes  as  they  are executed.        Details such as UID, PID and argument listing are printed out.        This program is very useful to examine short lived processes that would        not normally appear in a prstat or &quot;<a href="ps.html">ps -ef</a>&quot; listing. Sometimes applications will run hundreds  of  short  lived  processes  in  their  normal        startup cycle, a behaviour that is easily monitored with execsnoop.        </p>
+<p>Since  this  uses  DTrace, only users with root privileges can run this        command.</p>
+<p>execsnoop will run forever until Ctrl-C is hit.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>       Default output, print processes as they are executed,<br>
+<span class="code">$ execsnoop</span><br>
+<br>
+Print human readable timestamps,<br>
+<span class="code">$ execsnoop -v</span><br>
+<br>
+Print zonename,<br>
+<span class="code">$ execsnoop -Z</span><br>
+<br>
+Snoop this command only,<br>
+<span class="code">$ execsnoop -c ls</span><br>
+</p>
+<h2> Fields<br>
+</h2>
+<pre>  UID    User ID
+  PID    Process ID
+  PPID   Parent Process ID
+  COMM   command name for the process
+  ARGS   argument listing for the process
+  ZONE   zonename
+  PROJ   project ID
+  TIME   timestamp for the exec event, us
+  STRTIME timestamp for the exec event, string</pre>
+<p class="quote"><i>&quot;It's the way to educate your eyes. Stare. Pry, listen eavesdrop. Die knowing something. You are not here long&quot; ~ Walker Evans</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="iosnoop.html">iosnoop</a> - Snoop I/O events as they occur.<br>
+dtrace - generic front-end to the DTrace facility.<br>
+<a href="https://web.archive.org/web/20200311204404/http://dtrace.org/blogs/brendan/2011/10/10/top-10-dtrace-scripts-for-mac-os-x/">Top 10 DTrace scripts</a> - Brandan Gregg (author of the <a href="http://www.brendangregg.com/dtracebook/index.html">dtrace book</a>).</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

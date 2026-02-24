@@ -1,0 +1,60 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>mdutil Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>mdutil</h1> 
+<p>Manage the metadata stores used by Spotlight.</p>
+<pre>Syntax
+      mdutil [-pEsav] [-i on | off] <i>volume</i> ...
+
+Key
+
+   -E  This flag will cause each local store for the volumes indicated to be
+       erased. The stores will be rebuilt if appropriate (if they contain files).
+
+   -i on | off
+       Set the indexing status for the provided volumes to on or off.  Note
+       that indexing can be delayed due to low disk space or other conditions.
+
+   -p  Purge network cache. Spotlight caches indexes of some network devices locally.
+       This option requests that all local caches be flushed to the appropriate
+       network device.
+
+   -s  Display the indexing status of the listed volumes.
+
+   -a  Apply command to all volumes.
+
+   -v  Print verbose information when available.</pre>
+<p>To get a list of the available attributes for use in constructing queries, see mdimport(1), particularly the -X switch.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Show the indexing status of the root volume:</p>
+<p class="code"> $ mdutil -s /</p>
+<p>Erase and rebuild the spotlight index, this will often fix missing metadata in Finder after an OS upgrade: </p>
+<p class="code"> $ mdutil -E /</p>
+<p>Prevent spotlight from indexing all devices:</p>
+<p class="code">$ sudo mdutil -a -i off</p>
+<p class="quote"><i>&ldquo;After all these years, I am still involved in the process of self-discovery. It's better to explore life and make mistakes than to play it safe. Mistakes are part of the dues one pays for a full life&rdquo; ~ Sophia Loren</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="find.html">find</a> - Search for files that meet a desired criteria.<br>
+<a href="mdfind.html">mdfind</a> - Spotlight search.<br>
+<a href="mdimport.html">mdimport</a> - Import file hierarchies into the Spotlight datastore.<br>
+<a href="mdls.html">mdls</a> - List the metadata attributes for a specified file.<br>
+<a href="https://support.apple.com/en-gb/HT201716">HT201716</a> - Rebuild the Spotlight index (System Preferences ➞ Spotlight ➞ Privacy).</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>caller Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>caller</h1> 
+<p>Return the context of any active subroutine call (a shell function or a script) executed with the . or <span class="code">source</span> builtins.</p>
+<pre>Syntax
+      caller [expr]</pre>
+<p>Without <i>expr</i>, caller displays the line number and source filename
+of the current subroutine call.  If a non-negative integer is supplied as  expr,  caller  displays
+  the line number, subroutine name, and source file corresponding to that position in the
+current execution call stack.  This extra information can be used, for  example,  to  print  a
+stack  trace.   </p>
+<p>The  current  frame is frame 0.  </p>
+<p>The return value is 0 unless the shell is not
+executing a subroutine call or <i>expr</i> does not correspond to a valid position in the call stack.</p>
+<p>caller is a builtin command.</p>
+<h3><a id="e"></a>Examples</h3>
+<pre>$ caller
+</pre>
+<p class="quote"><i>&ldquo;...for the Pot to call the Kettle black&rdquo; - William Penn</i></p>
+<h3>Related macOS commands</h3>
+<p><a href="md5.html">source</a> - Execute commands from a file.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></p></body>
+</html>

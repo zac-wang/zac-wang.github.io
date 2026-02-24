@@ -1,0 +1,113 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>osascript Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>osascript</h1> 
+<p>Execute AppleScripts and other OSA language scripts. Executes
+  the given script file, or standard input if none is
+given. Scripts can be plain text or compiled scripts. osascript was
+designed for use with AppleScript,
+but will work with any Open Scripting Architecture (OSA) language.</p>
+<pre>Syntax
+      osascript [-l <i>language</i>] [-e <i>command</i>] [-s <i>flags</i>] [<i>programfile</i>]
+
+Key:<i></i>
+   <b>-e</b> <i>command</i>
+      Enter one line of a script.  Multiple <b>-e</b> commands can be given to build up a multi-line script.
+      If <b>-e</b> is given, osascript will not look for a filename in the argument list.
+ 
+      Because most scripts use characters that are special to many shell programs
+      (e.g., Apple-Script uses single and double quote marks, (, ), and *), the <i>command</i>
+      will have to be correctly quoted and escaped to get it past the shell intact.
+
+   -i
+      Interactive mode: osascript will prompt for one line at a time, and output the result, if applicable,
+      after each line. Any script supplied as a command argument using -e or programfile will be loaded,
+      but not executed, before starting the interactive prompt. 
+
+   <b>-l</b> <i>language</i>
+      Override the language for any plain text files.  Normally, plain text files are compiled as AppleScript.
+
+   <b>-s</b> <i>flags</i>
+     Modify the output style.  The <i>flags</i> argument is a string consisting of any of the
+     modifier characters <b>e</b>, <b>h</b>, <b>o</b>, and <b>s</b>. 
+     Multiple modifiers can be concatenated in the same string, and multiple <b>-s</b> options can be specified.
+
+     The modifiers come in exclusive pairs;
+     if conflicting modifiers are specified, the last one takes precedence.
+     The meanings of the modifier characters are as follows:
+
+        <b>h</b>  Print values in human-readable form (default).
+        <b>s</b>  Print values in recompilable source form.
+
+     osascript normally prints its results in human-readable form:
+     strings do not have quotes around them, characters are not escaped,
+     braces for lists and records are omitted, etc.  This is generally more useful, but can
+     introduce ambiguities.  For example, the lists '{"foo", "bar"}' and '{{"foo", {"bar"}}}' would
+     both be displayed as 'foo, bar'.  
+
+     To see the results in an unambiguous form that could be recompiled into the same value, use
+     the <b>s</b> modifier:
+
+        <b>e</b>  Print script errors to stderr (default).
+        <b>o</b>  Print script errors to stdout.</pre>
+<p>osascript normally prints script errors to stderr, so downstream clients only see
+valid results.  When running automated tests, however, using the <b>o</b> modifier lets you distinguish script
+errors, which you care about matching, from other diagnostic
+output, which you don't.</p>
+<p> osascript in  macOS 10.0 would translate <span class="code">\r</span> characters in
+  the output to <span class="code">\n</span> and provided c and r modifiers for the -s option to change
+this. osascript now always leaves the output alone; pipe through <a href="tr.html">tr</a> if necessary.</p>
+<p>For multi-line AppleScript you can use  ¬ as a new line continuation character, press <span class="code">Option-L</span> to  enter this into your text editor.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Open or switch to Safari:<br>
+<span class="code">$ osascript -e 'tell app &quot;Safari&quot; to activate'</span></p>
+<p>Close safari: <span class="code"><br>
+$ osascript -e 'quit app &quot;safari.app&quot;'</span></p>
+<p>Empty the trash:<span class="code"><br>
+$ osascript -e 'tell application &quot;Finder&quot; to empty trash'</span></p>
+<p>Set the output volume to 50%<span class="code"><br>
+$ sudo osascript -e 'set volume output volume 50'</span></p>
+<p>Input volume and Alert volume can also be set from 0 to 100%: <br>
+<span class="code">$ sudo osascript -e 'set volume input volume 40'</span><br>
+<span class="code">$ sudo osascript -e 'set volume alert volume 75'</span><br>
+</p>
+<p>Mute the output volume (True/False):<br>
+<span class="code">$ 
+osascript -e 'set volume output muted TRUE'</span></p>
+<p>Toggle volume muting:<br>
+<span class="code">$ osascript -e 'set volume output muted not (output muted of (get volume settings))'</span></p>
+<p>Toggle system theme:<br>
+<span class="code">$ 
+osascript -e 'tell application &quot;System Events&quot; to tell appearance preferences to set dark mode to not dark mode'</span></p>
+<p>Shut down without asking for confirmation:<br>
+<span class="code">$ 
+osascript -e 'tell app &quot;System Events&quot; to shut down'</span></p>
+<p>Restart without asking for confirmation:<br>
+<span class="code">$ 
+osascript -e 'tell app &quot;System Events&quot; to restart'</span></p>
+<p class="quote"><i>&ldquo;Every time I get a script it's a matter of trying to know what I could do with it. I see colors, imagery. It has to have a smell. It's like falling in love. You can't give a reason why&rdquo; ~ Paul Newman</i></p>
+<h3>Related macOS commands</h3>
+<span class="space">osalang(1) - list the OSA languages
+installed on your system.<br>
+<a href="osacompile.html">osacompile</a> - Compile Applescript</p>.<br>
+<a href="pkill.html">pkill</a> - Kill processes by a full or partial name.</span><br>
+<a href="https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html">Introduction to AppleScript</a> - Language Guide.<!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

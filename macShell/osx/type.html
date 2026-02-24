@@ -1,0 +1,80 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>type Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>type</h1> 
+<p>Describe a command. For each <i>name</i>, indicate how it would be interpreted if used as a command name.</p>
+<pre>Syntax
+      type [-aftpP] <i>name</i> [<i>name</i> ...]
+
+Key
+   -a  Print all the places that contain an executable named <i>name</i>. </pre>
+<blockquote>
+<blockquote>
+<p>This  includes  aliases and functions,  if  and only if the -p option is not also used. <br>
+The table of hashed commands is not consulted when using -a. </p>
+</blockquote>
+</blockquote>
+<pre>   -t   Print a string describing the file type which is one of:
+           alias    (shell alias)
+           function (shell function)
+           builtin  (shell builtin)
+           file     (disk file)
+           keyword  (shell reserved word) </pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<p> If the <i>name</i> is not found, then nothing is printed, and an exit status of false is returned. </p>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre>   -f  Suppress shell function lookup, as with the command builtin.
+
+   -p  Print the path of the disk file that <i>name</i> would execute as a command.
+       returns nothing if 'type -t name' would not return <b>file</b>.
+
+   -P  Force a PATH search for each <i>name</i>, even if 'type -t name' would not return <b>file</b>.</pre>
+<blockquote>
+<blockquote>
+<p>If a command is hashed, -p and -P print the hashed value, not necessarily  the file that appears first in PATH. </p>
+</blockquote>
+</blockquote>
+<pre>
+With no options, indicate how each <i>name</i> would be interpreted if used as a command name.</pre>
+<p>type returns true if any of the arguments are found, false if none are found.</p>
+<p>This is a BASH shell builtin, to display your local syntax from the bash prompt type: <span class="code">help [t]ype</span></p>
+<h3><a id="e"></a>Examples</h3>
+<pre> $ type -a grep
+ grep is /usr/bin/grep
+ 
+ $ type type<br> type is a shell builtin
+
+ $ type lsl
+ lsl is a function
+ lsl ()
+ {
+    ls -l $1
+ }</pre>
+<p class="quote"><i>&quot;Character is not made in a crisis - it is only exhibited&quot; ~ Robert Freeman </i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="which.html">which</a> - Locate a program file in the user's path.<br>
+<a href="ls.html">ls</a> - List information about file(s).<br>
+<a href="locate.html">locate</a> - Find files.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

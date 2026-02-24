@@ -1,0 +1,84 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>getopt Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>getopt</h1> 
+<p>Parse positional parameters.<br>
+  Break up the options in a command line (for easy parsing by shell procedure), 
+and check for legal options.</p>
+<pre>Syntax
+      args=`getopt <i>optstring</i> $*` ; errcode=$?; set -- $<i>args</i>
+
+Options<i>
+</i>   <i>Optstring</i>  A string of recognized option letters 
+              either individual characters or characters followed by a colon 
+              to indicate an argument is to follow.
+              e.g. an option string  x recognizes an option "-x",
+              and an option string  x: recognizes an option and argument "-x <i>argument</i>".
+              It does not matter if the argument has leading white space.
+
+   --        This special option is used to delimit the end of the options.
+             getopt will place  `--' in the arguments at the end of the options,
+             or recognize it if used  explicitly. 
+
+($1 $2 ...)   The shell arguments  are reset so that each
+              option is preceded by a `-' and in its own shell argument; 
+              each option argument is also in its own shell argument.</pre>
+<h3><a id="e"></a>Examples</h3>
+<p>The following code fragment shows how one might process the arguments for a command that can take the options -a and -b, and the option -o, which requires an argument.</p>
+<pre>     args=`getopt abo: $*`
+     # you should not use `getopt abo: "$@"` since that would parse
+     # the arguments differently from what the set command below does.
+     if [ $? != 0 ]
+     then
+       echo 'Usage: ...'
+       exit 2
+     fi
+     set -- $args
+     # You cannot use the set command with a backquoted getopt directly,
+     # since the exit code from getopt would be shadowed by those of set,
+     # which is zero by definition.
+     for i
+     do
+       case "$i"
+       in
+         -a|-b)
+           echo flag $i set; sflags="${i#-}$sflags";
+           shift;;
+         -o)
+           echo oarg is "'"$2"'"; oarg="$2"; shift;
+           shift;;
+         --)
+           shift; break;;
+       esac
+     done
+     echo single-char flags: "'"$sflags"'"
+     echo oarg is "'"$oarg"'"
+
+     This code will accept any of the following as equivalent:
+
+     cmd -aoarg file file
+     cmd -a -o arg file file
+     cmd -oarg -a file file
+     cmd -a -oarg -- file file</pre>
+<p class="quote"><i>&ldquo;You spend a good piece of your life gripping a baseball and in the end it turns out that it was the other way around all the time&rdquo; ~ Jim Bouton </i></p>
+<h3>Related macOS commands</h3>
+<p><a href="getopts.html">getopts</a> - Parse positional parameters.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

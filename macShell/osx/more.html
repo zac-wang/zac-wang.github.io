@@ -1,0 +1,67 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>more Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>more</h1> 
+<p>Page through text one screenful at a time, <a href="less.html">less</a> 
+provides <i>more</i> emulation and extensive enhancements.</p>
+<pre>Syntax
+
+     more [-dlfpcsu] [-num] [+/ <i>pattern</i>] [+ <i>linenum</i>] [<i>file</i> ...]
+
+Options
+     -num  This option specifies an integer which is the screen size (in
+           lines).
+
+     -d    more will prompt the user with the message "[Press space to continue,
+           'q' to quit.]" and will display "[Press 'h' for instructions.]"
+           instead of ringing the bell when an illegal key is pressed.
+
+     -l    more usually treats ^L (form feed) as a special character, and will
+           pause after any line that contains a form feed.  The -l option will
+           prevent this behavior.
+
+     -f    Causes more to count logical, rather than screen lines (i.e., long
+           lines are not folded).
+
+     -p    Do not scroll.  Instead, clear the whole screen and then display
+           the text.
+
+     -c    Do not scroll.  Instead, paint each screen from the top, clearing
+           the remainder of each line as it is displayed.
+
+     -s    Squeeze multiple blank lines into one.
+
+     -u    Suppress underlining.
+
+     +/    The +/ option specifies a string that will be searched for before
+           each file is displayed.
+
+     +num  Start at line number num.</pre>
+<p> The -n and -v options are non-standard and their use in scripts 
+  is not recommended. </P>
+<p>When the output of <span class="code">more</span> is redirected to a file, it outputs a small header for each file:<br>
+<span class="code">:::::::::::::: filename.txt ::::::::::::::</span></P>
+<p class="quote"><i>&quot;If I had my life to live over, I'd make more mistakes next time. I would relax. I would limber up...&quot; ~ Jenny Joseph</i></P>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="echo.html">echo</a> - Display message on screen.<br>
+<a href="less.html">less</a> - Display output one screen at a time.<br>
+<a href="tee.html">tee</a> - Redirect output to multiple files.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

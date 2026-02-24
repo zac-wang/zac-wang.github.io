@@ -1,0 +1,116 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>kextfind Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>kextfind</h1> 
+<p>Find kernel extensions (kexts) based on a variety of criteria      and print information.</p>
+<pre>Syntax:
+
+     kextunload [<i>options</i>] [--] [<i>kext </i>...]
+
+Options
+
+    kext     Unload the loaded kext whose bundle identifier matches the
+              CFBundleIdentifier of kext.  All instances of IOService sub-
+              classes defined by the loaded kext and in the IOService plane of
+              the I/O Registry are terminated; the kext is checked to make
+              sure no instances of its libkern C++ classes remain; the kext's
+              C++ static destructores and module stop routine are invoked;
+              then the kext's executable and IOKitPersonalities are unloaded
+              from the kernel.  Failure at any stage prevents kext unload.
+
+     -b <i>identifier</i>, -bundle-id <i>identifier</i>
+              Unload executable and IOKitPersonalities (as described immedi-
+              ately above) for the kext whose CFBundleIdentifier is
+              identifier.
+
+     -c <i>classname</i>, -class <i>classname</i>
+              Terminate all instances of class classname that are in the
+              IOService plane of the I/O Registry, if possible, but do not
+              unload the defining kext or its IOKitPersonalities.  New load
+              requests for devices that were driven by these terminated
+              instances may result in the same class being instantiated at any
+              time.
+
+     -h, -help
+              Print a help message describing each option flag and exit with a
+              success result, regardless of any other options on the command
+              line.
+
+     -m <i>identifier</i>
+              Same as -b (remains for backward compatibility).
+
+     -p, -personalities-only
+              Terminate services and remove personalities only; do not unload
+              kexts.
+
+     -q, -quiet
+              Quiet mode; print no informational or error messages.
+
+     -v [0-6 | 0x####], -verbose [0-6 | 0x####]
+              Verbose mode; print information about program operation.  Higher
+              levels of verbosity include all lower levels.  By default
+              kextunload prints only warnings and errors.  You can specify a
+              level from 0-6, or a hexadecimal log specification (as described
+              in kext_logging(8)). The levels of verbose output are:
+
+              0            Print only errors (that is, suppress warnings); see
+                           also -quiet.
+
+              1 (or none)  Print basic information about program operation.
+
+              2            Prints information about unload stages.
+
+              3            Prints information about removal of personalities.
+
+              4            Prints information about module stop functions and
+                           C++ class destruction.
+
+              5            Prints detailed information internal operations
+                           such as bookkeping.
+
+              6            Identical to level 5 for kextunload.
+
+              Unlike in other kext tools, the -verbose flag in kextunload
+              applies to all kexts (that is, it turns on hexadecimal bit 0x8
+              by default).  See kext_logging(8) for more information on ver-
+              bose logging.</pre>
+<p>The kextunload program is used to terminate and unregister I/O Kit objects associated with a kernel extension (kext) and to unload the code and personalities for that kext.</p>
+<p> kextunload must run with <a href="sudo.html">superuser</a> privileges.</p>
+<p> If another loaded kext has a dependency on the kext being unloaded, the unload will fail.  You can determine whether a kext has dependents using the kextstat(8) tool.      kextunload is a formal interface for unloading kexts in the Darwin OS and in macOS.  Software and installers can rely on its presence and invoke it in order to unload kexts.</p>
+<h2>Exit Code</h2>
+<blockquote>
+<p>kextunload exits with a zero status upon success, or prints an error mes-      sage and exits with a nonzero status upon failure.</p>
+</blockquote>
+<h2>Bugs</h2>
+<blockquote>
+<p>Many single-letter options are inconsistent in meaning with (or directly      contradictory to) the same letter options in other kext tools.</p>
+</blockquote>
+<h3><a id="e"></a>Examples</h3>
+<p>Unload the Macally ICE keyboard driver</p>
+<p class="code">$ sudo kextunload /System/Library/Extensions/ICEKey.kext</p>
+<p class="quote"><i>&quot;To be a traveler—and novelists are often travelers—is to be constantly reminded of the simultaneity of what is going on in the world, your world and the very different world you have visited and from which you have returned home” ~ Susan Sontag</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="kextfind.html">kextfind</a> - List kernel extensions.<br>
+<a href="kextstat.html">kextstat</a> - Display status of loaded kernel extensions.<br>
+kextutil - load, diagnose problems with, and generate symbols for kernel      extensions.<br>
+<a href="find.html">find</a> - Search for files that meet a desired criteria.<br>
+<a href="xargs.html">xargs</a> - Execute utility - passing arguments.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

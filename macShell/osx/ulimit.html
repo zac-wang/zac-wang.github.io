@@ -1,0 +1,83 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>ulimit Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>ulimit</h1> 
+<p>User limits - limit the use of system-wide resources.</p>
+<pre>Syntax
+      ulimit [-acdefHilmnpqrsStuvx [<i>limit</i>]]<br>
+Key
+   -S   Set a soft limit for the given resource
+   -H   Set a hard limit for the given resource
+
+   -a   All current limits are reported
+   -c   The maximum size of core files created
+   -d   The maximum size of a process's data segment
+   -e   The maximum scheduling priority ("nice")
+   -f   The maximum size of files written by the shell and its children
+   -i   The maximum number of pending signals
+   -l   The maximum size that may be locked into memory
+   -m   The maximum resident set size
+   -n   The maximum number of open file descriptors (most systems do not allow this value to be set)
+   -p   The pipe size in 512-byte blocks (this may not be set)
+   -q   The maximum number of bytes in POSIX message queues
+   -r   The maximum real-time scheduling priority
+   -s   The maximum stack size  
+   -t   The maximum amount of cpu time in seconds
+   -u   The maximum number of processes available to a single user
+   -v   The maximum amount of virtual memory available to the shell
+   -x   The maximum number of file locks
+
+ <i>limit </i> The new value of the specified resource (use -a to display only)</pre>
+<p>ulimit provides control over the resources available to the shell and to processes started by it, on systems that allow such control. </p>
+<p>The soft limit is the value that the kernel enforces for the corresponding resource. The hard limit acts as a ceiling for the soft limit.</p>
+<p>An unprivileged process may only set its soft limit to a value in the range from 0 up to the hard limit, and (irreversibly) lower its hard limit. A privileged process may make arbitrary changes to either limit value.</p>
+<p>A hard limit cannot be increased once it is set; a soft limit may be increased up to the value of the hard limit.<br>
+If neither -H nor -S is specified, both the soft and hard limits are set. </p>
+<p>The value of <i>limit</i> can be a number in the unit specified for the resource or one of the special values <span class="code">hard</span>, <span class="code">soft</span>, or <span class="code">unlimited</span>, which stand for the current hard limit, the current soft limit, and no limit, respectively. </p>
+<p>If <i>limit</i> is omitted, the current value of the soft limit of the resource is printed, unless the -H option is given.<br>
+When more than one resource is specified, the limit name and unit are printed before the value.</p>
+<p>If no option is given, then -f is assumed. Values are in 1024-byte increments, except for -t, which is in seconds, -p, which is in units of 512-byte blocks, and -n and -u, which are unscaled values. </p>
+<p>The return status is 0 unless an invalid option or argument is supplied, or an error occurs while setting a new limit.</p>
+<p>This is a BASH shell builtin, to display your local syntax from the bash prompt type: <span class="code">help ulimit</span></p>
+<h3><a id="e"></a>Examples</h3>
+<pre>$ ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+file size               (blocks, -f) unlimited
+max locked memory       (kbytes, -l) unlimited
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 256
+pipe size            (512 bytes, -p) 1
+stack size              (kbytes, -s) 8192
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 709
+virtual memory          (kbytes, -v) unlimited</pre>
+<p>Setting Max User Processes too low can cause problems, but setting it too high
+could potentially allow a bash <a href="https://www.unixmen.com/fork-bomb-can-prevent-danger/">forkbomb</a> to crash the system.
+
+$ ulimit -u 300
+$ ulimit -u
+300</p>
+<p class="quote"><i>&ldquo;Every man is a damn fool for at least five minutes every day; wisdom consists of not exceeding that limit&rdquo; ~ Elbert Hubbard</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="quota.html">quota</a> - Display disk usage and limits.<br>
+<a href="tccutil.html">tccutil</a> - Manage the privacy database.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

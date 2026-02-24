@@ -1,0 +1,45 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>pbcopy Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>pbcopy</h1> 
+<p>Copy data  from STDIN to the clipboard.</p>
+<pre>Syntax
+      pbcopy  [-<i>pboard</i> {<u>general</u> | ruler | find | font}]
+
+Key
+   -pboard  Specify a pasteboard to copy to.
+            By default the general pasteboard.</pre>
+<p>Takes the standard input and places it in the specified pasteboard. If no pasteboard is specified, the general pasteboard will be used by default. </p>
+<p>The input is placed in the pasteboard as ASCII data unless it begins with the Encapsulated PostScript (EPS) file header or the Rich Text Format (RTF) file header, in which case it is placed in
+the pasteboard as one of those data types.</p>
+<h3><a id="e"></a>Examples</h3>
+<p># Copy a list of files in your home directory to the macOS clipboard:<br>
+<span class="code">$ ls ~ | pbcopy</span></p>
+<p># Copy the contents of a file to the clipboard:<br>
+<span class="code">$ pbcopy < cookies.txt</span><span class="code"></span></p>
+<p># Copy part of a file to the clipboard:<br>
+<span class="code">$ grep 'ip address' serverlist.txt | pbcopy</span><br>
+<br>
+<i class="quote">"God shows his contempt for wealth by the kind of person he selects to receive it&quot; ~ Austin O'Malley</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="pbpaste.html">pbpaste</a> Paste data from the Clipboard.<br>
+<a href="printenv.html">printenv</a> - Print environment variables.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

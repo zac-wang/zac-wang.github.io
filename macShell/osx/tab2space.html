@@ -1,0 +1,52 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>tab2space Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>tab2space</h1> 
+<p>Expand tabs and ensure consistent line endings.</p>
+<pre>Syntax
+      tab2space [<i>options</i>] <b>[</b><i>infile</i> [<i>outfile</i>]<b>]</b> ...
+
+
+Options
+
+   -dos or -crlf  Set line ends to CRLF (Windows - default)
+
+   -mac or -cr    Set line ends to CR (classic Mac OS)
+
+   -unix or -lf   Set line ends to LF (Unix / Mac OS X)
+
+   -tabs          Preserve tabs, e.g. for Makefile.
+
+   -t<i>n</i>            Set tabs to <i>n</i> (default is 4) spaces.
+
+   -help or -h    Display this help message.</pre>
+<p> The iconv program converts the encoding of characters in inputfile from one coded character set to another. The result is written to standard output unless otherwise specified by the --output option. </p>
+<h3><a id="e"></a>Examples</h3>
+<p>Convert input.txt to have cr/lf line endings and save as output.txt </p>
+<p class="code">$ <span class="space">tab2space</span> input.txt output.txt</p>
+<p>Convert input.txt to have unix LF line endings and save as output.txt </p>
+<p class="code">$ <span class="space">tab2space</span> -lf input.txt output.txt</p>
+<p class="quote"><i> &ldquo;Plus ça change, plus c'est la même chose (The more things change, the more they are the same.)&rdquo; ~ Jean-Baptiste Alphonse Karr 1849.</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="chmod.html">chmod</a> - Change access permissions.<br>
+<a href="getfileinfo.html">GetFileInfo</a> - Get attributes of HFS+ files.<br>
+Equivalent PowerShell command: <a href="../ps/syntax-set-eol.html">set-eol.ps1</a></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

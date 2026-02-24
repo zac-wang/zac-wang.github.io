@@ -1,0 +1,58 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>case Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>case</h1> 
+<p>Expand <var>words</var>, and match against pattern.</p>
+<pre>Syntax
+      case <i>word</i> in [ [(] <i>pattern</i> [ | <i>pattern</i> ] ... ) <i>list</i> ;; ] ... esac</pre>
+<p>A case command first expands <i>word</i>, and tries to match it against each <i>pattern</i> in turn, using
+the same matching rules as for pathname expansion (see Pathname Expansion). </p>
+<p>The <i>word</i> is
+expanded using tilde expansion, parameter and variable expansion, arithmetic substitution,
+command substitution, process substitution and quote removal. </p>
+<p>Each <i>pattern</i> examined is
+expanded using tilde expansion, parameter and variable expansion, arithmetic substitution,
+command substitution, and process substitution. If the shell option nocasematch is enabled,
+the match is performed without regard to the case of alphabetic characters. </p>
+<p>When a match is
+found, the corresponding <i>list</i> is executed. After the first match, no subsequent matches are
+attempted. </p>
+<p><span class="body">Here is an example using <code>case</code> in a script that could be used to describe 
+one interesting feature of an animal: </span> </p>
+<pre>echo -n "Enter the name of an animal: "
+read ANIMAL
+echo -n "The $ANIMAL has "
+case $ANIMAL in
+  (horse | dog | cat) legs=four;;
+  (man | kangaroo ) legs=two;;
+  (*) echo -n "an unknown number of";;
+esac
+echo $legs" legs."</pre>
+<p>The exit status is zero if no pattern matches. Otherwise, it is the exit status
+of the last command executed in list.</p>
+<p>case is a bash builtin command </p>
+<p class="quote"><i>&ldquo;In expanding the field of knowledge, we but increase the horizon of ignorance&rdquo; ~ Henry Miller </i> </p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="break.html">break</a> - Exit from a loop.<br>
+<a href="for.html">for</a> - Loop command.<br>
+<a href="while.html">while</a> - Loop command.<br>
+continue - Resume the next iteration of a while or for loop.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>md5 Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>md5</h1> 
+<p>Calculate a message-digest fingerprint (checksum) for a file.</p>
+<pre>Syntax
+      md5 [-pqrtx] [-s <i>string</i>] [<i>file</i> ...]
+
+Key
+   -s    Print a checksum of the given <i>string</i>.
+
+   -p    Echo stdin to stdout and append the checksum to stdout.
+
+   -q    Quiet mode - only the checksum is printed out.  Overrides the -r option.
+
+   -r    Reverse the format of the output.  This helps with visual diffs.
+         Does nothing when combined with the -ptx options.
+
+   -t    Run a built-in time trial.
+
+   -x    Run a built-in test script.</pre>
+<p>The md5 utility takes as input a message of arbitrary length and produces as output a 'fingerprint' or 'message digest' of the input.  It is conjectured that it is computationally infeasible to produce two messages having the same message digest, or to produce any message having a given prespecified target message digest.</p>
+<p>The MD5 algorithm is intended for digital signature applications, where a large file must be 'compressed' in a secure manner before being encrypted with a private (secret) key under a public-key cryptosystem such as RSA. MD5's designer Ron Rivest has stated &quot;md5 and sha1 are both clearly broken (in terms of collision-resistance)&quot;.  So MD5 should be avoided when creating new protocols, or implementing protocols with better options.  SHA256 and SHA512 are better options as they have been more resilient to attacks (as of 2009).</p>
+<p>The options may be used in any combination and must precede any files named on the command line. The hexadecimal checksum of each file listed on the command line is printed after the options are processed.</p>
+<p>Type <span class="code">md5</span> followed by a space. Drag the file into the Terminal window to complete the filename, then hit Return.</p>
+<p>The md5 utility exits 0 on success, and 1 if at least one of the input files could not be read.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Calculate a checksum for the file '<span class="code">/Users/jayden/Downloads/demo.dmg</span>':</p>
+<p class="code"> $ MD5 /Users/jayden/Downloads/demo.dmg<br>
+MD5 (/Users/jayden/Downloads/demo.dmg) = 0cd6120d85f8c9a864d482ecd261e9f4</p>
+<p class="quote"><i>&ldquo;Each day on twitter there is one main character. The goal is to never be it&rdquo; ~ @maplecocaine</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="cksum.html">cksum</a> - Print CRC checksum and byte counts.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

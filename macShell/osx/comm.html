@@ -1,0 +1,74 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>comm Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>comm</h1> 
+<p>Compare two sorted files line by line. Output
+the lines that are common, plus the lines that are unique.</p>
+<pre>Syntax
+      comm [-123i] <i>file1 file2</i>
+
+Options
+   -1    Suppress lines unique to <i>file1</i>
+   -2    Suppress lines unique to <i>file2</i>
+   -3    Suppress lines that appear in both files 
+   -i    Case insensitive comparison of lines</pre>
+<p>  With no options, 'comm' produces three text columns as output. The  utility reads <i>file1</i> and file2, <i>which</i> should be sorted lexically.<br>
+This will output:</p>
+<pre> Lines only in file1; Lines only in file2; Lines in both files. </pre>
+<p>If printing of a column is suppressed, the output will be padded 
+with TAB characters.</p>
+<p> The options -1, -2, and -3 suppress printing of the corresponding columns.<br>
+The filename<span class="code"> '-' </span>means standard input.</p>
+<p>Each column will have a number of tab characters prepended to it equal to
+the number of lower numbered columns that are being printed. For example, if column number two is being suppressed, lines printed in column
+number one will not have any tabs preceding them, and lines printed in
+column number three will have one.</p>
+<p> The comm utility assumes that the files are lexically sorted; all characters participate in line comparisons.</p>
+<p>Unlike some other comparison utilities, 'comm' has an exit status that does 
+  not depend on the result of the comparison. Upon normal completion 'comm' produces 
+an exit code of zero. If there is an error it exits with nonzero status. <br>
+<br>
+Collation sorting: the LANG, LC_ALL, LC_COLLATE, and LC_CTYPE environment variables affect
+the execution of comm as described in environ(7)</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Return the unique lines in the file words.txt that don't exist in countries.txt</p>
+<p><span class="code">$ comm -23 &lt;(sort words.txt | uniq) &lt;(sort countries.txt | uniq)</span></p>
+<p>Return the lines that are in both words.txt and countries.txt:</p>
+<p><span class="code">$ comm -12 &lt;(sort words.txt | uniq) &lt;(sort countries.txt | uniq)</span></p>
+<p>Return the files that are in the directory 'march' but not in the directory 'april':</p>
+<p><span class="code">$ comm -23 &lt;(ls march) &lt;(ls april)</span></p>
+<p>Return the files that are in the directory 'march' but not in the directory 'april':</p>
+<p><span class="code">$ comm -23 &lt;(ls march) &lt;(ls april)</span></p>
+<p>Return the files that are in the directory 'april' but not in the directory 'march':</p>
+<p><span class="code">$ comm -13 &lt;(ls march) &lt;(ls april)</span></p>
+<p>Copy those files to the directory 'result'</p>
+<p class="code">$ mkdir result<br>
+$ cp april/`comm -13 &lt;(ls march) &lt;(ls april)` result</p>
+<p class="quote"><i>&ldquo;When I'm President, I will go line by line to make sure that we are not spending money unwisely&rdquo; - Barack Obama </i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="cmp.html">cmp</a> - Compare two files.<br>
+<a href="diff.html">diff</a> - Display the differences between two files.<br>
+<a href="diff3.html">diff3</a> - Show differences among three files.<br>
+<a href="sdiff.html">sdiff</a> - merge two files interactively.<br>
+<a href="sort.html">sort</a> - Sort text files.<br>
+<a href="uniq.html">uniq</a> - Uniquify files.<br>
+<a href="syntax-substitution.html">Command substitution</a> - `with backquotes`</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

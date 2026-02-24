@@ -1,0 +1,186 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>date Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>date</h1> 
+<p>Display or set date and time. <br>
+  Displays the current date and time when invoked without arguments. Providing 
+  arguments will format the date and time in a user-defined way or set the date. 
+Only the superuser can set the date. </p>
+<pre>Syntax
+      date [-jnRu] [-r <i>seconds</i> | <i>filename</i>] [-v [+|-]<i>val</i>[ymwdHMS]] ... [+<i>output_fmt</i>]
+      date [-ju] [[[mm]dd]HH]MM[[cc]yy][.ss]
+      date [-jRu] -f <i>input_fmt new_date</i> [+<i>output_fmt</i>]
+      date [-jnu] [-I[FMT]] [-f <i>input_fmt</i>] [-r ...] [-v ...] [<i>new_date</i>]
+
+Key
+   -f      Use <i>input_fmt</i> as the format string to parse the <i>new_date</i> provided rather than using the
+           default [[[mm]dd]HH]MM[[cc]yy][.ss] format.  Parsing is done using strptime(3).
+
+   -I[<i>FMT</i>]
+           Use ISO 8601 output format.  <i>FMT</i> may be omitted, in which case the default is 'date'.
+           Valid FMT values are ‘date’, ‘hours’, ‘minutes’, and ‘seconds’.
+           The date and time is formatted to the specified precision.  When FMT is ‘hours’ (or the more
+           precise ‘minutes’ or ‘seconds’), the ISO 8601 format includes the timezone.
+
+   -j      Do not try to set the date.  This allows you to use the -f flag in addition to the + option
+           to convert one date format to another.  Note that any date or time components unspecified
+           by the -f <i>format</i> string take their values from the current time.
+
+   -n      Obsolete flag, accepted and ignored for compatibility.
+
+   -R      Use RFC 2822 date and time output format.
+           This is equivalent to using &quot;%a, %d %b %Y %T %z&quot; as <i>output_fmt</i> while LC_TIME is set to the &quot;C&quot; locale.
+
+   -r <i>seconds</i>
+           Print the date and time represented by <i>seconds</i>, where <i>seconds</i> is the number of seconds since
+           the <a href="https://www.epochconverter.com/">Epoch</a> (00:00:00 UTC, January 1, 1970; see time(3)), and can be specified in decimal, octal, or hex.
+
+   -r <i>filename</i>
+           Print the date and time of the last modification of filename.
+
+   -u      Display or set the date in UTC (Coordinated Universal) time.
+
+   -v      Adjust (i.e., take the current date and display the result of the adjustment; not actually set the date)
+           the second, minute, hour, month day, week day, month or year according to <i>val</i>.
+           If <i>val</i> is preceded with a plus or minus sign, the date is adjusted forwards or backwards according to the
+           remaining string, otherwise the relevant part of the date is set.
+           The date can be adjusted as many times as required using these flags. Flags are processed in the order given.
+
+           When setting values (rather than adjusting them), seconds are in the range 0-59, minutes are in the range 0-59,
+           hours are in the range 0-23, month days are in the range 1-31, week days are in the range 0-6 (Sun-Sat),
+           months are in the range 1-12 (Jan-Dec) and years are in the range 80-38 or 1980-2038.
+
+           If <i>val</i> is numeric, one of either y, m, w, d, H, M or S must be used to specify which part of the date is to
+           be adjusted.
+
+           The week day or month may be specified using a name rather than a number.
+           If a name is used with the plus (or minus) sign, the date will be put forwards (or backwards) to the next
+           (previous) date that matches the given week day or month.  This will not adjust the date, if the given week day
+           or month is the same as the current one.
+
+           When a date is adjusted to a specific value or in units greater than hours, daylight savings time considerations
+           are ignored.  Adjustments in units of hours or less honor daylight saving time.
+           So, assuming the current date is March 26, 0:30 and that the DST adjustment means that the clock goes  forward
+           at 01:00 to 02:00, using -v +1H will adjust the date to March 26, 2:30.
+           Likewise, if the date is October 29, 0:30 and the DST adjustment means that the clock goes back at 02:00 to 01:00,
+           using -v +3H will be necessary to reach October 29, 2:30.
+
+           When the date is adjusted to a specific value that does not actually exist (for example March 26, 1:30 BST 2000
+           in the Europe/London timezone), the date will be silently adjusted forwards in units of one hour until it reaches
+           a valid time.  When the date is adjusted to a specific value that occurs twice (for example October 29, 1:30 2000),
+           the resulting timezone will be set so that the date matches the earlier of the two times.
+
+           It is not possible to adjust a date to an invalid absolute day, so using the switches -v 31d -v 12m will simply fail
+           five months of the year.  It is therefore usual to set the month before setting the day; using -v 12m -v 31d always works.
+
+           Adjusting the date by months is inherently ambiguous because a month is a unit of variable length depending
+           on the current date.  This kind of date adjustment is applied in the most intuitive way.
+           First of all, date tries to preserve the day of the month.  If it is impossible because the target month is shorter
+           than the present one, the last day of the target month will be the result.
+           For example, using -v +1m on May 31 will adjust the date to June 30, while using the same option on January 30 will
+           result in the date adjusted to the last day of February.  This approach is also believed to make the most sense for
+           shell scripting.  Nevertheless, be aware that going forth and back by the same number of months may take you to a
+           different date.
+
+           Refer to the examples below for further details.</pre>
+<p>An operand with a leading plus (`+') sign signals a user-defined 
+  format string which specifies the format in which to display the date and time.<br>
+  The format string can contain any of the conversion specifications described 
+  in the strftime(3) manual page, as well as any arbitrary text. A <i>newline</i> character 
+is always output after the characters specified by the format string.</p>
+<pre>The format string for the default display is:
+
+     `%a %b %e %H:%M:%S %Z %Y'.
+
+     If an operand does not have a leading plus sign, it is interpreted as a
+     value for setting the system's notion of the current date and time.  The
+     canonical representation for setting the date and time is:
+
+     cc     Century (either 19 or 20) prepended to the abbreviated year.
+
+     yy     Year in abbreviated form (e.g., 89 for 1989, 06 for 2006).
+                   If 'yy' is specified,but 'cc' is not, a value for 'yy' between 
+       69 and 99 results in a 'cc' value of 19.
+       Otherwise, a 'cc' value of 20 is used.
+
+     mm     Numeric month, from 1 to 12.
+     dd     The day of the month, from 1 to 31.
+     hh     The hour of the day, from 0 to 23.
+     mm     The minute of the hour, from 0 to 59.
+     ss     Seconds, a number from 0 to 60 (59 plus a potential leap second).
+
+     Everything but the minutes is optional.
+
+     Time changes for Daylight Saving and Standard time and leap seconds and
+     years are handled automatically.</pre>
+<h2> Environment Variables</h2>
+<blockquote>
+<p><span class="code">TZ</span> The timezone to use when displaying dates.  See environ(7) for more.</p>
+</blockquote>
+<h2>Files</h2>
+<blockquote>
+<p> /var/log/messages  A record of the user setting the time.</p>
+</blockquote>
+<h2>EXIT Status</h2>
+<blockquote>
+<p> The date utility exits 0 on success, 1 if unable to set the date, and 2 if able to set the local date, but unable to set it globally.</p>
+</blockquote>
+<p>On macOS, <span class="code">date</span> is a  BSD utility, not a bash feature. On machines with GNU coreutils  see <a href="../bash/date.html">here</a> for the date syntax.</p>
+<h3><a id="e"></a>Examples</h3>
+<p>Print the date as an <a href="../dates.html">ISO 8601</a> compliant date/time string:<br>
+<span class="code">$ date -u -I seconds</span></p>
+<p>You can also get the same thing by manually selecting the 8601 elements manually:</p>
+<p><span class="code">$ date  +&quot;%Y-%m-%dT%H:%M:%S%Z&quot;</span></p>
+<p>Output the date and time on two lines (%n separates):<br>
+<span class="code">$ date "+DATE: %m/%d/%y%nTIME: %H:%M:%S"</span></p>
+<p class="code">DATE: 11/06/22<br>
+TIME: 19:28:54</p>
+<p>Output the date:<br>
+<span class="code">$ date &quot;+DATE: %Y-%m-%d%</span><br>
+</p>
+<p class="code"> DATE: 2022-11-06<br>
+</p>
+<p> Set the time to 2:32 PM, without modifying the date:</p>
+<p class="code">$ date 1432</p>
+<p>Set the date to 'June 13, 1985, 4:27 PM':<br>
+<span class="code">$ date 0613162785</span><br>
+<br>
+Set the time to 2:32 PM, without modifying the date:<br>
+<span class="code">$ date 1432</span><br>
+<br>
+In the Europe/London timezone, the command:            </p>
+<p class="code">$ date -v1m -v<b>+1y</b></p>
+<p>will display:            Sun Jan  4 04:15:24 GMT 1998<br>
+where it is currently Mon Aug  4 04:15:24 BST 1997.</p>
+<p>Print out the date suitable for setting on another machine:</p>
+<p class="code">$ date &quot;+%m%d%H%M%Y.%S&quot;</p>
+<p>Store the current date in a variable (in year-month-day format)<br>
+<span class="code">$ mydate=`date &quot;+%Y-%m-%d&quot;;`<br>
+$ echo The date is: ${mydate};</span><br>
+</p>
+<p class="quote"><i>&ldquo;Carpe Diem - Seize the day&rdquo; - Horace </i></p>
+<h3>Related macOS commands</h3>
+<p class="space"> timed(8) <br>
+<a href="cal.html">cal</a> - Display a calendar.<br>
+<a href="crontab.html">crontab</a> - Schedule a command to run at a later time.<br>
+<a href="time.html">time</a> - Measure Program Resource Use.<br>
+<a href="touch.html">touch</a> - Change file timestamps.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

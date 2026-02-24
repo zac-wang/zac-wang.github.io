@@ -1,0 +1,86 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>sharing Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>sharing</h1> 
+<p>Create share points for afp (<a href="https://www.macworld.com/article/234926/using-afp-to-share-a-mac-drive-its-time-to-change.html">Apple Filing Protocol</a>), <a href="ftp.html">ftp</a> and <a href="https://docs.microsoft.com/en-gb/windows/desktop/FileIO/microsoft-smb-protocol-and-cifs-protocol-overview">Microsoft smb</a> services.</p>
+<pre>Syntax
+      sharing [-a <i>path</i> [<i>options</i>]] [-e <i>share_point_name</i> [<i>options</i>]]
+              [-r <i>share_point_name</i>] [-l]
+
+Key
+   -a <i>path</i>              Add a new share point for the directory specified by <i>path</i>.
+   -e <i>share_point_name</i>  Edit the share point record specified by <i>share_point_name</i>.
+   -r <i>share_point_name</i>  Delete the share point record specified by <i>share_point_name</i>.
+   -l                   List all existing share point records.
+
+ The following options modify share point record attributes:
+   -A <i>afp_name</i>     Use customized name <i>afp_name</i> when using share point with afp.
+   -F <i>ftp_name</i>     Use customized name <i>ftp_name</i> when using share point with ftp.
+   -S <i>smb_name</i>     Use customized name <i>smb_name</i> when using share points with smb.
+
+   -s <i>flags</i>        Use this option to enable and disable sharing via afp, ftp, and smb.
+                   By default a share point is enabled for afp, ftp, and smb protocols.
+
+                   To enable/disable particular services, combine (binary AND) the following flags:
+                   100 (enable sharing for afp), 
+                   010 (enable sharing for smb), 
+                   001 (enable sharing for ftp). Specify 000 to turn off sharing of a share point altogether.
+                   Use a customized name <i>smb_name</i> if appropriate when using share points with smb.
+
+   -g <i>guest_flag</i>   Use this option to enable and disable guest access for afp, ftp, and smb.
+                   By default guest access is enabled for afp, ftp, and smb.
+                   To enable/disable guest access to particular services, combine (binary AND) the following flags:
+                   100  (enable guest for afp),
+                   010 (enable guest for smb), 
+                   001 (enable guest for ftp). Specify 000 to turn off guest access for a share point altogether.
+
+   -i <i>inherit_privileges_flag</i>
+                   Use this option to enable/disable the &quot;inherit privileges&quot; attribute for afp, ftp, and smb.
+                   By default &quot;inherit privileges&quot; is enabled for ftp only.
+
+                   To enable/disable guest access to particular services, combine (binary AND) the following flags:
+                   100 (&quot;inherit privileges&quot; for afp),
+                   010 (&quot;inherit privileges&quot; for smb), 
+                   001 (&quot;inherit privileges&quot; for ftp).  Specify 000 to turn off &quot;inherit privileges&quot; for a share point altogether.
+
+   -n <i>customized_record_name</i>
+                   Specify a <i>customized_record_name</i> to be used as the share point record name.
+                   By default the record name is the name of the directory pointed to by the share point record.
+                   This directory is specified by the <i>path</i> when the record is created.
+</pre>
+<p>The GUI controls for sharing can be found under System Preferences ➞ Sharing ➞ File Sharing</p>
+<p>For Windows file sharing, Apple uses &quot;SMBX&quot; to support  Microsoft's SMB2. This is a proprietary Apple replacement for the open source <a href="https://www.samba.org/">Samba</a> library.</p>
+<p>In macOS Mavericks, Apple  began migrating from afp to  SMBX, macOS will only fall back to afp when file sharing with Macs running previous versions of macOS or when working with Time Machine backups.</p>
+<p> Location of tool: <span class="code">usr/sbin/sharing</span></p>
+<h3><a id="e"></a>Examples</h3>
+<p>Create a share point for the directory      &quot;/SomePath/ShareThisDirectory&quot;:</p>
+<p class="code">$ sudo /usr/sbin/sharing -a /SomePath/ShareThisDirectory</p>
+<p>Edit the share point record created above,      and add a customized name &quot;SP1&quot; for SMB servies, also enable guest access.</p>
+<p class="code">$ sudo /usr/sbin/sharing -e ShareThisDirectory -S SP1 -g 010</p>
+<p>To turn off guest access to the newly-created share:</p>
+<p class="code">$ sudo /usr/sbin/sharing -e ShareThisDirectory -g 000</p>
+<p>Remove the share entirely:</p>
+<p class="code">$ sudo /usr/sbin/sharing -r ShareThisDirectory</p>
+<p class="quote"><i>&ldquo;Plenty of people miss their share of happiness, not because they never found it, but because they didn't stop to enjoy it.&rdquo; ~ William Feather</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="chmod.html">chmod</a> - Change access permissions.<br>
+<a href="mount.html">mount</a> - Mount a file system.</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

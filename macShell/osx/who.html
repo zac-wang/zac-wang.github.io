@@ -1,0 +1,60 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>who Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>who</h1> 
+<p>Print all usernames currently logged on, showing for each user 
+the login name, tty name, the date and time of login, and hostname if not local.</p>
+<pre>Syntax
+      who [-mTuH] [<i>file</i>]
+      who am i
+
+Options
+   -m    Only print information about the current terminal.
+         This is the POSIX way of saying who am i.
+
+   -T    Print a character after the user name indicating the state of the
+         terminal line: `+' if the terminal is writable; `-' if it is not;
+         and `?' if a bad line is encountered.
+
+   -u    Print the idle time for each user.
+
+   -H    Write column headings above the regular output.
+
+   am I  Returns the invoker's real user name.
+
+   <i>file</i>  By default, who gathers information from the file /var/run/utmp. An
+         alternative file may be specified which is usually /var/log/wtmp
+         (or /var/log/wtmp.[0-6] depending on site policy as wtmp can grow
+         quite large and daily versions may or may not be kept around after
+         compression by ac(8)).  The wtmp file contains a record of every
+         login, logout, crash, shutdown and date change since wtmp was last
+         truncated or created.</pre>
+<p>If /var/log/wtmp is being used as the file, the user name may be empty or 
+  one of the special characters '|', '}' and '~'. Logouts produce an out- put 
+  line without any user name. For more information on the special characters, 
+  see utmp(5).</p>
+<p class="quote"><i>&ldquo;The more the merrier&rdquo; ~ John Heywood</i></p>
+<h3>Related macOS commands</h3>
+<p> <span class="space"><a href="last.html">last</a> - indicate last logins of users and ttys.<br>
+mesg - display (or do not display) messages from other users.<br>
+<a href="users.html">users</a> -  Print login names of users currently logged in.<br>
+<a href="w.html">w</a> - Show who is logged on and what they are doing.</span></p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>

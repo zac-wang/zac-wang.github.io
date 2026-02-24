@@ -1,0 +1,103 @@
+<!doctype html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=768, initial-scale=1">
+<link rel="STYLESHEET" href="../css/main.css" type="text/css">
+<title>du Man Page - macOS - SS64.com</title>
+<script async src="../js/q.js"></script>
+<script async src="../js/content.js"></script>
+</head><body><!-- #BeginLibraryItem "/Library/head_osx.lbi" --><div id="tnav"><ul>
+<li class="tbtn"><a href="https://ss64.com/">SS64</a></li>
+<li class="tbtn"><a href="../osx">macOS <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li class="tbtn"><a href="syntax.html">How-to <svg viewBox="0 0 13 20.1" width="13" height="13" style="transform: rotate(0deg);"><path d="M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></svg></a></li>
+<li><div id="search"><form action="https://www.google.com/search" method="get">
+<input type="text" name="q" id="qu" size="27" maxlength="255" aria-label="Search text">
+<input class="submit mousetrap" value="Search" id="btn" type="submit">
+<input type="hidden" name="sitesearch" value="ss64.com/osx/"></form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>du</h1> 
+<p>Display disk usage statistics.<br>
+Lists the file system usage for individual files, if a folder argument is passed argument, du will list usage for each sub folder in that hierarchy. If no file is specified, the current folder (hierarchy) is displayed. </p>
+<pre>Syntax
+      du [-H | -L | -P] 
+            [-a | -s | -d <i>depth</i>] [-c]
+               [-h | -k | -m | -g]
+                  [-x] [-I <i>mask</i>]
+                     [<i>file</i> ...]
+
+Options
+   -H    Symbolic links on the command line are followed, symbolic links
+         in file hierarchies are not followed.
+
+   -L    Symbolic links on the command line and in file hierarchies are followed.
+
+   -P    No symbolic links are followed (default)
+
+   -a    Display an entry for each file in a file hierarchy.
+
+   -s    Display an entry for each specified file.  (Equivalent to -d 0)
+
+   -d <i>depth</i>
+         Display an entry for all files and folders <i>depth</i> folders deep.
+
+   -h   "Human-readable" output.  Display size with a non-standard <a href="../convert.html">suffix</a> as follows:
+         B=Byte, K=kilobyte, M=megabyte, G=gigabyte, T=teraByte and P=petabyte.
+         All numbers are rounded down. Cannot be used to sort by size.
+
+   -k    KB Display block counts in 1024-byte (1-Kbyte) blocks.
+   -m    MB Display block counts in 1048576-byte (1-Mbyte) blocks.
+   -g    GB Display block counts in 1073741824-byte (1-Gbyte) blocks.
+
+   -r    Generate any read error messages, on by default, this option
+         exists solely for conformance with X/Open Portability Guide 4
+
+   -c    Display a grand total.
+
+   -x    File system mount points are not traversed.
+
+   -I <i>mask</i>
+         Ignore files and folders matching the specified <i>mask</i>.</pre>
+<p>The <span class="code">du</span> utility counts the storage used by symbolic links and not the files they reference unless the <span class="code">-H</span> or <span class="code">-L</span> option is specified. <br>
+If either the <span class="code">-H</span> or <span class="code">-L</span> options are specified, storage used by any symbolic links which are followed is not counted or displayed. </p>
+<p>Files having multiple hard links are counted (and displayed) a single time per <span class="code">du</span> execution. </p>
+<p>If the <span class="code">-k</span> flag is specified, the number of 1024-byte blocks used by the file is displayed, otherwise getbsize(3) is used to determine the preferred block size. Partial numbers of blocks are rounded up.</p>
+<h2>Revision files</h2>
+<blockquote>
+<p>In OSX Lion and greater, folders under<span class="code"> /.DocumentRevisions-V100</span> are used to store previous versions of auto-saved documents. <br>
+This can be turned off for each app (<span class="code">defaults write -app 'ApplicationNametoDisable' ApplePersistence -bool no</span>) <br>
+ Most current mac applications do manage this sensibly and delete older version files automatically.<br>
+Old version files can be deleted 
+in bulk with <a href="https://www.titanium-software.fr/en/onyx.html">OnyX</a> (Cleaning&gt;Misc&gt;Delete 'Automatically saved versions of Documents').</p>
+</blockquote>
+<h2>Environment</h2>
+<blockquote>
+<p> If the environment variable BLOCKSIZE is set, and the -k option is not specified, the block counts will be displayed in units of that size block. If BLOCKSIZE is not set, and the -k option is not specified, the block counts will be displayed in 512-byte blocks. </p>
+</blockquote>
+<h3><a id="e"></a>Examples</h3>
+<p>List files and folders - totalling the size to include subfolders:</p>
+<p class="code">du -sk * | sort -nr</p>
+<p>List  folders and hidden (system folders) - totalling the size to include subfolders:</p>
+<p class="code">du -d 1 . | sort -nr</p>
+<p>List  the 10 largest subdirectories in the current directory:</p>
+<p class="code">du -hs */ | sort | head</p>
+<p>Display all files, excluding mount points, show  &quot;Human-readable&quot; output and traverse to a depth of 2 levels down, starting from  the home directory (~):</p>
+<p class="code">$  du -cxhd 2 ~</p>
+<p>Display a grand total of  files on this disk, show  &quot;Human-readable&quot; output and traverse to a depth of 1 level down, starting from / the root directory:</p>
+<p class="code">$ sudo du -cxhd 1 /</p>
+<p> List the size of every directory on the whole system, with each line prefixed by the disk usage in KiB. This is useful for finding crash logs and other files that may be using a lot of disk space:</p>
+<p class="code">sudo du -k / | sort -rn &gt; ~/diskuse.txt</p>
+<p> List the size of all <span class="code"> /.DocumentRevisions-V100/...</span> folders: </p>
+<p class="code">sudo du -sh /.DocumentRevisions-V100</p>
+<p class="quote"><i>&ldquo;Never go to a doctor whose office plants have died&rdquo; ~ Erma Bombeck</i></p>
+<h3>Related macOS commands</h3>
+<p class="space"><a href="df.html">df</a> - Display free disk space.<br>
+<a href="ln.html">ln</a> - Make links between files (hard links, symbolic links).<br>
+<a href="fs_usage.html">fs_usage</a> - Filesystem usage (process/pathname).<br>
+<a href="quota.html">quota</a> - Display disk usage and limits.<br>
+<a href="open.html">open</a> - open a file or folder.<br>
+fts(3), compat(5), symlink(7), quot(8)</p><!-- #BeginLibraryItem "/Library/foot_osx.lbi" --><!-- AuctionX Display platform tag START -->
+<div id="27677x300x250x4627x_ADSLOT1" clickTrack="%%CLICK_URL_ESC%%"></div>
+<script async src="https://served-by.pixfuture.com/www/delivery/headerbid.js" slotId="27677x300x250x4627x_ADSLOT1" refreshTime="5" refreshInterval="120"></script><!-- AuctionX Display platform tag END -->
+<hr>
+<div id=bl>&nbsp;</div>
+<div id=br>Copyright &copy; 1999-2023 <a href="https://ss64.com/">SS64.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem --></body>
+</html>
