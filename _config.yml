@@ -1,7 +1,43 @@
-# 要求JeKyll处理该目录下的文件
+#         1. 站点基础信息（必配）
+# 站点标题（会显示在页面标题、导航栏等位置）
+title: 我的 GitHub Pages 博客
+# 站点副标题/描述（用于 SEO、首页展示）
+description: 一个记录学习笔记的技术博客
+# 站点 URL（GitHub Pages 必须正确配置，否则链接会失效）
+url: "https://zac-wang.github.io"
+# 站点根路径（如果是用户/组织站点填 /，如果是项目站点填 /项目名/）
+baseurl: ""
+# 站点语言（影响日期格式、SEO 等）
+lang: zh-CN
+# 时区（解决日期显示错误问题）
+timezone: Asia/Shanghai
+# 站点作者信息
+author:
+  name: zac
+  email: love_iphone@qq.com
+  github: zac-wang
+
+
+
+
+
+#         2. 构建与渲染配置（控制 Jekyll 编译行为）
+
+# 编码格式（默认 UTF-8，建议保留）
+encoding: UTF-8
+# Markdown 解析器（GitHub Pages 推荐 kramdown）
+markdown: kramdown
+# 代码高亮器（GitHub Pages 仅支持 rouge）
+highlighter: rouge
+# 是否启用语法高亮
+kramdown:
+  syntax_highlighter_opts:
+    disable: false
+
+# 强制包含的文件（默认 Jekyll 会忽略以 . 开头的文件）
 include: [".well-known"]
 
-# 排除某些文件或目录
+# 排除不需要编译的文件/文件夹
 exclude:
   - my-code/*
 
